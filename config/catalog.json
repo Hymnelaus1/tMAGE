@@ -1,0 +1,723 @@
+{
+ "topologies": [
+  {
+   "id": "DA",
+   "label": "Fark Yükselteci (DA)",
+   "desc": "Aktif yüklü diferansiyel çift. DC, AC kazanç/BW/PM, CMRR, PSRR.",
+   "ports": "vinp vinn vout vdd vss"
+  },
+  {
+   "id": "FCO",
+   "label": "Katlanmış Kaskod OTA (FCO)",
+   "desc": "Yüksek kazançlı tek katlı OTA. Kazanç, GBW, faz payı, slew.",
+   "ports": "vinp vinn vout vdd vss"
+  },
+  {
+   "id": "TSO",
+   "label": "İki Katlı Opamp (TSO)",
+   "desc": "Miller kompanzasyonlu iki katlı opamp. Kazanç, faz payı, slew rate.",
+   "ports": "vinp vinn vout vdd vss"
+  },
+  {
+   "id": "BGR",
+   "label": "Bandgap Referans (BGR)",
+   "desc": "Sıcaklık süpürmesi, besleme hassasiyeti, PSRR, startup.",
+   "ports": "vdd vss vref"
+  },
+  {
+   "id": "COMP",
+   "label": "Karşılaştırıcı (latch)",
+   "desc": "Yayılım gecikmesi, ofset, latch süresi, güç. Kitteki comparator.sp'den.",
+   "ports": "in inn out vdd vss"
+  },
+  {
+   "id": "OSC",
+   "label": "CMOS osilatör",
+   "desc": "Salınım frekansı, faz gürültüsü, güç. Kitteki cmos_osc.sp'den (HB analizi).",
+   "ports": "vdd vss out"
+  },
+  {
+   "id": "LNA",
+   "label": "Düşük gürültülü yükselteç (LNA)",
+   "desc": "S11, S21, S12, gürültü figürü, güç. Kitteki lna.sp'den.",
+   "ports": "in out vdd"
+  },
+  {
+   "id": "CUSTOM",
+   "label": "Özel / diğer",
+   "desc": "Topolojiyi kendin tanımla, analizleri elle seç.",
+   "ports": ""
+  }
+ ],
+ "technologies": [
+  {
+   "id": "saed90",
+   "label": "SAED 90 nm (ana hedef)",
+   "vdd": 1.2,
+   "lmin": "0.09u",
+   "temp": [
+    -40,
+    27,
+    125
+   ],
+   "corners": [
+    "TT",
+    "FF",
+    "SS",
+    "FS",
+    "SF"
+   ],
+   "pdk": "/opt/synopsys/edk/SAED90nm_PDK_10222017",
+   "simulators": [
+    "hspice",
+    "finesim"
+   ],
+   "devices": {
+    "nmos": "n12",
+    "pmos": "p12",
+    "nmos_lvt": "n12_lvt",
+    "pmos_lvt": "p12_lvt",
+    "nmos_hvt": "n12_hvt",
+    "pmos_hvt": "p12_hvt",
+    "pnp": "VPNP",
+    "pnp_lateral": "LPNP"
+   },
+   "lib_file": "hspice/SAED90nm.lib",
+   "lib_section": "{corner}_12",
+   "extra_libs": [
+    "BJT_12"
+   ],
+   "supply": {
+    "vdd": 1.2,
+    "vss": 0,
+    "mode": "single"
+   },
+   "param_defaults": {
+    "dc_transfer.vstop": 1.2,
+    "supply_sweep.vmin": 0.8,
+    "supply_sweep.vmax": 1.4
+   },
+   "notes": [
+    "Çekirdek 1.2 V; model adları n12/p12 (LVT: n12_lvt, HVT: n12_hvt).",
+    "BJT_12 (VPNP/LPNP) yalnızca TT_12 içinde hazır gelir; diğer köşelerde ayrıca .lib eklenir.",
+    "Lmin 0.09 µm. Eski devrelerdeki W/L değerleri yeniden boyutlandırılmalı (sizing kapsam dışı)."
+   ]
+  },
+  {
+   "id": "sky130",
+   "label": "SKY130 (açık PDK, B planı)",
+   "vdd": 1.8,
+   "lmin": "0.15u",
+   "temp": [
+    -40,
+    27,
+    125
+   ],
+   "corners": [
+    "tt",
+    "ff",
+    "ss",
+    "fs",
+    "sf"
+   ],
+   "pdk": "",
+   "simulators": [
+    "ngspice"
+   ],
+   "devices": {
+    "nmos": "sky130_fd_pr__nfet_01v8",
+    "pmos": "sky130_fd_pr__pfet_01v8",
+    "pnp": "pnp_05v5_W3p40L3p40"
+   },
+   "supply": {
+    "vdd": 1.8,
+    "vss": 0,
+    "mode": "single"
+   },
+   "param_defaults": {
+    "dc_transfer.vstop": 1.8,
+    "supply_sweep.vmin": 1.4,
+    "supply_sweep.vmax": 2.2
+   },
+   "notes": [
+    "ngspice ile çalışır; X1 alt devre çağrısı (Xm ... model)."
+   ]
+  },
+  {
+   "id": "gtu130",
+   "label": "130 nm (referans, mevcut kit)",
+   "vdd": 1.2,
+   "lmin": "0.13u",
+   "temp": [
+    -40,
+    27,
+    125
+   ],
+   "corners": [
+    "TT",
+    "FF",
+    "SS",
+    "FS",
+    "SF"
+   ],
+   "pdk": "",
+   "simulators": [
+    "hspice"
+   ],
+   "devices": {
+    "nmos": "NFET",
+    "pmos": "PFET"
+   },
+   "inc": "130nm.txt",
+   "supply": {
+    "vdd": 1.2,
+    "vss": -1.2,
+    "mode": "dual"
+   },
+   "param_defaults": {},
+   "notes": [
+    "Kit referansı: ±1.2 V çift besleme, model dosyası 130nm.txt."
+   ]
+  }
+ ],
+ "analyses": [
+  {
+   "id": "op",
+   "group": "DC",
+   "label": "DC çalışma noktası",
+   "spice": ".op",
+   "desc": "Tüm transistörlerin bias akımı/gerilimi, doyum kontrolü.",
+   "metrics": [
+    "gm",
+    "gds",
+    "vdsat",
+    "region"
+   ],
+   "params": [],
+   "on": [
+    "DA",
+    "FCO",
+    "TSO",
+    "BGR",
+    "COMP",
+    "OSC",
+    "LNA"
+   ]
+  },
+  {
+   "id": "ac_loop",
+   "group": "AC",
+   "label": "Açık çevrim kazanç / BW / faz payı",
+   "spice": ".ac dec",
+   "desc": "DC kazanç, 3 dB bant genişliği, GBW, faz payı.",
+   "metrics": [
+    "gain",
+    "BW_3dB",
+    "GBW",
+    "phase_margin"
+   ],
+   "params": [
+    {
+     "k": "fstart",
+     "l": "Başlangıç",
+     "d": 1,
+     "u": "Hz"
+    },
+    {
+     "k": "fstop",
+     "l": "Bitiş",
+     "d": 1000000000.0,
+     "u": "Hz"
+    },
+    {
+     "k": "pts",
+     "l": "Nokta/dekat",
+     "d": 20,
+     "u": ""
+    },
+    {
+     "k": "cl",
+     "l": "Yük kapasitesi",
+     "d": 0.5,
+     "u": "pF"
+    }
+   ],
+   "on": [
+    "DA",
+    "FCO",
+    "TSO"
+   ]
+  },
+  {
+   "id": "cmrr",
+   "group": "AC",
+   "label": "CMRR",
+   "spice": ".ac dec",
+   "desc": "Ortak mod bastırma oranı (diferansiyel kazanç / ortak mod kazancı).",
+   "metrics": [
+    "gainCM",
+    "cmrr"
+   ],
+   "params": [
+    {
+     "k": "fstart",
+     "l": "Başlangıç",
+     "d": 1,
+     "u": "Hz"
+    },
+    {
+     "k": "fstop",
+     "l": "Bitiş",
+     "d": 1000000000.0,
+     "u": "Hz"
+    }
+   ],
+   "on": [
+    "DA",
+    "FCO",
+    "TSO"
+   ]
+  },
+  {
+   "id": "psrr",
+   "group": "AC",
+   "label": "PSRR",
+   "spice": ".ac dec",
+   "desc": "Besleme bastırma oranı, VDD ve VSS yolları.",
+   "metrics": [
+    "gainPSRR",
+    "psrr"
+   ],
+   "params": [
+    {
+     "k": "fstart",
+     "l": "Başlangıç",
+     "d": 1,
+     "u": "Hz"
+    },
+    {
+     "k": "fstop",
+     "l": "Bitiş",
+     "d": 1000000000.0,
+     "u": "Hz"
+    }
+   ],
+   "on": [
+    "DA",
+    "FCO",
+    "TSO",
+    "BGR"
+   ]
+  },
+  {
+   "id": "noise",
+   "group": "AC",
+   "label": "Gürültü",
+   "spice": ".noise",
+   "desc": "Girişe indirgenmiş toplam gürültü ve spektral yoğunluk.",
+   "metrics": [
+    "tot_noise",
+    "noise"
+   ],
+   "params": [
+    {
+     "k": "fstart",
+     "l": "Başlangıç",
+     "d": 1,
+     "u": "Hz"
+    },
+    {
+     "k": "fstop",
+     "l": "Bitiş",
+     "d": 100000000.0,
+     "u": "Hz"
+    }
+   ],
+   "on": [
+    "FCO",
+    "BGR"
+   ]
+  },
+  {
+   "id": "tran_slew",
+   "group": "Geçici",
+   "label": "Slew rate / yerleşme",
+   "spice": ".tran",
+   "desc": "Birim kazanç tamponunda basamak yanıtı: slew, yerleşme süresi, yüzde hata.",
+   "metrics": [
+    "slewrate",
+    "tdlay2",
+    "perc"
+   ],
+   "params": [
+    {
+     "k": "step",
+     "l": "Basamak",
+     "d": 0.2,
+     "u": "V"
+    },
+    {
+     "k": "tstop",
+     "l": "Süre",
+     "d": 5,
+     "u": "µs"
+    },
+    {
+     "k": "cl",
+     "l": "Yük kapasitesi",
+     "d": 0.5,
+     "u": "pF"
+    }
+   ],
+   "on": [
+    "FCO",
+    "TSO"
+   ]
+  },
+  {
+   "id": "tran_start",
+   "group": "Geçici",
+   "label": "Startup (açılış)",
+   "spice": ".tran",
+   "desc": "Besleme rampasında referansın doğru duruma oturması (BGR için kritik).",
+   "metrics": [
+    "vref_final",
+    "t_settle"
+   ],
+   "params": [
+    {
+     "k": "trise",
+     "l": "Rampa süresi",
+     "d": 10,
+     "u": "µs"
+    },
+    {
+     "k": "tstop",
+     "l": "Süre",
+     "d": 100,
+     "u": "µs"
+    }
+   ],
+   "on": [
+    "BGR"
+   ]
+  },
+  {
+   "id": "comp_tran",
+   "group": "Geçici",
+   "label": "Karşılaştırıcı gecikme / ofset",
+   "spice": ".tran",
+   "desc": "Giriş rampasında yayılım gecikmesi, latch gecikmesi ve giriş ofseti (v(out) geçiş noktası).",
+   "metrics": [
+    "tdlay",
+    "tdlay_latch",
+    "offset",
+    "zPOWER"
+   ],
+   "params": [
+    {
+     "k": "step",
+     "l": "Adım",
+     "d": 2,
+     "u": "ns"
+    },
+    {
+     "k": "tstop",
+     "l": "Süre",
+     "d": 400,
+     "u": "µs"
+    },
+    {
+     "k": "clk",
+     "l": "Saat frekansı",
+     "d": 10,
+     "u": "MHz"
+    }
+   ],
+   "on": [
+    "COMP"
+   ]
+  },
+  {
+   "id": "osc_pn",
+   "group": "RF",
+   "label": "Osilatör frekans / faz gürültüsü",
+   "spice": ".hb / .tran",
+   "desc": "Salınım frekansı, belirli ofsette faz gürültüsü, tepe genlik.",
+   "metrics": [
+    "freq",
+    "phasenoise",
+    "vpeak",
+    "RPOWER"
+   ],
+   "params": [
+    {
+     "k": "f0",
+     "l": "Hedef frekans",
+     "d": 5000,
+     "u": "MHz"
+    },
+    {
+     "k": "nharm",
+     "l": "Harmonik",
+     "d": 5,
+     "u": ""
+    },
+    {
+     "k": "offs",
+     "l": "Ofset",
+     "d": 1,
+     "u": "MHz"
+    }
+   ],
+   "on": [
+    "OSC"
+   ]
+  },
+  {
+   "id": "rf_sparam",
+   "group": "RF",
+   "label": "S-parametreleri / gürültü figürü",
+   "spice": ".ac + .net",
+   "desc": "S11, S12, S21, S22 ve NF; hedef frekansta ve bant boyunca.",
+   "metrics": [
+    "S11",
+    "S12",
+    "S21",
+    "S22",
+    "nf"
+   ],
+   "params": [
+    {
+     "k": "f0",
+     "l": "Merkez frekans",
+     "d": 5.5,
+     "u": "GHz"
+    },
+    {
+     "k": "fstart",
+     "l": "Başlangıç",
+     "d": 1,
+     "u": "GHz"
+    },
+    {
+     "k": "fstop",
+     "l": "Bitiş",
+     "d": 10,
+     "u": "GHz"
+    }
+   ],
+   "on": [
+    "LNA"
+   ]
+  },
+  {
+   "id": "dc_transfer",
+   "group": "DC",
+   "label": "DC transfer / offset / salınım",
+   "spice": ".dc",
+   "desc": "Giriş süpürmesi: çıkış salınımı, giriş ofseti, ortak mod giriş aralığı.",
+   "metrics": [
+    "out_volt",
+    "outn_volt",
+    "offset",
+    "icmr"
+   ],
+   "params": [
+    {
+     "k": "vstart",
+     "l": "Başlangıç",
+     "d": 0,
+     "u": "V"
+    },
+    {
+     "k": "vstop",
+     "l": "Bitiş",
+     "d": 1.2,
+     "u": "V"
+    },
+    {
+     "k": "vstep",
+     "l": "Adım",
+     "d": 0.01,
+     "u": "V"
+    }
+   ],
+   "on": [
+    "DA",
+    "TSO"
+   ]
+  },
+  {
+   "id": "temp_sweep",
+   "group": "Süpürme",
+   "label": "Sıcaklık süpürmesi",
+   "spice": ".dc temp",
+   "desc": "Referans gerilimin sıcaklık katsayısı (ppm/°C) ve eğrisi.",
+   "metrics": [
+    "vrefmax",
+    "vrefmin",
+    "ppm"
+   ],
+   "params": [
+    {
+     "k": "tmin",
+     "l": "Min",
+     "d": -40,
+     "u": "°C"
+    },
+    {
+     "k": "tmax",
+     "l": "Maks",
+     "d": 125,
+     "u": "°C"
+    },
+    {
+     "k": "tstep",
+     "l": "Adım",
+     "d": 5,
+     "u": "°C"
+    }
+   ],
+   "on": [
+    "BGR"
+   ]
+  },
+  {
+   "id": "supply_sweep",
+   "group": "Süpürme",
+   "label": "Besleme süpürmesi (line regulation)",
+   "spice": ".dc vdd",
+   "desc": "Besleme değişirken çıkış değişimi: dif_vsup, minimum çalışma beslemesi.",
+   "metrics": [
+    "dif_vsup",
+    "volt",
+    "volt2",
+    "volt3"
+   ],
+   "params": [
+    {
+     "k": "vmin",
+     "l": "Min",
+     "d": 0.8,
+     "u": "V"
+    },
+    {
+     "k": "vmax",
+     "l": "Maks",
+     "d": 1.4,
+     "u": "V"
+    },
+    {
+     "k": "vstep",
+     "l": "Adım",
+     "d": 0.02,
+     "u": "V"
+    }
+   ],
+   "on": [
+    "BGR"
+   ]
+  },
+  {
+   "id": "power_area",
+   "group": "Genel",
+   "label": "Güç ve alan tahmini",
+   "spice": ".meas",
+   "desc": "Statik güç tüketimi ve toplam aktif alan.",
+   "metrics": [
+    "zPOWER",
+    "zSAREA"
+   ],
+   "params": [],
+   "on": [
+    "DA",
+    "FCO",
+    "TSO",
+    "BGR",
+    "COMP",
+    "OSC",
+    "LNA"
+   ]
+  },
+  {
+   "id": "corners",
+   "group": "Güvenilirlik",
+   "label": "PVT köşeleri",
+   "spice": ".lib / .temp",
+   "desc": "Seçili analizleri köşe × sıcaklık × besleme kombinasyonlarında tekrarla.",
+   "metrics": [
+    "worst_case"
+   ],
+   "params": [
+    {
+     "k": "vdd_tol",
+     "l": "Besleme toleransı",
+     "d": 10,
+     "u": "%"
+    }
+   ],
+   "on": []
+  },
+  {
+   "id": "montecarlo",
+   "group": "Güvenilirlik",
+   "label": "Monte Carlo",
+   "spice": ".alter / mc",
+   "desc": "Uyumsuzluk (mismatch) etkisi: ofset ve kazanç dağılımı.",
+   "metrics": [
+    "mean",
+    "sigma"
+   ],
+   "params": [
+    {
+     "k": "runs",
+     "l": "Koşu sayısı",
+     "d": 100,
+     "u": ""
+    }
+   ],
+   "on": []
+  }
+ ],
+ "agents": [
+  {
+   "id": "spec",
+   "label": "Spesifikasyon ajanı",
+   "desc": "Devreyi ve istenen özellikleri anlar."
+  },
+  {
+   "id": "scenario",
+   "label": "Test senaryosu ajanı",
+   "desc": "Hangi analizlerin nasıl yapılacağına karar verir."
+  },
+  {
+   "id": "stimulus",
+   "label": "Stimulus / netlist ajanı",
+   "desc": "Testbench ve kaynakları yazar."
+  },
+  {
+   "id": "measure",
+   "label": "Ölçüm ajanı",
+   "desc": ".meas ifadelerini ve kontrolleri ekler."
+  },
+  {
+   "id": "judge",
+   "label": "Hakem (LLM-as-judge)",
+   "desc": "Sonuçları değerlendirir ve raporlar."
+  }
+ ],
+ "backends": [
+  {
+   "id": "ollama",
+   "label": "Ollama (Jetson Orin Nano)",
+   "needs_url": true
+  },
+  {
+   "id": "openai",
+   "label": "OpenAI uyumlu sunucu",
+   "needs_url": true
+  }
+ ],
+ "analyses_note": "Analiz komutları (.ac .tran .noise .dc .meas) teknolojiden bağımsızdır; teknolojiyle yalnızca model, besleme, köşe ve boyutlar değişir."
+}

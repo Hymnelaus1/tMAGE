@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>tMAGE</title>
+<style>
+  :root { --bg:#f5f6f8; --panel:#fff; --ink:#1b1d22; --muted:#6a707c; --line:#dfe2e8; --accent:#2457d6; --accent2:#e8eefc;
+          --ok:#1a7f4b; --bad:#c0392b; --warn:#a96b00; --code:#f0f2f6; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#13151a; --panel:#1b1e25; --ink:#e8eaee; --muted:#9aa1ad; --line:#2d313a;
+          --accent:#6d97ff; --accent2:#222c47; --ok:#4cc38a; --bad:#ff7b6b; --warn:#e5b567; --code:#13151a; } }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:14px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif; }
+  header { display:flex; flex-wrap:wrap; align-items:center; gap:10px 16px; padding:12px 24px; background:var(--panel); border-bottom:1px solid var(--line); position:sticky; top:0; z-index:5; }
+  header h1 { margin:0; font-size:20px; letter-spacing:.02em; } header h1 small { font-weight:400; color:var(--muted); font-size:12px; margin-left:8px; }
+  .chip { font-size:12px; padding:2px 10px; border-radius:99px; border:1px solid var(--line); color:var(--muted); }
+  .chip.ok { color:var(--ok); border-color:var(--ok); } .chip.bad { color:var(--bad); border-color:var(--bad); }
+  main { display:grid; grid-template-columns:minmax(0,1fr) 340px; gap:18px; padding:18px 24px 40px; max-width:1300px; margin:0 auto; align-items:start; }
+  @media (max-width:980px) { main { grid-template-columns:1fr; padding:12px; } aside { position:static !important; } }
+  section.card, aside .card { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:14px 16px; margin-bottom:16px; }
+  h2 { font-size:15px; margin:0 0 4px; display:flex; align-items:center; gap:8px; }
+  h2 .n { background:var(--accent); color:#fff; width:22px; height:22px; border-radius:50%; font-size:12px; display:inline-flex; align-items:center; justify-content:center; }
+  .sub { color:var(--muted); font-size:12.5px; margin:0 0 10px; }
+  label.f { display:flex; flex-direction:column; gap:3px; font-size:12px; color:var(--muted); min-width:0; }
+  input, select, textarea, button { font:inherit; font-size:13px; }
+  input[type=text], select, textarea { padding:6px 8px; border-radius:8px; border:1px solid var(--line); background:var(--bg); color:var(--ink); min-width:0; width:100%; }
+  textarea { font-family:ui-monospace,Consolas,monospace; font-size:12px; height:200px; resize:vertical; }
+  button { padding:6px 12px; border-radius:8px; border:1px solid var(--line); background:var(--panel); color:var(--ink); cursor:pointer; }
+  button:hover:not(:disabled) { border-color:var(--accent); } button:disabled { opacity:.5; cursor:default; }
+  button.primary { background:var(--accent); border-color:var(--accent); color:#fff; font-weight:600; }
+  .row { display:flex; flex-wrap:wrap; gap:10px 14px; margin-bottom:10px; align-items:flex-end; } .row > * { flex:1 1 150px; } .row > .nofl { flex:0 0 auto; }
+  .tabs { display:flex; gap:4px; margin-bottom:10px; } .tabs button.on { border-color:var(--accent); background:var(--accent2); color:var(--accent); font-weight:600; }
+  .fb { border:1px solid var(--line); border-radius:8px; overflow:hidden; } .fb .bar { display:flex; gap:6px; padding:6px; background:var(--code); border-bottom:1px solid var(--line); flex-wrap:wrap; }
+  .fb .bar input { flex:1 1 220px; } .fb .list { max-height:220px; overflow:auto; }
+  .fb .it { display:flex; justify-content:space-between; gap:10px; padding:4px 10px; cursor:pointer; border-bottom:1px solid var(--line); font-size:13px; }
+  .fb .it:hover { background:var(--accent2); } .fb .it .sz { color:var(--muted); font-size:12px; white-space:nowrap; }
+  .fb .it.sel { background:var(--accent2); font-weight:600; }
+  pre.prev { background:var(--code); border:1px solid var(--line); border-radius:8px; padding:8px 10px; max-height:200px; overflow:auto; font-size:12px; margin:8px 0 0; white-space:pre; }
+  .tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; } .tag { font-size:12px; background:var(--accent2); color:var(--accent); padding:2px 9px; border-radius:99px; }
+  .topos { display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:10px; }
+  .topo { border:1px solid var(--line); border-radius:10px; padding:10px 12px; cursor:pointer; background:var(--bg); }
+  .topo.on { border-color:var(--accent); background:var(--accent2); box-shadow:0 0 0 1px var(--accent) inset; }
+  .topo b { display:block; } .topo span { color:var(--muted); font-size:12px; } .topo em { float:right; font-style:normal; font-size:11px; color:var(--ok); }
+  .grp { font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); margin:12px 0 4px; }
+  .an { border:1px solid var(--line); border-radius:10px; padding:8px 12px; margin-bottom:6px; background:var(--bg); }
+  .an.on { border-color:var(--accent); } .an .top { display:flex; gap:10px; align-items:flex-start; } .an .top input { margin-top:4px; }
+  .an .t { flex:1; } .an .t b { font-weight:600; } .an .t span { display:block; color:var(--muted); font-size:12px; }
+  .an .m { font-size:11.5px; color:var(--muted); font-family:ui-monospace,Consolas,monospace; }
+  .an .pr { display:none; gap:8px 12px; flex-wrap:wrap; margin:8px 0 2px 26px; } .an.on .pr { display:flex; } .an .pr label { width:130px; }
+  table { width:100%; border-collapse:collapse; } td { padding:5px 6px; border-bottom:1px solid var(--line); vertical-align:middle; } td.a { width:46%; } td small { color:var(--muted); display:block; font-size:11.5px; }
+  .ck { display:flex; gap:8px; align-items:center; font-size:13px; } .corners { display:flex; gap:12px; flex-wrap:wrap; }
+  aside { position:sticky; top:68px; } aside h3 { font-size:13px; margin:0 0 8px; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); }
+  dl.sum { margin:0; font-size:13px; } dl.sum dt { color:var(--muted); font-size:11.5px; margin-top:8px; } dl.sum dd { margin:0; word-break:break-word; }
+  .warn { color:var(--warn); font-size:12.5px; margin:3px 0; } .okmsg { color:var(--ok); font-size:12.5px; }
+  .job { display:flex; justify-content:space-between; font-size:12.5px; padding:4px 0; border-bottom:1px solid var(--line); } .job span { color:var(--muted); }
+  .hint { font-size:12px; color:var(--muted); }
+  .stg { display:flex; flex-wrap:wrap; gap:4px; } .stg span { font-size:11px; padding:1px 8px; border-radius:99px; border:1px solid var(--line); color:var(--muted); }
+  .stg span.done { color:var(--ok); border-color:var(--ok); } .job { cursor:pointer; } .job:hover { color:var(--accent); } .job.sel { font-weight:600; }
+  .adapt { border:1px solid var(--warn); border-radius:8px; padding:8px 12px; margin-top:10px; font-size:13px; }
+  .adapt.done { border-color:var(--ok); } .adapt ul { margin:6px 0 0; padding-left:18px; font-size:12.5px; } .adapt li.w { color:var(--warn); }
+  .adapt .btns { margin-top:8px; display:flex; gap:8px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>tMAGE<small>Analog devreler için çok ajanlı testbench üretim motoru</small></h1>
+  <span class="chip" id="chipSrv">sunucu</span>
+  <span class="chip" id="chipLlm">LLM: kontrol edilmedi</span>
+</header>
+<main>
+<div>
+
+<section class="card">
+  <h2><span class="n">1</span>Devre</h2>
+  <p class="sub">Kendi devre netlistini ver: dosyadan seç ya da yapıştır.</p>
+  <div class="row"><label class="f">Proje adı<input type="text" id="name" placeholder="örn. da_deneme1"></label></div>
+  <div class="tabs"><button id="tabFile" class="on">Dosyadan seç</button><button id="tabPaste">Yapıştır</button></div>
+  <div id="paneFile">
+    <div class="fb">
+      <div class="bar">
+        <button id="fbUp" title="Üst klasör">↑</button>
+        <input type="text" id="fbPath">
+        <button id="fbGo">Git</button>
+        <button id="fbHome">Ev</button><button id="fbUsb">USB tb/inputs</button><button id="fbCirc">circuits</button>
+      </div>
+      <div class="list" id="fbList"></div>
+    </div>
+    <div class="hint" style="margin-top:6px">.sp .cir .txt .scs .inc dosyaları seçilebilir. USB takılı değilse klasör boş görünür.</div>
+  </div>
+  <div id="panePaste" style="display:none">
+    <textarea id="paste" placeholder="* netlist buraya&#10;.subckt da vinp vinn vout vdd vss&#10;..."></textarea>
+    <div class="row" style="margin-top:8px"><button id="pasteGo" class="nofl">Çözümle</button></div>
+  </div>
+  <div id="circInfo" style="display:none">
+    <div class="tags" id="circTags"></div>
+    <div id="adaptBox" class="adapt" style="display:none"></div>
+    <pre class="prev" id="circPrev"></pre>
+  </div>
+</section>
+
+<section class="card">
+  <h2><span class="n">2</span>Topoloji</h2>
+  <p class="sub">Testbench bu topolojiye göre kurulacak. Dosyadan tahmin varsa işaretlenir.</p>
+  <div class="topos" id="topos"></div>
+</section>
+
+<section class="card">
+  <h2><span class="n">3</span>Teknoloji ve simülatör</h2>
+  <p class="sub">Ana hedef SAED 90 nm. Kitteki 130 nm kıyas için duruyor.</p>
+  <div class="row">
+    <label class="f">Teknoloji<select id="tech"></select></label>
+    <label class="f">Simülatör<select id="sim"></select></label>
+    <label class="f">Besleme VDD (V)<input type="text" id="vdd"></label>
+  </div>
+  <div class="row">
+    <label class="f">PDK klasörü<input type="text" id="pdk"></label>
+    <label class="f">Sıcaklıklar (°C, virgülle)<input type="text" id="temps"></label>
+  </div>
+  <div class="grp" style="margin-top:0">Köşeler</div>
+  <div class="corners" id="corners"></div>
+</section>
+
+<section class="card">
+  <h2><span class="n">4</span>Analizler</h2>
+  <p class="sub">Hangi analizlerin testbench'e girmesini seç. Topolojiye göre önerilenler işaretlenir.</p>
+  <div class="row"><button id="anDef" class="nofl">Topoloji varsayılanları</button><button id="anNone" class="nofl">Hepsini kapat</button><span class="hint" id="anCount"></span></div>
+  <div id="analyses"></div>
+</section>
+
+<section class="card">
+  <h2><span class="n">5</span>LLM seçimi</h2>
+  <p class="sub">Her ajan için model seç. Jetson Orin Nano'daki Ollama modelleri canlı listelenir.</p>
+  <div class="row">
+    <label class="f">Sağlayıcı<select id="backend"></select></label>
+    <label class="f" id="urlWrap">Sunucu adresi<input type="text" id="llmUrl"></label>
+    <button id="fetchModels" class="nofl">Modelleri getir</button>
+  </div>
+  <div class="hint" id="modelInfo"></div>
+  <div class="ck" style="margin:10px 0"><input type="checkbox" id="same"><label for="same">Tüm ajanlar aynı modeli kullansın</label>
+    <select id="sameModel" style="max-width:260px"></select></div>
+  <table id="agents"></table>
+</section>
+
+</div>
+<aside>
+  <div class="card">
+    <h3>Özet</h3>
+    <dl class="sum" id="sum"></dl>
+    <div id="warns" style="margin-top:10px"></div>
+    <div style="margin-top:12px"><button class="primary" id="save" style="width:100%">İş tanımını kaydet</button></div>
+    <div class="hint" style="margin-top:6px">Kayıt: ~/tmage/runs/…/job.json. Testbench üretimi sonraki adımda bağlanacak.</div>
+    <div id="saveMsg" style="margin-top:6px"></div>
+  </div>
+  <div class="card"><h3>Son işler</h3><div id="jobs" class="hint">yok</div></div>
+  <div class="card" id="runCard" style="display:none">
+    <h3>Koşu <span id="runName" style="text-transform:none;letter-spacing:0;color:var(--ink)"></span></h3>
+    <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px"><span class="chip" id="runState">hazır</span><span class="hint" id="runStage"></span></div>
+    <div class="stg" id="runStages"></div>
+    <button class="primary" id="runGo" style="width:100%;margin:8px 0">Koşuyu başlat</button>
+    <pre class="prev" id="runLog" style="height:260px;max-height:260px;font-size:11px;white-space:pre-wrap"></pre>
+    <pre class="prev" id="runReport" style="display:none;white-space:pre-wrap"></pre>
+  </div>
+</aside>
+</main>
+
+<script>
+window.onerror = (m, src, l) => { const c = document.getElementById("chipSrv"); c.className = "chip bad"; c.textContent = "JS hata: " + m + " (satır " + l + ")"; };
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let C = null;                      // katalog
+let S = {name:'', circuit:null, topology:null, tech:'saed90', sim:'hspice', vdd:'1.2', pdk:'', temps:'-40, 27, 125',
+         corners:['TT'], analyses:{}, llm:{backend:'ollama', url:'', models:[], same:true, sameModel:'', agents:{}}};
+let guess = null, saveTimer = null;
+
+async function api(path, opt) {
+  const r = await fetch(path, opt);
+  return r.json();
+}
+function persist() {
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(() => api('/api/state', {method:'POST', body:JSON.stringify(S)}), 400);
+  renderSummary();
+}
+
+/* ---------- Devre ---------- */
+let fbCur = '';
+async function fbLoad(path) {
+  const d = await api('/api/fs?path=' + encodeURIComponent(path));
+  const list = $('fbList'); list.textContent = '';
+  if (d.error) { list.innerHTML = '<div class="it">' + esc(d.error) + '</div>'; return; }
+  fbCur = d.path; $('fbPath').value = d.path;
+  if (!d.items.length) list.innerHTML = '<div class="it"><span>(boş)</span></div>';
+  for (const it of d.items) {
+    const el = document.createElement('div'); el.className = 'it';
+    if (S.circuit && S.circuit.path === d.path + '/' + it.name) el.classList.add('sel');
+    el.innerHTML = '<span>' + (it.dir ? '📁 ' : '📄 ') + esc(it.name) + '</span><span class="sz">' + (it.dir ? '' : (it.size / 1024).toFixed(1) + ' KB') + '</span>';
+    el.onclick = () => it.dir ? fbLoad(d.path + '/' + it.name) : pickFile(d.path + '/' + it.name);
+    list.appendChild(el);
+  }
+  $('fbUp').onclick = () => fbLoad(d.parent);
+}
+async function pickFile(path) {
+  const d = await api('/api/file?path=' + encodeURIComponent(path));
+  if (d.error) { alert(d.error); return; }
+  setCircuit({path:d.path, name:d.name, text:d.text, parsed:d.parsed, tech:d.tech, srcTech:d.tech}, d.guess);
+  if (!$('name').value) { $('name').value = d.name.replace(/\.[^.]+$/, ''); S.name = $('name').value; }
+  fbLoad(fbCur);
+}
+function setCircuit(c, g) {
+  S.circuit = c; guess = g || null;
+  renderCircuit(); renderTopos();
+  if (guess && !S.topology) selectTopo(guess, true);
+  persist();
+}
+function renderCircuit() {
+  const c = S.circuit; $('circInfo').style.display = c ? '' : 'none'; if (!c) return;
+  const p = c.parsed, tags = $('circTags'); tags.textContent = '';
+  const add = t => { const s = document.createElement('span'); s.className = 'tag'; s.textContent = t; tags.appendChild(s); };
+  add(c.name || 'yapıştırılan'); add(p.lines + ' satır');
+  p.subckts.forEach(s => add('subckt ' + s.name + ' (' + s.ports.length + ' port)'));
+  if (p.params.length) add(p.params.length + ' .param');
+  if (p.includes.length) add(p.includes.length + ' .inc/.lib');
+  if (p.analyses.length) add('mevcut: ' + p.analyses.join(' '));
+  renderAdapt();
+  $('circPrev').textContent = c.text.split('\n').slice(0, 40).join('\n') + (p.lines > 40 ? '\n…' : '');
+}
+function techLabel(id) { return (C.technologies.find(t => t.id === id) || {label:id || 'bilinmiyor'}).label; }
+function renderAdapt() {
+  const c = S.circuit, box = $('adaptBox'); box.style.display = 'none'; box.className = 'adapt'; box.textContent = '';
+  if (!c) return;
+  const needs = c.srcTech && c.srcTech !== S.tech && !(c.adapted && c.adapted.tech === S.tech);
+  if (!needs && !(c.adapted && c.adapted.tech === S.tech)) return;
+  box.style.display = '';
+  if (needs) {
+    box.innerHTML = '<b>Netlist ' + esc(techLabel(c.srcTech)) + ' için yazılmış, seçili teknoloji ' + esc(techLabel(S.tech)) + '.</b>' +
+      '<div class="hint">Model adları, kütüphane satırı ve besleme farkları otomatik uyarlanır. Orijinal korunur.</div>' +
+      '<div class="btns"><button class="primary" id="adaptGo">Seçili teknolojiye uyarla</button></div>';
+    $('adaptGo').onclick = doAdapt;
+  } else {
+    box.classList.add('done');
+    box.innerHTML = '<b>' + esc(techLabel(c.adapted.tech)) + ' için uyarlandı.</b><ul>' +
+      c.adapted.report.map(r => '<li' + (r.startsWith('UYARI') ? ' class="w"' : '') + '>' + esc(r) + '</li>').join('') + '</ul>' +
+      '<div class="btns"><button id="adaptRev">Orijinale dön</button></div>';
+    $('adaptRev').onclick = () => { c.text = c.orig; c.parsed = c.origParsed; c.tech = c.srcTech; c.adapted = null; renderCircuit(); persist(); };
+  }
+}
+async function doAdapt() {
+  const c = S.circuit; const base = c.adapted ? c.orig : c.text;
+  const d = await api('/api/adapt', {method:'POST', body:JSON.stringify({text:base, tech:S.tech, pdk:S.pdk, corner:S.corners[0] || 'TT'})});
+  if (!d.ok) { alert(d.error); return; }
+  c.orig = base; c.origParsed = c.origParsed || c.parsed;
+  c.text = d.text; c.parsed = d.parsed; c.tech = S.tech; c.adapted = {tech:S.tech, report:d.report};
+  renderCircuit(); persist();
+}
+$('tabFile').onclick = () => { $('paneFile').style.display = ''; $('panePaste').style.display = 'none'; $('tabFile').classList.add('on'); $('tabPaste').classList.remove('on'); };
+$('tabPaste').onclick = () => { $('paneFile').style.display = 'none'; $('panePaste').style.display = ''; $('tabPaste').classList.add('on'); $('tabFile').classList.remove('on'); };
+$('pasteGo').onclick = async () => {
+  const text = $('paste').value; if (!text.trim()) return;
+  const d = await api('/api/parse', {method:'POST', body:JSON.stringify({text, name:$('name').value})});
+  setCircuit({path:'', name:'(yapıştırılan)', text, parsed:d.parsed, tech:d.tech, srcTech:d.tech}, d.guess);
+};
+$('fbGo').onclick = () => fbLoad($('fbPath').value);
+$('fbPath').onkeydown = e => { if (e.key === 'Enter') fbLoad($('fbPath').value); };
+$('fbHome').onclick = () => fbLoad(C.home);
+$('fbCirc').onclick = () => fbLoad(C.home + '/tmage/circuits');
+$('fbUsb').onclick = () => fbLoad((C.usb_tb || '/run/media') + (C.usb_tb ? '/inputs' : ''));
+$('name').oninput = e => { S.name = e.target.value; persist(); };
+
+/* ---------- Topoloji ---------- */
+function renderTopos() {
+  const box = $('topos'); box.textContent = '';
+  for (const t of C.topologies) {
+    const el = document.createElement('div'); el.className = 'topo' + (S.topology === t.id ? ' on' : '');
+    el.innerHTML = (guess === t.id ? '<em>önerilen</em>' : '') + '<b>' + esc(t.label) + '</b><span>' + esc(t.desc) + '</span>';
+    el.onclick = () => selectTopo(t.id);
+    box.appendChild(el);
+  }
+}
+function selectTopo(id, quiet) {
+  S.topology = id; renderTopos();
+  if (!quiet || !Object.keys(S.analyses).length) applyDefaults();
+  persist();
+}
+
+/* ---------- Teknoloji ---------- */
+function techObj() { return C.technologies.find(t => t.id === S.tech) || C.technologies[0]; }
+function renderTech(reset) {
+  const t = techObj();
+  if (reset) {
+    S.vdd = String(t.vdd); S.pdk = t.pdk; S.temps = t.temp.join(', ');
+    S.sim = t.simulators[0]; S.corners = [t.corners[0]];
+  }
+  $('tech').value = S.tech; $('vdd').value = S.vdd; $('pdk').value = S.pdk; $('temps').value = S.temps;
+  const sim = $('sim'); sim.textContent = '';
+  t.simulators.forEach(s => sim.add(new Option(s, s))); if (!t.simulators.includes(S.sim)) S.sim = t.simulators[0]; sim.value = S.sim;
+  const cr = $('corners'); cr.textContent = '';
+  t.corners.forEach(c => {
+    const l = document.createElement('label'); l.className = 'ck';
+    const i = document.createElement('input'); i.type = 'checkbox'; i.checked = S.corners.includes(c);
+    i.onchange = () => { S.corners = i.checked ? [...new Set([...S.corners, c])] : S.corners.filter(x => x !== c); persist(); };
+    l.append(i, c); cr.appendChild(l);
+  });
+}
+function applyTechParams() {
+  const pd = techObj().param_defaults || {};
+  for (const [key, val] of Object.entries(pd)) { const [id, k] = key.split('.'); if (S.analyses[id]) S.analyses[id].p[k] = String(val); }
+}
+$('tech').onchange = e => { S.tech = e.target.value; renderTech(true); applyTechParams(); renderAnalyses(); renderAdapt(); persist(); };
+$('sim').onchange = e => { S.sim = e.target.value; persist(); };
+['vdd', 'pdk', 'temps'].forEach(k => $(k).oninput = e => { S[k] = e.target.value; persist(); });
+
+/* ---------- Analizler ---------- */
+function applyDefaults() {
+  S.analyses = {};
+  for (const a of C.analyses) S.analyses[a.id] = {on: a.on.includes(S.topology), p: Object.fromEntries(a.params.map(p => [p.k, String(p.d)]))};
+  applyTechParams(); renderAnalyses();
+}
+function renderAnalyses() {
+  const box = $('analyses'); box.textContent = ''; let lastG = '';
+  for (const a of C.analyses) {
+    if (!S.analyses[a.id]) S.analyses[a.id] = {on:false, p:Object.fromEntries(a.params.map(p => [p.k, String(p.d)]))};
+    const st = S.analyses[a.id];
+    if (a.group !== lastG) { const g = document.createElement('div'); g.className = 'grp'; g.textContent = a.group; box.appendChild(g); lastG = a.group; }
+    const el = document.createElement('div'); el.className = 'an' + (st.on ? ' on' : '');
+    el.innerHTML = '<div class="top"><input type="checkbox" ' + (st.on ? 'checked' : '') + '><div class="t"><b>' + esc(a.label) + '</b><span>' + esc(a.desc) +
+      '</span><span class="m">' + esc(a.spice) + ' → ' + esc(a.metrics.join(', ')) + '</span></div></div>';
+    const pr = document.createElement('div'); pr.className = 'pr';
+    for (const p of a.params) {
+      const l = document.createElement('label'); l.className = 'f'; l.textContent = p.l + (p.u ? ' (' + p.u + ')' : '');
+      const i = document.createElement('input'); i.type = 'text'; i.value = st.p[p.k];
+      i.oninput = () => { st.p[p.k] = i.value; persist(); };
+      l.appendChild(i); pr.appendChild(l);
+    }
+    el.appendChild(pr);
+    el.querySelector('input[type=checkbox]').onchange = e => { st.on = e.target.checked; el.classList.toggle('on', st.on); updCount(); persist(); };
+    box.appendChild(el);
+  }
+  updCount();
+}
+function updCount() { $('anCount').textContent = Object.values(S.analyses).filter(a => a.on).length + ' analiz seçili'; }
+$('anDef').onclick = () => { applyDefaults(); persist(); };
+$('anNone').onclick = () => { Object.values(S.analyses).forEach(a => a.on = false); renderAnalyses(); persist(); };
+
+/* ---------- LLM ---------- */
+function modelList() {
+  const b = C.backends.find(x => x.id === S.llm.backend);
+  if (b && b.models) return b.models;
+  return S.llm.models.map(m => m.name || m);
+}
+function renderLlm() {
+  const L = S.llm, b = C.backends.find(x => x.id === L.backend);
+  $('backend').value = L.backend;
+  $('urlWrap').style.display = b.needs_url ? '' : 'none';
+  $('fetchModels').style.display = (L.backend === 'ollama') ? '' : 'none';
+  $('llmUrl').value = L.url;
+  const names = modelList();
+  const fill = (sel, cur) => { sel.textContent = ''; sel.add(new Option('(seç)', '')); names.forEach(n => sel.add(new Option(n, n)));
+    if (cur && !names.includes(cur)) sel.add(new Option(cur, cur)); sel.value = cur || ''; };
+  fill($('sameModel'), L.sameModel);
+  $('same').checked = L.same; $('sameModel').style.display = L.same ? '' : 'none';
+  const t = $('agents'); t.textContent = '';
+  for (const a of C.agents) {
+    const tr = document.createElement('tr');
+    tr.innerHTML = '<td class="a"><b>' + esc(a.label) + '</b><small>' + esc(a.desc) + '</small></td><td></td>';
+    const sel = document.createElement('select'); fill(sel, L.same ? L.sameModel : L.agents[a.id]);
+    sel.disabled = L.same;
+    sel.onchange = () => { L.agents[a.id] = sel.value; persist(); };
+    tr.children[1].appendChild(sel); t.appendChild(tr);
+  }
+}
+async function fetchModels() {
+  const L = S.llm; if (!L.url) return;
+  $('modelInfo').textContent = 'Bağlanıyor…';
+  const d = await api('/api/models?url=' + encodeURIComponent(L.url));
+  const chip = $('chipLlm');
+  if (d.ok) {
+    L.models = d.models; chip.className = 'chip ok'; chip.textContent = 'Jetson: bağlı · ' + d.ms + ' ms';
+    $('modelInfo').textContent = d.models.length + ' model bulundu: ' + d.models.map(m => m.name + ' (' + (m.params || m.size_gb + ' GB') + ')').join(', ');
+  } else {
+    chip.className = 'chip bad'; chip.textContent = 'Jetson: erişilemiyor';
+    $('modelInfo').textContent = d.error + ' · Tailscale bağlı mı ve Jetson açık mı?';
+  }
+  renderLlm(); persist();
+}
+$('backend').onchange = e => { S.llm.backend = e.target.value; if (S.llm.backend === 'ollama') S.llm.url = S.llm.url || C.env.ollama_url; renderLlm(); persist(); if (S.llm.backend === 'ollama') fetchModels(); };
+$('llmUrl').oninput = e => { S.llm.url = e.target.value; persist(); };
+$('fetchModels').onclick = fetchModels;
+$('same').onchange = e => { S.llm.same = e.target.checked; renderLlm(); persist(); };
+$('sameModel').onchange = e => { S.llm.sameModel = e.target.value; renderLlm(); persist(); };
+
+/* ---------- Özet ve kayıt ---------- */
+function problems() {
+  const w = [], L = S.llm;
+  if (!S.circuit) w.push('Devre seçilmedi.');
+  if (!S.topology) w.push('Topoloji seçilmedi.');
+  if (!Object.values(S.analyses).some(a => a.on)) w.push('En az bir analiz seç.');
+  if (!S.corners.length) w.push('En az bir köşe seç.');
+  const missing = C.agents.filter(a => !(L.same ? L.sameModel : L.agents[a.id]));
+  if (missing.length) w.push('Model seçilmeyen ajan: ' + missing.map(a => a.label.split(' ')[0]).join(', '));
+  return w;
+}
+function renderSummary() {
+  if (!C) return;
+  const on = C.analyses.filter(a => (S.analyses[a.id] || {}).on).map(a => a.label);
+  const t = C.topologies.find(x => x.id === S.topology), L = S.llm;
+  const rows = [['Proje', S.name || '—'], ['Devre', S.circuit ? S.circuit.name : '—'], ['Topoloji', t ? t.label : '—'],
+    ['Teknoloji', techObj().label + ' · ' + S.sim + ' · ' + S.vdd + ' V'], ['Köşeler', S.corners.join(', ') || '—'],
+    ['Analizler', on.length ? on.join(', ') : '—'], ['LLM', (C.backends.find(b => b.id === L.backend) || {}).label + (L.same && L.sameModel ? ' · ' + L.sameModel : '')]];
+  $('sum').innerHTML = rows.map(r => '<dt>' + r[0] + '</dt><dd>' + esc(r[1]) + '</dd>').join('');
+  const w = problems();
+  $('warns').innerHTML = w.length ? w.map(x => '<div class="warn">• ' + esc(x) + '</div>').join('') : '<div class="okmsg">Hazır.</div>';
+}
+$('save').onclick = async () => {
+  const w = problems(), msg = $('saveMsg');
+  if (w.length && !confirm('Eksikler var:\n' + w.join('\n') + '\n\nYine de kaydedilsin mi?')) return;
+  const L = S.llm;
+  const job = {name:S.name || 'devre', topology:S.topology, technology:{id:S.tech, simulator:S.sim, vdd:S.vdd, pdk:S.pdk, temps:S.temps, corners:S.corners},
+    circuit:S.circuit ? {path:S.circuit.path, name:S.circuit.name, parsed:S.circuit.parsed} : null,
+    netlist_text:S.circuit ? S.circuit.text : '', netlist_original:S.circuit && S.circuit.orig ? S.circuit.orig : '',
+    adaptation:S.circuit && S.circuit.adapted ? S.circuit.adapted : null,
+    analyses:C.analyses.filter(a => (S.analyses[a.id] || {}).on).map(a => ({id:a.id, label:a.label, spice:a.spice, metrics:a.metrics, params:S.analyses[a.id].p})),
+    llm:{backend:L.backend, url:L.url, agents:Object.fromEntries(C.agents.map(a => [a.id, L.same ? L.sameModel : (L.agents[a.id] || '')]))}};
+  const d = await api('/api/jobs', {method:'POST', body:JSON.stringify(job)});
+  msg.className = d.ok ? 'okmsg' : 'warn'; msg.textContent = d.ok ? 'Kaydedildi: ' + d.dir + ' · aşamalar: ' + d.stages.map(x => x.label).join(' → ') : 'Hata: ' + d.error;
+  loadJobs(); if (d.ok) selectRun(d.dir.split('/').pop(), job.name);
+};
+async function loadJobs() {
+  const d = await api('/api/jobs'), box = $('jobs'); box.textContent = '';
+  if (!d.jobs.length) { box.textContent = 'yok'; return; }
+  d.jobs.slice(0, 8).forEach(j => { const r = document.createElement('div'); r.className = 'job';
+    r.innerHTML = '<div>' + esc(j.name) + ' <span>' + esc(j.topology || '') + '</span></div><span>' + esc((j.created || '').slice(5, 16)) + '</span>';
+    if (j.dir === curRun) r.classList.add('sel');
+    r.onclick = () => selectRun(j.dir, j.name); box.appendChild(r); });
+}
+
+/* ---------- Koşu ve log ---------- */
+let curRun = '', logN = 0, pollT = null;
+function selectRun(dir, name) {
+  curRun = dir; logN = 0; $('runCard').style.display = ''; $('runName').textContent = name || dir; $('runLog').textContent = ''; $('runReport').style.display = 'none';
+  clearInterval(pollT); pollT = setInterval(pollRun, 2000); pollRun(); loadJobs();
+}
+async function pollRun() {
+  if (!curRun) return;
+  const d = await api('/api/run/log?dir=' + encodeURIComponent(curRun) + '&since=' + logN);
+  if (d.error) return;
+  const log = $('runLog'), atEnd = log.scrollTop + log.clientHeight >= log.scrollHeight - 20;
+  if (d.lines.length) { log.textContent += d.lines.join('\n') + '\n'; logN = d.total; if (atEnd) log.scrollTop = log.scrollHeight; }
+  const st = d.status || {}, chip = $('runState');
+  chip.textContent = {running:'çalışıyor', done:'bitti', failed:'başarısız', hazir:'hazır'}[st.state] || st.state;
+  chip.className = 'chip ' + (st.state === 'done' ? 'ok' : st.state === 'failed' ? 'bad' : '');
+  $('runStage').textContent = st.state === 'running' ? (st.stage || '') : (st.seconds ? st.seconds + ' sn' : '');
+  $('runGo').disabled = st.state === 'running'; $('runGo').textContent = st.state === 'running' ? 'Çalışıyor…' : (logN ? 'Yeniden çalıştır' : 'Koşuyu başlat');
+  $('runStages').innerHTML = (d.stages || []).map(x => '<span class="' + (x.done ? 'done' : '') + '">' + esc(x.label) + '</span>').join('');
+  if (d.report) { $('runReport').style.display = ''; $('runReport').textContent = d.report; }
+  if (st.state !== 'running' && logN && !d.lines.length) { clearInterval(pollT); pollT = setInterval(pollRun, 8000); }
+}
+$('runGo').onclick = async () => {
+  const d = await api('/api/run/start', {method:'POST', body:JSON.stringify({dir:curRun})});
+  if (!d.ok) { alert(d.error); return; }
+  logN = 0; $('runLog').textContent = ''; $('runReport').style.display = 'none'; clearInterval(pollT); pollT = setInterval(pollRun, 2000); setTimeout(pollRun, 600);
+};
+
+/* ---------- Başlangıç ---------- */
+(async () => {
+  try { C = await api('/api/config'); $('chipSrv').className = 'chip ok'; $('chipSrv').textContent = 'sunucu çalışıyor'; }
+  catch (e) { $('chipSrv').className = 'chip bad'; $('chipSrv').textContent = 'sunucu yok'; return; }
+  const saved = await api('/api/state');
+  if (saved && saved.tech) S = Object.assign(S, saved, {llm:Object.assign(S.llm, saved.llm || {})});
+  if (!S.llm.url) S.llm.url = C.env.ollama_url;
+  if (!S.llm.models.length && C.env.ollama_models.length) S.llm.models = C.env.ollama_models.map(n => ({name:n}));
+  if (!S.llm.sameModel && C.env.ollama_model) S.llm.sameModel = C.env.ollama_model;
+  C.technologies.forEach(t => $('tech').add(new Option(t.label, t.id)));
+  C.backends.forEach(b => $('backend').add(new Option(b.label, b.id)));
+  $('name').value = S.name;
+  if (!S.pdk) { renderTech(true); } else renderTech(false);
+  renderTopos(); renderCircuit();
+  if (Object.keys(S.analyses).length) renderAnalyses(); else if (S.topology) applyDefaults(); else renderAnalyses();
+  renderLlm(); renderSummary(); loadJobs();
+  fbLoad(C.usb_tb ? C.usb_tb + '/inputs' : C.home);
+  if (S.llm.backend === 'ollama') fetchModels();
+})();
+</script>
+</body>
+</html>

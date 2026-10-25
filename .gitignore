@@ -1,0 +1,18 @@
+# Koşu çıktıları, loglar, benchmark sonuçları
+runs/
+logs/
+bench/
+circuits/
+# Yerel/gizli yapılandırma
+config/ui_state.json
+config/env.sh
+config/jetson.env
+config/*.bak
+*.ovpn
+vpn/
+site_info
+# Python / Obsidian
+__pycache__/
+*.pyc
+docs/.obsidian/workspace*.json
+docs/.obsidian/cache

@@ -1,0 +1,91 @@
+{
+ "order": [
+  "spec",
+  "scenario",
+  "stimulus",
+  "measure",
+  "verify",
+  "report"
+ ],
+ "stages": {
+  "spec": {
+   "agent": "spec",
+   "label": "Spesifikasyon",
+   "needs": [],
+   "goal": "Devreyi anla: portların rollerini, devre özetini ve varsayımları çıkar.",
+   "output": {
+    "port_roles": "{port: giris_pozitif|giris_negatif|cikis|besleme_pozitif|besleme_negatif|referans|diger}",
+    "circuit_summary": "string, 2-4 cümle",
+    "assumptions": "[string]",
+    "open_questions": "[string]"
+   }
+  },
+  "scenario": {
+   "agent": "scenario",
+   "label": "Test senaryosu",
+   "needs": [
+    "spec"
+   ],
+   "goal": "Seçilen her analiz için hangi testbench'in kurulacağına karar ver. Yalnızca context.analyses içindekileri kullan.",
+   "output": {
+    "tests": "[{id, analysis_id, purpose, connections:{port:kaynak/yük}, sweep:{...}, metrics:[...]}]",
+    "order": "[test id]"
+   }
+  },
+  "stimulus": {
+   "agent": "stimulus",
+   "label": "Stimulus / netlist",
+   "needs": [
+    "spec",
+    "scenario"
+   ],
+   "goal": "Her test için çalıştırılabilir testbench GÖVDESİNİ yaz: kaynaklar, yük, DUT örneği ve analiz komutları. Kurallar: toprak düğümü 0; DUT'u 'X0 <portlar sırayla> <subckt_adı>' ile çağır (port sırası context.circuit.ports); tek beslemede VSS=0 ve VDD=context.technology.vdd; giriş ortak modunu yaklaşık VDD/2 yap; .lib, .inc, .end, .subckt YAZMA (sistem ekler); .meas YAZMA (ölçüm ajanı yazar); analiz parametrelerini context.analyses[].params'tan al. Her testbench ayrı, bağımsız bir dosyadır. ÖNEMLİ: Yer tutucu ({...}, 'context.' vb.) KULLANMA; tüm sayıları doğrudan yaz. Örnek AC testbench gövdesi (VDD=1.2 V, DUT portları vinp vinn vout vdd vss): 'Vdd vdd 0 1.2\\nVss vss 0 0\\nVcm cm 0 0.6\\nVin vinp cm DC 0 AC 0.5\\nVinn vinn cm DC 0 AC -0.5\\nX0 vinp vinn vout vdd vss da\\nCl vout 0 0.5p\\n.ac dec 20 1 1e9'. Bu yalnızca biçim örneğidir; port sırasını ve adlarını kendi devrene göre uyarla.",
+   "output": {
+    "testbenches": "[{test_id, file, netlist_text}]"
+   }
+  },
+  "measure": {
+   "agent": "measure",
+   "label": "Ölçüm",
+   "needs": [
+    "spec",
+    "scenario",
+    "stimulus"
+   ],
+   "goal": "Her testbench için yalnızca .meas satırlarını yaz ve beklenen aralığı belirt. Metrik adları context.analyses[].metrics ile AYNI olmalı (örn. gain, phase_margin). Testbench'teki düğüm adlarını kullan. Ölçüm satırlarında .end YAZMA. statement alanı tam bir '.meas ...' satırı olsun; birden çok satır için '\\n' kullan.",
+   "output": {
+    "measurements": "[{test_id, name, statement, expect:{min, max, unit}}]"
+   }
+  },
+  "verify": {
+   "agent": "verify",
+   "label": "Doğrulama (oylama + kural)",
+   "needs": [
+    "scenario",
+    "stimulus",
+    "measure"
+   ],
+   "goal": "Simülasyon sonuçlarını kümele, kural kontrollerini uygula, kazanan adayı seç.",
+   "output": {
+    "runs": "[{candidate, metrics:{}, rules_passed:bool}]",
+    "clusters": "[...]",
+    "winner": "candidate",
+    "flags": "[string]"
+   }
+  },
+  "report": {
+   "agent": "report",
+   "label": "Rapor",
+   "needs": [
+    "spec",
+    "scenario",
+    "measure",
+    "verify"
+   ],
+   "goal": "Sonucu kısa ve doğru biçimde anlat. Yeni sayı uydurma; yalnızca verify çıktısındaki değerleri kullan.",
+   "output": {
+    "markdown": "string"
+   }
+  }
+ }
+}
