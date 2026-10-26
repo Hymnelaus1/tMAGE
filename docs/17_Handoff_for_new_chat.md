@@ -10,7 +10,7 @@ Paste this file at the start of a new conversation. It captures the state of the
 
 Target circuits: DA (diff amp), FCO (folded-cascode OTA), TSO (two-stage op-amp), BGR (bandgap). Kit also has COMP (comparator), OSC (oscillator), LNA. Main technology: **SAED 90 nm (HSPICE)**. Reference kit netlists were written for 130 nm / SKY130.
 
-Presentation (Canva): "tMAGE Proje Onerisi". The original plan said "LLM-as-judge"; it was **replaced by voting + rule checks** (decision recorded in `docs/10_Dogrulama_Oylama.md`).
+Presentation (Canva): "tMAGE Proje Onerisi". The original plan said "LLM-as-judge"; it was **replaced by voting + rule checks** (decision recorded in `docs/10_Verification_Voting.md`).
 
 ---
 

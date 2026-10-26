@@ -8,6 +8,8 @@ Status: `done`, `running`, `next`, `later`. Order inside a section is priority.
 - [x] Script-first spec/scenario, drafts, RAG, batch runner (`v0.2.0`)
 - [x] English prompts, HSPICE-manual rules, benchmark and findings tooling (`v0.3.0`)
 - [x] Verilog-A toolchain smoke test
+- [x] Documents translated to English, files renamed
+- [ ] UI texts, code comments and `config/` labels translated to English (after the benchmark, the running benchmark executes those files)
 - [x] GitHub repository, tags, automatic local and GitHub backup
 - [ ] Model benchmark finished (9 models, running)
 - [ ] `sim.py` failed-`.meas` bug fixed, scores recomputed
@@ -26,7 +28,7 @@ Status: `done`, `running`, `next`, `later`. Order inside a section is priority.
 
 ## Now: finish the model benchmark (running)
 
-* `running` 9 models x DA/FCO/TSO x 3 runs x 3 candidates, each model alone (`scripts/model_bench.sh`). Findings are scanned automatically into `docs/22_Benchmark_Bulgulari.md`.
+* `running` 9 models x DA/FCO/TSO x 3 runs x 3 candidates, each model alone (`scripts/model_bench.sh`). Findings are scanned automatically into `docs/22_Benchmark_Findings.md`.
 * `next` Fix `sim.py` `read_measures()` (failed `.meas` must not become 25.0/1.0) and **recompute all scores from the saved `.ms0/.mt0` files** without re-running HSPICE.
 * `next` Activate `config/prompt_versions/v3_pending_pitfalls.json` in `agent_prompts.json` (commit separately so v2 stays comparable).
 
@@ -51,7 +53,7 @@ Status: `done`, `running`, `next`, `later`. Order inside a section is priority.
 
 * `done` Toolchain works (`gcc` + `glibc-devel`, HSPICE `.hdl` smoke test: gain 20 dB for A=10).
 * `next` Choose the use case with the PhD assistant: (1) ideal behavioural blocks inside testbenches (recommended first), (2) behavioural model vs transistor-level comparison as a second verification source, (3) spec checker in Verilog-A.
-* `later` Wire the chosen use case into the pipeline and the UI; rules are in `docs/21_HSPICE_Kilavuz_Notlari.md`.
+* `later` Wire the chosen use case into the pipeline and the UI; rules are in `docs/21_HSPICE_Manual_Notes.md`.
 
 ## Product
 

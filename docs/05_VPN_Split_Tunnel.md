@@ -1,39 +1,39 @@
 ---
-tags: [tmage, vpn, lisans]
+tags: [tmage, vpn, license]
 ---
-# VPN ve split tunnel
+# VPN and split tunnel
 
-**Amaç:** Yalnızca HSPICE lisans sunucusu VPN'den geçsin; internet normal bağlantıdan çıksın.
+**Goal:** Only the HSPICE license server goes through the VPN; the internet uses the normal connection.
 
-## Yapılandırma
-GTÜ'nün kişiye özel `.ovpn` dosyası (**asla depoya girmez**, içinde özel anahtar var) `~/vpn/gtu.ovpn` olarak kopyalanır (`chmod 600`) ve sonuna eklenir:
+## Configuration
+The personal GTU `.ovpn` file (**never committed**, it contains a private key) is copied to `~/vpn/gtu.ovpn` (`chmod 600`) and these lines are appended:
 ```
 route-nopull
 pull-filter ignore "redirect-gateway"
 pull-filter ignore "dhcp-option"
 pull-filter ignore "block-outside-dns"
-route <lisans sunucusu IP> 255.255.255.255 vpn_gateway
+route <license server IP> 255.255.255.255 vpn_gateway
 ```
-- `route-nopull`: sunucunun gönderdiği tüm yönlendirmeleri yok sayar.
-- `pull-filter`: tüm trafiği VPN'e yönlendirmeyi ve DNS değişikliğini engeller.
-- Son satır: yalnızca lisans sunucusunun adresi `tun0` üzerinden gider.
+- `route-nopull`: ignores all routes the server pushes.
+- `pull-filter`: blocks sending all traffic into the VPN and the DNS change.
+- Last line: only the license server's address goes through `tun0`.
 
-## Bağlanma
+## Connecting
 ```bash
-sudo openvpn --config ~/vpn/gtu.ovpn   # kullanıcı adı/parola sorar; terminal açık kalmalı
+sudo openvpn --config ~/vpn/gtu.ovpn   # asks for user name/password; keep the terminal open
 ```
-`Initialization Sequence Completed` görülünce bağlandı.
+`Initialization Sequence Completed` means it is connected.
 
-## Doğrulama
+## Verification
 ```bash
-ip -br a | grep tun0                 # tun0 var mı
-ip route | grep tun0                 # yalnızca lisans /32 rotası ve VPN alt ağı
-curl -s ifconfig.me                  # genel IP DEĞİŞMEMELİ
-timeout 5 bash -c 'echo > /dev/tcp/<lisans>/27200' && echo ok
+ip -br a | grep tun0                 # does tun0 exist
+ip route | grep tun0                 # only the license /32 route and the VPN subnet
+curl -s ifconfig.me                  # the public IP must NOT change
+timeout 5 bash -c 'echo > /dev/tcp/<license>/27200' && echo ok
 ```
-Tailscale (100.64.0.0/10) ile çakışmaz.
+It does not clash with Tailscale (100.64.0.0/10).
 
-## Bilinen risk
-Terminal kapanırsa ya da VPN kopar ise HSPICE `Unable to checkout (hspice)` verir ve 120 sn bekler. Boru hattı bunu önceden kontrol eder ([[09_Loglama]], [[13_Sorun_Giderme]]).
+## Known risk
+If the terminal closes or the VPN drops, HSPICE reports `Unable to checkout (hspice)` and waits 120 s. The pipeline checks this beforehand ([[09_Logging]], [[13_Troubleshooting]]).
 
-İsteğe bağlı: sağ üst aç/kapa düğmesi için `NetworkManager-openvpn` + `NetworkManager-openvpn-gnome` kurulur ve profil `nmcli connection import type openvpn` ile içe aktarılır (kurulmadı).
+Optional: for an on/off button at the top right, install `NetworkManager-openvpn` + `NetworkManager-openvpn-gnome` and import the profile with `nmcli connection import type openvpn` (not installed).

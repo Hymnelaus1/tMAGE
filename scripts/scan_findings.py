@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Read-only scanner for a model-benchmark folder. Writes docs/22_Benchmark_Bulgulari.md.
+"""Read-only scanner for a model-benchmark folder. Writes docs/22_Benchmark_Findings.md.
 
 Never touches config/ or engine/ and never starts runs. Safe to run while a benchmark is in progress.
 Usage: python3 scripts/scan_findings.py [batch/model_bench_20261026]
@@ -14,7 +14,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 BASE = Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / "batch" / "model_bench_20261026"
-OUT = ROOT / "docs" / "22_Benchmark_Bulgulari.md"
+OUT = ROOT / "docs" / "22_Benchmark_Findings.md"
 SUSPECT = (25.0, 1.0)  # temper / alter# column values that leak when a measure fails (sim.py read_measures bug)
 
 
@@ -48,14 +48,14 @@ def warn_kinds(cand):
 
 
 def main():
-    L = [f"# Benchmark bulguları (otomatik)", "", f"Üretildi: {time.strftime('%Y-%m-%d %H:%M:%S')} · kaynak: `{BASE.relative_to(ROOT)}` · salt okunur tarama (`scripts/scan_findings.py`)", "",
-         "Sahte değer kuralı: ölçüm `failed` iken `vos/gaincm/gainpsrr/psrr/vfin/cl_gain` = 25.0 veya 1.0 ise bu sıcaklık/alter# sütunudur, gerçek ölçüm değildir (bkz. `20_Gorulen_Hatalar.md` A).", ""]
+    L = [f"# Benchmark findings (automatic)", "", f"Generated: {time.strftime('%Y-%m-%d %H:%M:%S')} · source: `{BASE.relative_to(ROOT)}` · read-only scan (`scripts/scan_findings.py`)", "",
+         "Fake-value rule: if a measure is `failed` and `vos/gaincm/gainpsrr/psrr/vfin/cl_gain` is 25.0 or 1.0, that is the temperature/alter# column, not a real measurement (see `20_Observed_Errors.md`, A).", ""]
     for mdir in sorted(p for p in BASE.iterdir() if p.is_dir()) if BASE.exists() else []:
         sf = mdir / "summary.json"
         if not sf.exists():
             continue
         res = json.loads(sf.read_text())
-        L += [f"## {mdir.name}", "", "| Devre | Koşu | Durum | Süre | Kümeler | Çoğunluk | Sahte değer | Başarısız .meas | Taslağa düşen test |", "|---|---|---|---|---|---|---|---|---|"]
+        L += [f"## {mdir.name}", "", "| Circuit | Run | Status | Time | Clusters | Majority | Fake values | Failed .meas | Tests that fell back to drafts |", "|---|---|---|---|---|---|---|---|---|"]
         issues, kinds = collections.Counter(), collections.Counter()
         for topo, reps in res.items():
             for r in reps:
@@ -76,11 +76,11 @@ def main():
                         issues[re.sub(r"[-\d.e+]+", "#", i)[:100]] += 1
                     kinds.update(warn_kinds(cand))
                 maj = max((len(x) for x in (r["clusters"] or [])), default=0)
-                L.append(f"| {topo} | {r['rep']} | {r['status']} | {r['seconds'] or '-'} s | {r['clusters']} | {'evet' if maj >= 2 else 'hayır'} | {sus} | {fm} | {fb} |")
+                L.append(f"| {topo} | {r['rep']} | {r['status']} | {r['seconds'] or '-'} s | {r['clusters']} | {'yes' if maj >= 2 else 'no'} | {sus} | {fm} | {fb} |")
         if issues:
-            L += ["", "En sık aday sorunları:", ""] + [f"- {n}x {k}" for k, n in issues.most_common(6)]
+            L += ["", "Most frequent candidate problems:", ""] + [f"- {n}x {k}" for k, n in issues.most_common(6)]
         if kinds:
-            L += ["", "HSPICE ölçüm uyarıları:", ""] + [f"- {n}x {k}" for k, n in kinds.most_common(6)]
+            L += ["", "HSPICE measurement warnings:", ""] + [f"- {n}x {k}" for k, n in kinds.most_common(6)]
         L.append("")
     OUT.write_text("\n".join(L))
     print("wrote", OUT)

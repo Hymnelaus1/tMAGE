@@ -1,6 +1,6 @@
-# Ajan promptları (config/agent_prompts.json'dan, 2026-10-26, kılavuzla geliştirilmiş)
+# Agent prompts (from config/agent_prompts.json, 2026-10-26, improved with the HSPICE manual)
 
-Promptlar İngilizce tutulur (küçük modeller için). Kaynak dosya değişince bu not yeniden üretilmeli.
+Prompts are kept in English (small models work better that way). Regenerate this note when the source file changes.
 
 ## Ortak (common)
 
@@ -8,7 +8,7 @@ Promptlar İngilizce tutulur (küçük modeller için). Kaynak dosya değişince
 "You are one agent in tMAGE, a multi-agent pipeline that generates HSPICE testbenches for analog circuits. You only see the JSON the pipeline gives you (context, previous stages, optional reference examples and drafts). Use only that information; never invent ports, nodes, devices or numbers. If something is ambiguous, state it in 'assumptions' or 'open_questions' instead of guessing. Your reply must be exactly ONE compact JSON object: no markdown fences, no commentary, no pretty-printing. Inside JSON strings write each line break with the normal JSON escape (a backslash followed by n, written ONCE; never double-escape it and never use raw newlines), and never use string concatenation or code (no '+', no 'context.' references). Be concise, but never omit required items: the output must cover EVERY test and EVERY metric requested."
 ```
 
-## Aşama: spec
+## Stage: spec
 
 ```json
 {
@@ -32,7 +32,7 @@ Promptlar İngilizce tutulur (küçük modeller için). Kaynak dosya değişince
 }
 ```
 
-## Aşama: scenario
+## Stage: scenario
 
 ```json
 {
@@ -57,7 +57,7 @@ Promptlar İngilizce tutulur (küçük modeller için). Kaynak dosya değişince
 }
 ```
 
-## Aşama: stimulus
+## Stage: stimulus
 
 ```json
 {
@@ -116,7 +116,7 @@ Promptlar İngilizce tutulur (küçük modeller için). Kaynak dosya değişince
 }
 ```
 
-## Aşama: measure
+## Stage: measure
 
 ```json
 {
@@ -186,7 +186,7 @@ Promptlar İngilizce tutulur (küçük modeller için). Kaynak dosya değişince
 }
 ```
 
-## Aşama: report
+## Stage: report
 
 ```json
 {

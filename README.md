@@ -2,13 +2,11 @@
 
 GTU ELM491 graduation project. Given an analog circuit netlist, a topology and a set of analyses, small local LLM agents write HSPICE testbenches. The system simulates them, **verifies the results by majority voting plus sanity rules** and writes a report. Sizing and optimisation are out of scope.
 
-*(Türkçe: Analog devre netlistini ve analizleri seçersiniz; LLM ajanları HSPICE testbench'lerini yazar, sistem simüle eder, oylama ve kural kontrolüyle doğrular, rapor üretir. Belgeler `docs/` altında Türkçedir.)*
-
 Students: Orhan Haluk Tascioglu, Nisa Bekci. Advisor: Prof. Dr. Engin Afacan.
 
 ## Status
 
-Work in progress, **results are preliminary**. The model benchmark (9 models x 3 circuits x 3 runs x 3 voted candidates) is still running; see [ROADMAP.md](ROADMAP.md) and [docs/22_Benchmark_Bulgulari.md](docs/22_Benchmark_Bulgulari.md).
+Work in progress, **results are preliminary**. The model benchmark (9 models x 3 circuits x 3 runs x 3 voted candidates) is still running; see [ROADMAP.md](ROADMAP.md) and [docs/22_Benchmark_Findings.md](docs/22_Benchmark_Findings.md).
 
 | | |
 |---|---|
@@ -17,7 +15,7 @@ Work in progress, **results are preliminary**. The model benchmark (9 models x 3
 | Not supported yet | COMP, OSC (flat netlists, no `.subckt`; OSC needs harmonic balance) |
 | Technology | SAED 90 nm, HSPICE X-2025.06-SP2 |
 | LLM runtime | Ollama on a Jetson Orin Nano (8 GB), models of 4B parameters or more |
-| UI | Local web UI (Turkish), stdlib Python only |
+| UI | Local web UI, stdlib Python only (its texts are still Turkish; translation is planned) |
 
 ## How it works
 
@@ -31,7 +29,7 @@ Design rules that came out of testing small models:
 * Everything deterministic is done by **script** (spec, scenario, testbench and `.meas` drafts); the LLM only refines.
 * The model gets a **verified draft** plus matching real examples from the kit (RAG) and a short English prompt with a list of known errors and fixes.
 * Wrong outputs are caught by **sanity ranges** and by **voting across candidates**; a failing test falls back to the script draft and is flagged (the report shows the model's own contribution).
-* Prompts, context, logs and reports an LLM sees are English; only the UI and `docs/` are Turkish.
+* Everything is English (prompts, context, logs, reports, documents) except the UI texts, code comments and `config/` labels, which are being translated.
 
 ## Plan at a glance
 
@@ -75,7 +73,7 @@ Vector versions: [architecture.svg](docs/images/architecture.svg), [pipeline.svg
 | `config/` | topology/technology/analysis catalog, stage schemas, agent prompts, `prompt_versions/` |
 | `engine/` | pipeline, context hand-off, RAG and script drafts, Ollama client, HSPICE runner, batch runner |
 | `scripts/` | VPN service, model benchmark, mixed-model voting, ranking, findings scanner |
-| `docs/` | Obsidian vault (Turkish): design notes, change log, observed errors, prompts, HSPICE manual notes |
+| `docs/` | Obsidian vault: design notes, change log, observed errors, prompts, HSPICE manual notes |
 
 Included: the kit netlists and parameter files (`knowledge/inputs`, `knowledge/examples`) and the SkyWater device models (Apache-2.0), because the RAG step and the batch runner read them.
 
@@ -116,7 +114,7 @@ Earlier prompt sets are kept as files in `config/prompt_versions/` (`v1_old`, `v
 
 ## Known issues
 
-* `engine/sim.py` `read_measures()` turns a *failed* `.meas` into the temperature column value (25.0) or alter# (1.0). Details: `docs/20_Gorulen_Hatalar.md`. Fix is planned right after the running benchmark.
+* `engine/sim.py` `read_measures()` turns a *failed* `.meas` into the temperature column value (25.0) or alter# (1.0). Details: `docs/20_Observed_Errors.md`. Fix is planned right after the running benchmark.
 * Sizes come from 130 nm kit netlists, so results validate the flow, not a real 90 nm design.
 * `gpt-oss:20b` crashes Ollama on the 8 GB Jetson.
 
@@ -124,7 +122,7 @@ Earlier prompt sets are kept as files in `config/prompt_versions/` (`v1_old`, `v
 
 `docs/` also opens as an Obsidian vault (Obsidian > *Open folder as vault* > `docs/`).
 
-Start with `docs/17_Handoff_for_new_chat.md` (project state, access, lessons) and `docs/18_Degisiklik_Gunlugu.md` (chronological change log).
+Start with `docs/17_Handoff_for_new_chat.md` (project state, access, lessons) and `docs/18_Change_Log_Benchmark.md` (chronological change log).
 
 ## Privacy
 
