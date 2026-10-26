@@ -1,0 +1,13 @@
+{
+ "_note": "Proposed additions, NOT active. Not read by the pipeline. Apply to config/agent_prompts.json only after batch/model_bench_20261026 finishes (editing config/ mid-run would change prompts for later models).",
+ "measure": [
+  {"error": "'.meas dc vos find par('v(vout)-v(vinp)') at=0.6' with '.dc Vin -0.05 0.05 0.05': HSPICE warns 'Measurement time value specified exceeds analysis limit' and the measure FAILS (seen in qwen2.5:7b FCO run 1 and 2, all 3 candidates).",
+   "fix": "The 'at=' value must lie inside the swept range. For an offset test use the sweep point where the input difference is 0 (e.g. at=0 when the sweep is -0.05..0.05 around 0), not the supply or common-mode voltage."},
+  {"error": "Measure value of exactly 25.0 or 1.0 for vos, vfin, gaincm, gainpsrr or cl_gain.",
+   "fix": "These are not measurements: they are the temperature (25) or alter# (1) columns shown when a measure failed. A failed measure is printed as 'failed'. Re-check the .meas (sweep range, trigger level, node names)."}
+ ],
+ "stimulus": [
+  {"error": "Offset test swept the input around 0 V (-0.05..0.05) while the circuit has symmetric supplies, but the common mode/at value was taken from the single-supply case (VDD/2 = 0.6).",
+   "fix": "Take the sweep centre from context.circuit.supply_hint: symmetric supply -> centre 0 V; single supply -> centre VDD/2. Use the same centre in the .meas 'at=' value."}
+ ]
+}

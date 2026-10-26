@@ -1,0 +1,29 @@
+# Değişiklik ve işlem günlüğü
+
+Bu not, oturum boyunca yapılan işlemleri sırayla kaydeder. Yeni işlemler en alta eklenir.
+
+## 2026-10-26
+
+- **Sağlık kontrolü:** VPN aktif (tun0 var, lisans portu erişilebilir, genel IP VPN dışında). Jetson Ollama yanıt veriyor, 9 model listeli, hiçbiri yüklü değil. Çalışan batch yok. Git'te 22 işlenmemiş değişiklik.
+- **Karar (kullanıcı):** Yeni modeller indirilsin: `qwen2.5-coder:7b`, `deepseek-coder:6.7b`, 4B modellerin Q8 sürümleri. Ölçüm kapsamı: tam (3 koşu x 3 aday). 4B altı modeller (granite4:3b, qwen2.5-coder:3b) ve `gemma4:e2b-it-qat` (etkin ~2B) kullanılmıyor.
+- **Kod:** `engine/batch.py` içine `--voters` ve `--agent` seçenekleri eklendi (her model tek başına çalıştırılabilir).
+- **Betik:** `scripts/model_bench.sh` eklendi. Her model için DA, FCO, TSO x 3 koşu x 3 aday; çıktı `<outdir>/<model>/`, ilerleme günlüğü `<outdir>.log`.
+- **Sunucu:** `./run.sh` ile arayüz sunucusu başlatıldı (batch bunu gerektiriyor). Günlük: `runs/server.log`.
+- **İndirme:** Jetson'a 4 model çekme isteği gönderildi (`bench/pull.log`). Q8 etiket adları tahmindir; hata verirse düzeltilecek.
+- **Beklemede:** İndirmeler bitince `scripts/model_bench.sh` başlatılacak.
+- **Verilog-A:** `gcc` ve `glibc-devel` kullanıcı tarafından kuruldu. `work/va_test/` içinde duman testi: `.hdl gain.va` + `X` örneği, `A=10` için HSPICE `.meas` kazancı 20.0 dB (beklenen). Verilog-A derleme zinciri çalışıyor, henüz akışa bağlı değil.
+- **Notlar:** `19_Ajan_Promptlari.md` (promptlar config'den üretildi) ve `20_Gorulen_Hatalar.md` (hata/çözüm tablosu) eklendi.
+- **İndirme:** `qwen2.5-coder:7b`, `deepseek-coder:6.7b`, `qwen3:4b-instruct-2507-q8_0` tamam; `qwen3.5:4b-q8_0` sürüyor.
+- **Promptların İngilizceye çevrilmesi:** `config/stages.json` içindeki tüm `goal` alanları ve `engine/handoff.py` içindeki temel (baseline) sistem istemi İngilizceye çevrildi. Ajan adı artık Türkçe `label` yerine aşama kimliğiyle verilir. Yedek: `config/stages.json.bak`. Kalan Türkçe yalnızca arayüz `label` alanlarında (LLM'e gitmez).
+- **PDF:** `~/Downloads/hspice_sa.pdf` = HSPICE User Guide: Simulation and Analysis, 1024 sayfa, 14 MB.
+- **Kılavuz çıkarımı:** `hspice_sa.pdf` metne çevrildi (`knowledge/manual/hspice_sa.txt`, git'e eklenmemeli). `.MEASURE` bölümünden 8 kural ve 3 hata/çözüm `config/agent_prompts.json` içindeki `measure` ajanına eklendi (yedek: `agent_prompts.json.bak`). Verilog-A kuralları `21_HSPICE_Kilavuz_Notlari.md` dosyasında, henüz akışa bağlı değil. `19_Ajan_Promptlari.md` yeniden üretildi.
+- **Uyarı:** kılavuz B-2008.09, kurulu HSPICE X-2025.06-SP2. Yeni kurallar ölçümden önce HSPICE ile doğrulanmalı.
+- **İndirmeler tamam:** dört modelin hepsi (`qwen2.5-coder:7b`, `deepseek-coder:6.7b`, `qwen3:4b-instruct-2507-q8_0`, `qwen3.5:4b-q8_0`).
+- **Doğrulama (HSPICE X-2025.06):** `work/meas_test/` içinde yeni `.meas` biçimleri çalıştı: `max vdb`, `trig at=1 targ vdb val=0 fall=1` (ugf 1.5919 GHz, teori 1.59 GHz), `find vp when vdb=0`, `param='gain-3'`, `trig/targ rise=1`, `deriv ... when`. İlk denemede ugf "failed" çıktı; sebep tarama 1 GHz'de bitmesiydi (sözdizimi değil), "0/failed = ölçüm çalışmadı" kuralını doğruladı.
+- **Ölçüm başlatıldı:** `scripts/model_bench.sh batch/model_bench_20261026` (DA/FCO/TSO x 3 koşu x 3 aday, her model tek başına). Sıra: qwen3:4b-instruct, qwen3.5:4b, qwen2.5:7b, qwen2.5-coder:7b, qwen3:4b-instruct-2507-q8_0, qwen3.5:4b-q8_0, command-r7b, ministral-3:8b, deepseek-coder:6.7b. İlerleme: `batch/model_bench_20261026.log`.
+- **Prompt sürümleri korundu:** `config/prompt_versions/v1_old` (eski) ve `v2_manual` (kılavuzla geliştirilmiş, ölçümde kullanılan). Geri dönüş için v1_old içindeki iki JSON `config/` altına kopyalanır. Ölçüm sürerken `config/` değiştirilmez (promptlar her çağrıda okunur).
+- **Karar (kullanıcı):** ölçüm ~20 saat sürse de tamamlanacak; veri hataları görmek için kritik.
+- **Hata analizi (salt okunur):** qwen2.5:7b FCO run 1/2 başarısızlığı iki parçadan oluşuyor: (A) `sim.py read_measures()` başarısız `.meas` sonucunu `temper`/`alter#` sütunuyla karıştırıp sahte 25.0/1.0 değeri üretiyor (kod hatası), (B) modelin ofset `.meas at=0.6` değeri `.dc` aralığı (-0.05..0.05) dışında (model/prompt hatası). Ayrıntı `20_Gorulen_Hatalar.md`. Önerilen pitfall'lar `config/prompt_versions/v3_pending_pitfalls.json` içinde, **aktif değil**; ölçüm bitince `agent_prompts.json`'a eklenecek. `sim.py` düzeltmesi de ölçüm bitince yapılacak.
+- **Otomatik bulgu günlüğü (kullanıcı kararı: "otomatik logla, sonra karar verelim"):** `scripts/scan_findings.py` (salt okunur) benchmark klasörünü tarayıp `docs/22_Benchmark_Bulgulari.md` üretir: koşu durumu, çoğunluk, sahte 25.0/1.0 değerleri, başarısız `.meas` sayısı, taslağa düşen testler, en sık sorunlar. `scripts/scan_loop.sh` bunu her 30 dakikada çalıştırır ve benchmark bitince son taramayı yapıp durur. Ölçüme, `config/` ve `engine/` dosyalarına dokunmaz. Karar (pitfall ekleme, `sim.py` düzeltmesi, yeniden hesaplama) ölçüm bittikten sonra.
+- **Karar (kullanıcı, 2026-10-27):** benchmark bitince tabloya bakıp her devre için en başarılı 3 LLM ile karışık çoğunluk oylaması koşulacak; amaç çeşitli oylamanın sonuç verip vermediğini görmek.
+- **Hazırlık (salt okunur / yeni dosya):** `scripts/rank_models.py` (devre başına sıralama: temiz çoğunluk %60, referans doğruluğu %30, hız %10; `failed` ölçümlü aday temiz sayılmaz) ve `scripts/mixed_vote.sh <çıktı> DA=a,b,c FCO=... TSO=...` (3 farklı model, aday başına bir model). Henüz koşulmadı. Sıralama ve karışık koşu `sim.py` düzeltmesinden sonra yapılacak.

@@ -137,10 +137,10 @@ def build_messages(run_dir: Path, stage: str, overrides=None):
         if d is None:
             raise RuntimeError(f"Stage '{need}' must finish before '{stage}'.")
         prev[need] = d
-    system = (f"Sen tMAGE'in '{spec['label']}' ajanısın. Analog devre testbench üretim hattında çalışıyorsun.\n"
-              f"Görev: {spec['goal']}\nKurallar: Yalnızca verilen context'teki bilgiyi kullan, bilmediğini uydurma, "
-              "belirsizse open_questions/assumptions alanına yaz. Çıktın tek bir JSON nesnesi olsun, başka metin yazma.\n"
-              "Beklenen JSON alanları:\n" + json.dumps(spec["output"], ensure_ascii=False, indent=1))
+    system = (f"You are the '{stage}' agent of tMAGE. You work in an analog-circuit testbench generation pipeline.\n"
+              f"Task: {spec['goal']}\nRules: Use only the information in the given context, do not invent anything, "
+              "and write uncertainties into the open_questions/assumptions fields. Your output must be a single JSON object, with no other text.\n"
+              "Expected JSON fields:\n" + json.dumps(spec["output"], ensure_ascii=False, indent=1))
     user = {"context": ctx, "previous_stages": prev}
     if improved():
         sys_add, user_add = extras(stage, ctx, prev)
@@ -165,7 +165,7 @@ def system_prompt(stage):
         return None
     L = [P["common"], "", f"ROLE: {st['role']}", f"GOAL: {st['goal']}", "", "RULES:"] + [f"- {r}" for r in st["rules"]]
     L += ["", "KNOWN ERRORS AND FIXES (observed in earlier runs; do not repeat them):"] + [f"- ERROR: {x['error']} FIX: {x['fix']}" for x in st["pitfalls"]]
-    L += ["", "OUTPUT: return exactly one JSON object with these fields (descriptions in Turkish are only hints about the value format):",
+    L += ["", "OUTPUT: return exactly one JSON object with these fields (the descriptions are only hints about the value format):",
           json.dumps(STAGES["stages"][stage]["output"], ensure_ascii=False)]
     return "\n".join(L)
 

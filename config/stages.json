@@ -12,7 +12,7 @@
    "agent": "spec",
    "label": "Spesifikasyon",
    "needs": [],
-   "goal": "Devreyi anla: portların rollerini, devre özetini ve varsayımları çıkar.",
+   "goal": "Understand the circuit: extract the role of each port, a circuit summary and assumptions.",
    "output": {
     "port_roles": "{port: input_pos|input_neg|output|supply_pos|supply_neg|reference|other|unknown}",
     "circuit_summary": "string, at most 2 sentences",
@@ -26,7 +26,7 @@
    "needs": [
     "spec"
    ],
-   "goal": "Seçilen her analiz için hangi testbench'in kurulacağına karar ver. Yalnızca context.analyses içindekileri kullan.",
+   "goal": "Decide which testbench to build for each selected analysis. Use only the analyses listed in context.analyses.",
    "output": {
     "tests": "[{id, analysis_id, purpose, connections:{...}, sweep:{...}, metrics:[...]}]",
     "order": "[test id]"
@@ -39,7 +39,7 @@
     "spec",
     "scenario"
    ],
-   "goal": "Her test için çalıştırılabilir testbench GÖVDESİNİ yaz: kaynaklar, yük, DUT örneği ve analiz komutları. Kurallar: toprak düğümü 0; DUT'u 'X0 <portlar sırayla> <subckt_adı>' ile çağır (port sırası context.circuit.ports); tek beslemede VSS=0 ve VDD=context.technology.vdd; giriş ortak modunu yaklaşık VDD/2 yap; .lib, .inc, .end, .subckt YAZMA (sistem ekler); .meas YAZMA (ölçüm ajanı yazar); analiz parametrelerini context.analyses[].params'tan al. Her testbench ayrı, bağımsız bir dosyadır. ÖNEMLİ: Yer tutucu ({...}, 'context.' vb.) KULLANMA; tüm sayıları doğrudan yaz. Örnek AC testbench gövdesi (VDD=1.2 V, DUT portları vinp vinn vout vdd vss): 'Vdd vdd 0 1.2\\nVss vss 0 0\\nVcm cm 0 0.6\\nVin vinp cm DC 0 AC 0.5\\nVinn vinn cm DC 0 AC -0.5\\nX0 vinp vinn vout vdd vss da\\nCl vout 0 0.5p\\n.ac dec 20 1 1e9'. Bu yalnızca biçim örneğidir; port sırasını ve adlarını kendi devrene göre uyarla.",
+   "goal": "Write the runnable testbench BODY for each test: sources, load, DUT instance and analysis commands. Rules: ground node is 0; instantiate the DUT as 'X0 <ports in order> <subckt_name>' (port order is context.circuit.ports); for a single supply use VSS=0 and VDD=context.technology.vdd; set the input common mode to about VDD/2; do NOT write .lib, .inc, .end or .subckt (the system adds them); do NOT write .meas (the measure agent writes them); take analysis parameters from context.analyses[].params. Each testbench is a separate, self-contained file. IMPORTANT: do NOT use placeholders ({...}, 'context.', etc.); write all numbers literally. Example AC testbench body (VDD=1.2 V, DUT ports vinp vinn vout vdd vss): 'Vdd vdd 0 1.2\\nVss vss 0 0\\nVcm cm 0 0.6\\nVin vinp cm DC 0 AC 0.5\\nVinn vinn cm DC 0 AC -0.5\\nX0 vinp vinn vout vdd vss da\\nCl vout 0 0.5p\\n.ac dec 20 1 1e9'. This is only a format example; adapt port order and names to your own circuit.",
    "output": {
     "testbenches": "[{test_id, file, netlist_text}]"
    }
@@ -52,7 +52,7 @@
     "scenario",
     "stimulus"
    ],
-   "goal": "Her testbench için yalnızca .meas satırlarını yaz ve beklenen aralığı belirt. Metrik adları context.analyses[].metrics ile AYNI olmalı (örn. gain, phase_margin). Testbench'teki düğüm adlarını kullan. Ölçüm satırlarında .end YAZMA. statement alanı tam bir '.meas ...' satırı olsun; birden çok satır için '\\n' kullan.",
+   "goal": "Write only the .meas lines for each testbench and state the expected range. Metric names MUST be the SAME as context.analyses[].metrics (e.g. gain, phase_margin). Use the node names from the testbench. Do NOT write .end in measurement lines. The statement field must be a complete '.meas ...' line; use '\\n' for several lines.",
    "output": {
     "measurements": "[{test_id, name, statement, expect:{min, max, unit}}]"
    }
@@ -65,7 +65,7 @@
     "stimulus",
     "measure"
    ],
-   "goal": "Simülasyon sonuçlarını kümele, kural kontrollerini uygula, kazanan adayı seç.",
+   "goal": "Cluster the simulation results, apply the rule checks and select the winning candidate.",
    "output": {
     "runs": "[{candidate, metrics:{}, rules_passed:bool}]",
     "clusters": "[...]",
@@ -82,7 +82,7 @@
     "measure",
     "verify"
    ],
-   "goal": "Sonucu kısa ve doğru biçimde anlat. Yeni sayı uydurma; yalnızca verify çıktısındaki değerleri kullan.",
+   "goal": "Describe the result briefly and correctly. Do not invent new numbers; use only the values in the verify output.",
    "output": {
     "markdown": "string"
    }
