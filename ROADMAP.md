@@ -2,6 +2,28 @@
 
 Status: `done`, `running`, `next`, `later`. Order inside a section is priority.
 
+## Checklist
+
+- [x] Web UI, pipeline, logging, docs (`v0.1.0`)
+- [x] Script-first spec/scenario, drafts, RAG, batch runner (`v0.2.0`)
+- [x] English prompts, HSPICE-manual rules, benchmark and findings tooling (`v0.3.0`)
+- [x] Verilog-A toolchain smoke test
+- [x] GitHub repository, tags, automatic local and GitHub backup
+- [ ] Model benchmark finished (9 models, running)
+- [ ] `sim.py` failed-`.meas` bug fixed, scores recomputed
+- [ ] Pitfalls from `config/prompt_versions/v3_pending_pitfalls.json` activated
+- [ ] Per-circuit ranking and mixed-model voting with the top 3
+- [ ] Model-contribution metric in the report
+- [ ] Ablation of the improvements, English vs Turkish prompts
+- [ ] BGR and LNA drafts and RAG examples
+- [ ] COMP and OSC through a `.subckt` wrapper
+- [ ] Corners x temperature x supply (PVT) and Monte Carlo
+- [ ] Verilog-A use case chosen and wired into the pipeline
+- [ ] Optional LLM explanation in the report
+- [ ] Per-agent model defaults in the UI, VPN on/off button
+- [ ] SKY130 / ngspice fallback plan
+- [ ] Final report and presentation
+
 ## Now: finish the model benchmark (running)
 
 * `running` 9 models x DA/FCO/TSO x 3 runs x 3 candidates, each model alone (`scripts/model_bench.sh`). Findings are scanned automatically into `docs/22_Benchmark_Bulgulari.md`.

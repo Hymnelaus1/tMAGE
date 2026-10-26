@@ -33,6 +33,82 @@ Design rules that came out of testing small models:
 * Wrong outputs are caught by **sanity ranges** and by **voting across candidates**; a failing test falls back to the script draft and is flagged (the report shows the model's own contribution).
 * Prompts, context, logs and reports an LLM sees are English; only the UI and `docs/` are Turkish.
 
+## Plan at a glance
+
+✅ done · 🔄 running · ❌ not done yet. Details and order: [ROADMAP.md](ROADMAP.md).
+
+| | Stage |
+|---|---|
+| ✅ | Local web UI (circuit, topology, technology, analyses, LLM and voting settings) |
+| ✅ | HSPICE with the university license through a split-tunnel VPN |
+| ✅ | Netlist adaptation to SAED 90 nm |
+| ✅ | Script-first pipeline: spec, scenario, testbench and `.meas` drafts, RAG, JSON schema, English prompts |
+| ✅ | Majority voting with sanity rules, batch runner, full logging |
+| ✅ | End-to-end runs on DA, FCO and TSO |
+| 🔄 | Model benchmark on the Jetson (9 models, 3 circuits, 3 runs each) |
+| ✅ | Verilog-A toolchain works (smoke test) |
+| ✅ | GitHub repository, versions as tags, automatic local and GitHub backup |
+| ❌ | Fix the failed-`.meas` parsing bug and recompute all scores |
+| ❌ | Mixed-model voting with the best 3 models per circuit |
+| ❌ | Ablation of the improvements (script-first, drafts, RAG, schema, prompts, language) |
+| ❌ | BGR and LNA drafts; COMP and OSC through a `.subckt` wrapper |
+| ❌ | Corners x temperature x supply (PVT) and Monte Carlo |
+| ❌ | Verilog-A inside the pipeline |
+| ❌ | Optional LLM explanation in the report (numbers only from the verify output) |
+| ❌ | Per-agent model defaults in the UI, VPN on/off button |
+| ❌ | SKY130 / ngspice fallback plan |
+| ❌ | Final report and presentation |
+
+## Architecture
+
+System overview (who does what):
+
+```mermaid
+flowchart LR
+    U["User (Turkish web UI)"] -->|"circuit, topology, analyses"| J["job.json"]
+    J --> C["context.json<br/>(standard English summary for the LLMs)"]
+    C --> P["Pipeline<br/>engine/pipeline.py"]
+    P <-->|"HTTP /api/chat"| O["Ollama on Jetson Orin Nano<br/>(models of 4B or more)"]
+    P -->|"testbench + .meas"| H["HSPICE<br/>SAED 90 nm"]
+    H -.->|"license, via VPN only"| L[("University license server")]
+    H -->|".ms0 / .mt0 results"| P
+    P --> R["report.md + logs"]
+    R --> U
+```
+
+Pipeline stages (what is script, what is LLM):
+
+```mermaid
+flowchart TD
+    A["Spec<br/>script"] --> B["Scenario<br/>script: one test per selected analysis"]
+    B --> D{"DUT precheck<br/>script AC test, gain > 0 dB?"}
+    D -->|"no"| X["Stop with a diagnosis"]
+    D -->|"yes"| G["N candidates, each with its own voter model"]
+    subgraph one["One candidate"]
+        S["Stimulus<br/>LLM refines a script draft + RAG examples"] --> M["Measure<br/>LLM refines .meas draft"]
+        M --> HS["HSPICE run"]
+        HS -->|"testbench fails"| FB["Fall back to the script draft<br/>(flagged in the report)"]
+        FB --> HS
+    end
+    G --> one
+    one --> V["Verify<br/>script: sanity rules + majority vote"]
+    V --> RP["Report<br/>script, only numbers from the winner"]
+```
+
+Verification (majority voting instead of LLM-as-judge):
+
+```mermaid
+flowchart LR
+    c1["Candidate 1 results"] --> k
+    c2["Candidate 2 results"] --> k
+    c3["Candidate 3 results"] --> k
+    k["Sanity rules per candidate<br/>(ranges, no failed .meas)"] -->|"passed"| cl["Cluster by metric tolerance (5 %)"]
+    k -->|"failed"| out["Dropped from the vote"]
+    cl --> mj{"Largest cluster has 2 or more?"}
+    mj -->|"yes"| w["Winner = that cluster"]
+    mj -->|"no"| f["Flag: no majority"]
+```
+
 ## Repository layout
 
 | Path | Content |
