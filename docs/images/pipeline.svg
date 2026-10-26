@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 860" width="1500" height="860" font-family="DejaVu Sans, Arial, sans-serif">
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#44505F"/></marker></defs>
+<rect width="1500" height="860" fill="#FFFFFF"/>
+<text x="750.0" y="46" font-size="28" fill="#1F2A37" text-anchor="middle" font-weight="bold">tMAGE: pipeline and verification</text>
+<rect x="40" y="90" width="250" height="90" rx="12" fill="#EEF2F7" stroke="#8A9BB0" stroke-width="2.5"/>
+<text x="165.0" y="129.0" font-size="19" fill="#1F2A37" text-anchor="middle" font-weight="bold">Web UI</text>
+<text x="165.0" y="152.0" font-size="14" fill="#44505F" text-anchor="middle">circuit, topology, analyses</text>
+<rect x="340" y="90" width="250" height="90" rx="12" fill="#EEF2F7" stroke="#8A9BB0" stroke-width="2.5"/>
+<text x="465.0" y="129.0" font-size="19" fill="#1F2A37" text-anchor="middle" font-weight="bold">context.json</text>
+<text x="465.0" y="152.0" font-size="14" fill="#44505F" text-anchor="middle">standard English summary</text>
+<text x="465.0" y="170.0" font-size="14" fill="#44505F" text-anchor="middle">given to every agent</text>
+<rect x="640" y="90" width="210" height="90" rx="12" fill="#DCE9F8" stroke="#3B6FB6" stroke-width="2.5"/>
+<text x="745.0" y="129.0" font-size="19" fill="#1F2A37" text-anchor="middle" font-weight="bold">Spec</text>
+<text x="745.0" y="152.0" font-size="14" fill="#44505F" text-anchor="middle">script: port roles</text>
+<rect x="900" y="90" width="250" height="90" rx="12" fill="#DCE9F8" stroke="#3B6FB6" stroke-width="2.5"/>
+<text x="1025.0" y="129.0" font-size="19" fill="#1F2A37" text-anchor="middle" font-weight="bold">Scenario</text>
+<text x="1025.0" y="152.0" font-size="14" fill="#44505F" text-anchor="middle">script: one test</text>
+<text x="1025.0" y="170.0" font-size="14" fill="#44505F" text-anchor="middle">per selected analysis</text>
+<rect x="1200" y="90" width="260" height="90" rx="12" fill="#E4DDF4" stroke="#6B52B3" stroke-width="2.5"/>
+<text x="1330.0" y="129.0" font-size="19" fill="#1F2A37" text-anchor="middle" font-weight="bold">DUT precheck</text>
+<text x="1330.0" y="152.0" font-size="14" fill="#44505F" text-anchor="middle">script AC run:</text>
+<text x="1330.0" y="170.0" font-size="14" fill="#44505F" text-anchor="middle">gain &gt; 0 dB?</text>
+<path d="M290,135 L340,135" fill="none" stroke="#44505F" stroke-width="2.5" marker-end="url(#a)"/>
+<path d="M590,135 L640,135" fill="none" stroke="#44505F" stroke-width="2.5" marker-end="url(#a)"/>
+<path d="M850,135 L900,135" fill="none" stroke="#44505F" stroke-width="2.5" marker-end="url(#a)"/>
+<path d="M1150,135 L1200,135" fill="none" stroke="#44505F" stroke-width="2.5" marker-end="url(#a)"/>
+<path d="M1330,180 L1330,235" fill="none" stroke="#44505F" stroke-width="2.5" marker-end="url(#a)"/>
+<text x="1352" y="212" font-size="14" fill="#44505F" text-anchor="middle">yes</text>
+<text x="1470" y="135" font-size="1" fill="#1F2A37" text-anchor="start"></text>
+<rect x="40" y="235" width="1420" height="300" rx="16" fill="none" stroke="#9AA5B1" stroke-width="2" stroke-dasharray="9 7"/>
+<text x="58" y="263" font-size="16" fill="#44505F" text-anchor="start" font-weight="bold">N candidates, each written by a different voter model</text>
+<rect x="80" y="290" width="300" height="100" rx="12" fill="#FBE6CC" stroke="#D9822B" stroke-width="2.5"/>
+<text x="230.0" y="334.0" font-size="19" fill="#1F2A37" text-anchor="middle" font-weight="bold">Stimulus</text>
+<text x="230.0" y="357.0" font-size="14" fill="#44505F" text-anchor="middle">LLM refines a script draft</text>
+<text x="230.0" y="375.0" font-size="14" fill="#44505F" text-anchor="middle">+ matching RAG examples</text>
+<rect x="470" y="290" width="300" height="100" rx="12" fill="#FBE6CC" stroke="#D9822B" stroke-width="2.5"/>
+<text x="620.0" y="334.0" font-size="19" fill="#1F2A37" text-anchor="middle" font-weight="bold">Measure</text>
+<text x="620.0" y="357.0" font-size="14" fill="#44505F" text-anchor="middle">LLM refines the .meas draft</text>
+<text x="620.0" y="375.0" font-size="14" fill="#44505F" text-anchor="middle">+ expected ranges</text>
+<rect x="860" y="290" width="270" height="100" rx="12" fill="#D9F0DF" stroke="#3E9A5A" stroke-width="2.5"/>
+<text x="995.0" y="334.0" font-size="19" fill="#1F2A37" text-anchor="middle" font-weight="bold">HSPICE</text>
+<text x="995.0" y="357.0" font-size="14" fill="#44505F" text-anchor="middle">testbench to</text>
+<text x="995.0" y="375.0" font-size="14" fill="#44505F" text-anchor="middle">.ms0 / .mt0 results</text>
+<rect x="1190" y="290" width="240" height="100" rx="12" fill="#DCE9F8" stroke="#3B6FB6" stroke-width="2.5"/>
+<text x="1310.0" y="334.0" font-size="19" fill="#1F2A37" text-anchor="middle" font-weight="bold">Draft fallback</text>
+<text x="1310.0" y="357.0" font-size="14" fill="#44505F" text-anchor="middle">script draft is used</text>
+<text x="1310.0" y="375.0" font-size="14" fill="#44505F" text-anchor="middle">and flagged</text>
+<path d="M380,340 L470,340" fill="none" stroke="#44505F" stroke-width="2.5" marker-end="url(#a)"/>
+<path d="M770,340 L860,340" fill="none" stroke="#44505F" stroke-width="2.5" marker-end="url(#a)"/>
+<path d="M1130,340 L1190,340" fill="none" stroke="#44505F" stroke-width="2.5" marker-end="url(#a)"/>
+<text x="1160" y="328" font-size="14" fill="#44505F" text-anchor="middle">fails</text>
+<path d="M1310,390 L1310,430 L995,430 L995,390" fill="none" stroke="#44505F" stroke-width="2.5" marker-end="url(#a)"/>
+<text x="1150" y="450" font-size="14" fill="#44505F" text-anchor="middle">re-run</text>
+<text x="80" y="495" font-size="14" fill="#44505F" text-anchor="start">Missing or failing tests never stop the vote: the run goes on with the script draft and the report shows the model's own contribution.</text>
+<path d="M260,535 L260,600" fill="none" stroke="#44505F" stroke-width="2.5" marker-end="url(#a)"/>
+<rect x="120" y="600" width="280" height="100" rx="12" fill="#E4DDF4" stroke="#6B52B3" stroke-width="2.5"/>
+<text x="260.0" y="644.0" font-size="19" fill="#1F2A37" text-anchor="middle" font-weight="bold">Sanity rules</text>
+<text x="260.0" y="667.0" font-size="14" fill="#44505F" text-anchor="middle">per candidate: value ranges,</text>
+<text x="260.0" y="685.0" font-size="14" fill="#44505F" text-anchor="middle">no failed .meas</text>
+<rect x="500" y="600" width="300" height="100" rx="12" fill="#E4DDF4" stroke="#6B52B3" stroke-width="2.5"/>
+<text x="650.0" y="644.0" font-size="19" fill="#1F2A37" text-anchor="middle" font-weight="bold">Majority vote</text>
+<text x="650.0" y="667.0" font-size="14" fill="#44505F" text-anchor="middle">cluster by metric tolerance (5 %)</text>
+<text x="650.0" y="685.0" font-size="14" fill="#44505F" text-anchor="middle">largest cluster wins</text>
+<rect x="900" y="600" width="250" height="100" rx="12" fill="#DCE9F8" stroke="#3B6FB6" stroke-width="2.5"/>
+<text x="1025.0" y="644.0" font-size="19" fill="#1F2A37" text-anchor="middle" font-weight="bold">Report</text>
+<text x="1025.0" y="667.0" font-size="14" fill="#44505F" text-anchor="middle">numbers only from</text>
+<text x="1025.0" y="685.0" font-size="14" fill="#44505F" text-anchor="middle">the winning candidate</text>
+<rect x="1230" y="600" width="230" height="100" rx="12" fill="#F3F3F3" stroke="#777777" stroke-width="2.5"/>
+<text x="1345.0" y="644.0" font-size="19" fill="#1F2A37" text-anchor="middle" font-weight="bold">Flags</text>
+<text x="1345.0" y="667.0" font-size="14" fill="#44505F" text-anchor="middle">no majority, fallbacks,</text>
+<text x="1345.0" y="685.0" font-size="14" fill="#44505F" text-anchor="middle">spec violations</text>
+<path d="M400,650 L500,650" fill="none" stroke="#44505F" stroke-width="2.5" marker-end="url(#a)"/>
+<text x="450" y="638" font-size="14" fill="#44505F" text-anchor="middle">passed</text>
+<path d="M800,650 L900,650" fill="none" stroke="#44505F" stroke-width="2.5" marker-end="url(#a)"/>
+<text x="850" y="638" font-size="14" fill="#44505F" text-anchor="middle">winner</text>
+<path d="M1150,650 L1230,650" fill="none" stroke="#44505F" stroke-width="2.5" marker-end="url(#a)"/>
+<text x="1190" y="638" font-size="14" fill="#44505F" text-anchor="middle">includes</text>
+<text x="260" y="735" font-size="14" fill="#44505F" text-anchor="middle">failed candidates are dropped from the vote</text>
+<rect x="60" y="790" width="26" height="18" rx="4" fill="#EEF2F7" stroke="#8A9BB0" stroke-width="2"/>
+<text x="96" y="805" font-size="15" fill="#1F2A37" text-anchor="start">Input</text>
+<rect x="185" y="790" width="26" height="18" rx="4" fill="#DCE9F8" stroke="#3B6FB6" stroke-width="2"/>
+<text x="221" y="805" font-size="15" fill="#1F2A37" text-anchor="start">Script</text>
+<rect x="319" y="790" width="26" height="18" rx="4" fill="#FBE6CC" stroke="#D9822B" stroke-width="2"/>
+<text x="355" y="805" font-size="15" fill="#1F2A37" text-anchor="start">LLM</text>
+<rect x="426" y="790" width="26" height="18" rx="4" fill="#D9F0DF" stroke="#3E9A5A" stroke-width="2"/>
+<text x="462" y="805" font-size="15" fill="#1F2A37" text-anchor="start">Simulator</text>
+<rect x="587" y="790" width="26" height="18" rx="4" fill="#E4DDF4" stroke="#6B52B3" stroke-width="2"/>
+<text x="623" y="805" font-size="15" fill="#1F2A37" text-anchor="start">Verification</text>
+<rect x="775" y="790" width="26" height="18" rx="4" fill="#F3F3F3" stroke="#777777" stroke-width="2"/>
+<text x="811" y="805" font-size="15" fill="#1F2A37" text-anchor="start">Output</text>
+</svg>

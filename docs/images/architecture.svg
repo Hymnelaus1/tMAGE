@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 520" width="1500" height="520" font-family="DejaVu Sans, Arial, sans-serif">
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#44505F"/></marker></defs>
+<rect width="1500" height="520" fill="#FFFFFF"/>
+<text x="750.0" y="46" font-size="28" fill="#1F2A37" text-anchor="middle" font-weight="bold">tMAGE: system overview</text>
+<rect x="50" y="150" width="250" height="100" rx="12" fill="#EEF2F7" stroke="#8A9BB0" stroke-width="2.5"/>
+<text x="175.0" y="194.0" font-size="19" fill="#1F2A37" text-anchor="middle" font-weight="bold">Web UI</text>
+<text x="175.0" y="217.0" font-size="14" fill="#44505F" text-anchor="middle">circuit, topology,</text>
+<text x="175.0" y="235.0" font-size="14" fill="#44505F" text-anchor="middle">technology, analyses</text>
+<rect x="380" y="150" width="250" height="100" rx="12" fill="#DCE9F8" stroke="#3B6FB6" stroke-width="2.5"/>
+<text x="505.0" y="194.0" font-size="19" fill="#1F2A37" text-anchor="middle" font-weight="bold">Pipeline</text>
+<text x="505.0" y="217.0" font-size="14" fill="#44505F" text-anchor="middle">engine/pipeline.py</text>
+<text x="505.0" y="235.0" font-size="14" fill="#44505F" text-anchor="middle">runs/&lt;id&gt;/ + logs</text>
+<rect x="730" y="70" width="300" height="100" rx="12" fill="#FBE6CC" stroke="#D9822B" stroke-width="2.5"/>
+<text x="880.0" y="114.0" font-size="19" fill="#1F2A37" text-anchor="middle" font-weight="bold">LLM agents</text>
+<text x="880.0" y="137.0" font-size="14" fill="#44505F" text-anchor="middle">Ollama on Jetson Orin Nano</text>
+<text x="880.0" y="155.0" font-size="14" fill="#44505F" text-anchor="middle">models of 4B or more</text>
+<rect x="730" y="230" width="300" height="100" rx="12" fill="#D9F0DF" stroke="#3E9A5A" stroke-width="2.5"/>
+<text x="880.0" y="274.0" font-size="19" fill="#1F2A37" text-anchor="middle" font-weight="bold">HSPICE</text>
+<text x="880.0" y="297.0" font-size="14" fill="#44505F" text-anchor="middle">SAED 90 nm, X-2025.06</text>
+<text x="880.0" y="315.0" font-size="14" fill="#44505F" text-anchor="middle">testbench + .meas</text>
+<rect x="1130" y="230" width="320" height="100" rx="12" fill="#F3F3F3" stroke="#777777" stroke-width="2.5"/>
+<text x="1290.0" y="274.0" font-size="19" fill="#1F2A37" text-anchor="middle" font-weight="bold">University license server</text>
+<text x="1290.0" y="297.0" font-size="14" fill="#44505F" text-anchor="middle">reachable through VPN only</text>
+<text x="1290.0" y="315.0" font-size="14" fill="#44505F" text-anchor="middle">(split tunnel)</text>
+<rect x="380" y="360" width="250" height="100" rx="12" fill="#F3F3F3" stroke="#777777" stroke-width="2.5"/>
+<text x="505.0" y="404.0" font-size="19" fill="#1F2A37" text-anchor="middle" font-weight="bold">Report + logs</text>
+<text x="505.0" y="427.0" font-size="14" fill="#44505F" text-anchor="middle">report.md, full LLM prompts,</text>
+<text x="505.0" y="445.0" font-size="14" fill="#44505F" text-anchor="middle">HSPICE output</text>
+<path d="M300,200 L380,200" fill="none" stroke="#44505F" stroke-width="2.5" marker-end="url(#a)"/>
+<text x="340" y="188" font-size="14" fill="#44505F" text-anchor="middle">job.json</text>
+<path d="M630,185 L730,135" fill="none" stroke="#44505F" stroke-width="2.5" marker-start="url(#a)" marker-end="url(#a)"/>
+<text x="640" y="140" font-size="14" fill="#44505F" text-anchor="middle">prompts / JSON</text>
+<path d="M630,215 L730,265" fill="none" stroke="#44505F" stroke-width="2.5" marker-start="url(#a)" marker-end="url(#a)"/>
+<text x="640" y="262" font-size="14" fill="#44505F" text-anchor="middle">testbench / results</text>
+<path d="M1030,280 L1130,280" fill="none" stroke="#44505F" stroke-width="2.5" marker-end="url(#a)"/>
+<text x="1080" y="268" font-size="14" fill="#44505F" text-anchor="middle">license</text>
+<path d="M505,250 L505,360" fill="none" stroke="#44505F" stroke-width="2.5" marker-end="url(#a)"/>
+<path d="M380,410 L175,410 L175,250" fill="none" stroke="#44505F" stroke-width="2.5" marker-end="url(#a)"/>
+<text x="275" y="398" font-size="14" fill="#44505F" text-anchor="middle">shown in the UI</text>
+<rect x="60" y="490" width="26" height="18" rx="4" fill="#EEF2F7" stroke="#8A9BB0" stroke-width="2"/>
+<text x="96" y="505" font-size="15" fill="#1F2A37" text-anchor="start">User</text>
+<rect x="176" y="490" width="26" height="18" rx="4" fill="#DCE9F8" stroke="#3B6FB6" stroke-width="2"/>
+<text x="212" y="505" font-size="15" fill="#1F2A37" text-anchor="start">Script</text>
+<rect x="310" y="490" width="26" height="18" rx="4" fill="#FBE6CC" stroke="#D9822B" stroke-width="2"/>
+<text x="346" y="505" font-size="15" fill="#1F2A37" text-anchor="start">LLM</text>
+<rect x="417" y="490" width="26" height="18" rx="4" fill="#D9F0DF" stroke="#3E9A5A" stroke-width="2"/>
+<text x="453" y="505" font-size="15" fill="#1F2A37" text-anchor="start">Simulator</text>
+<rect x="578" y="490" width="26" height="18" rx="4" fill="#F3F3F3" stroke="#777777" stroke-width="2"/>
+<text x="614" y="505" font-size="15" fill="#1F2A37" text-anchor="start">Output / external</text>
+</svg>
