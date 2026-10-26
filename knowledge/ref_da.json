@@ -1,0 +1,102 @@
+{
+ "spec": {
+  "port_roles": {
+   "vinp": "input_pos",
+   "vinn": "input_neg",
+   "vout": "output",
+   "vdd": "supply_pos",
+   "vss": "supply_neg"
+  },
+  "circuit_summary": "Aktif yüklü PMOS girişli fark yükselteci.",
+  "assumptions": [],
+  "open_questions": []
+ },
+ "scenario": {
+  "tests": [
+   {
+    "id": "ac_loop",
+    "analysis_id": "ac_loop",
+    "purpose": "kazanç, bant genişliği, faz payı",
+    "connections": {},
+    "sweep": {},
+    "metrics": [
+     "gain",
+     "bw",
+     "phase_margin"
+    ]
+   },
+   {
+    "id": "power_area",
+    "analysis_id": "power_area",
+    "purpose": "statik güç",
+    "connections": {},
+    "sweep": {},
+    "metrics": [
+     "zpower"
+    ]
+   }
+  ],
+  "order": [
+   "ac_loop",
+   "power_area"
+  ]
+ },
+ "stimulus": {
+  "testbenches": [
+   {
+    "test_id": "ac_loop",
+    "file": "ac_loop.sp",
+    "netlist_text": "Vdd vdd 0 1.2\nVss vss 0 0\nVcm cm 0 0.6\nVin vinp cm DC 0 AC 0.5\nVinn vinn cm DC 0 AC -0.5\nX0 vinp vinn vout vdd vss da\nCl vout 0 0.5p\n.ac dec 20 1 1e9"
+   },
+   {
+    "test_id": "power_area",
+    "file": "power_area.sp",
+    "netlist_text": "Vdd vdd 0 1.2\nVss vss 0 0\nVcm cm 0 0.6\nVin vinp cm DC 0\nVinn vinn cm DC 0\nX0 vinp vinn vout vdd vss da\nCl vout 0 0.5p\n.tran 10n 1u"
+   }
+  ]
+ },
+ "measure": {
+  "measurements": [
+   {
+    "test_id": "ac_loop",
+    "name": "gain",
+    "statement": ".meas ac gain find par('db(v(vout))') at=1000",
+    "expect": {
+     "min": 20,
+     "max": 80,
+     "unit": "dB"
+    }
+   },
+   {
+    "test_id": "ac_loop",
+    "name": "bw",
+    "statement": ".meas ac bw when par('db(v(vout))')=0",
+    "expect": {
+     "min": 1000000.0,
+     "max": 10000000000.0,
+     "unit": "Hz"
+    }
+   },
+   {
+    "test_id": "ac_loop",
+    "name": "phase_margin",
+    "statement": ".meas ac phase_margin find par('180+vp(vout)') at=bw",
+    "expect": {
+     "min": 45,
+     "max": 90,
+     "unit": "deg"
+    }
+   },
+   {
+    "test_id": "power_area",
+    "name": "zpower",
+    "statement": ".meas tran zpower avg power",
+    "expect": {
+     "min": 1e-06,
+     "max": 0.01,
+     "unit": "W"
+    }
+   }
+  ]
+ }
+}

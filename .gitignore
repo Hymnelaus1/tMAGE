@@ -16,10 +16,18 @@ __pycache__/
 *.pyc
 docs/.obsidian/workspace*.json
 docs/.obsidian/cache
-knowledge/inputs/
-knowledge/examples/
-knowledge/manual/
 
 # Benchmark ciktilari ve gecici denemeler
 batch/
 work/
+
+# Not shared: Synopsys material, VPN, vendor process models, simulator outputs
+scripts/vpn.sh
+knowledge/manual/
+knowledge/inputs/130nm.txt
+knowledge/inputs/inductor.txt
+knowledge/inputs/mimcap.txt
+knowledge/inputs/*.lis
+knowledge/inputs/*.[a-z][a-z]0
+knowledge/inputs/*.print*
+knowledge/inputs/*.dump0*

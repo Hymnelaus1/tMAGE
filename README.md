@@ -43,7 +43,9 @@ Design rules that came out of testing small models:
 | `scripts/` | VPN service, model benchmark, mixed-model voting, ranking, findings scanner |
 | `docs/` | Obsidian vault (Turkish): design notes, change log, observed errors, prompts, HSPICE manual notes |
 
-Not in the repository (git-ignored): run outputs (`runs/`, `batch/`), the kit netlists and models (`knowledge/inputs`), the HSPICE manual text, and local config (`config/env.sh`, `config/jetson.env`).
+Included: the kit netlists and parameter files (`knowledge/inputs`, `knowledge/examples`) and the SkyWater device models (Apache-2.0), because the RAG step and the batch runner read them.
+
+Not in the repository (git-ignored, see `.gitignore`): Synopsys tools, PDK and manual, the VPN helper, vendor process models (`130nm.txt`, `inductor.txt`, `mimcap.txt`; get them from the university kit), simulator output files, run outputs (`runs/`, `batch/`) and local config (`config/env.sh`, `config/jetson.env`).
 
 ## Quick start
 
@@ -56,6 +58,14 @@ python3 engine/batch.py --only DA --reps 3 --n 3 --voters qwen3:4b-instruct,qwen
 ```
 
 Requires Python 3.9 (standard library only), HSPICE X-2025.06-SP2 with a reachable license (university VPN), the SAED 90 nm PDK and an Ollama server with the models you select.
+
+## Setting up as a collaborator
+
+1. `git clone git@github.com:Hymnelaus1/tMAGE.git` (you need to be invited to the private repository).
+2. Copy `config/env.sh.example` to `config/env.sh` and `config/jetson.env.example` to `config/jetson.env`, then fill in your own paths, license server and Ollama address. These files stay local.
+3. Put the files that are not shared (vendor process models, Synopsys PDK/tools) in place from the university kit.
+4. Optional automatic backup: `scripts/install_backup.sh` (git post-commit hook plus a 2-hourly timer; local copy in `/data/tmage_backups`, push to `origin`).
+5. Do not commit run outputs, credentials or local config. Check `git status` before every commit.
 
 ## Versions
 
