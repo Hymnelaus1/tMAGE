@@ -29,7 +29,7 @@ from pipeline import Pipeline, license_reachable  # noqa: E402
 URL = "http://100.113.87.120:11434"
 TOL = 0.10  # ölçümler referansın %10'u içinde olmalı
 
-EXPECT_ROLES = {"vinp": "giris_pozitif", "vinn": "giris_negatif", "vout": "cikis", "vdd": "besleme_pozitif", "vss": "besleme_negatif"}
+EXPECT_ROLES = {"vinp": "input_pos", "vinn": "input_neg", "vout": "output", "vdd": "supply_pos", "vss": "supply_neg"}
 
 REF_SPEC = {"port_roles": EXPECT_ROLES, "circuit_summary": "Aktif yüklü PMOS girişli fark yükselteci.", "assumptions": [], "open_questions": []}
 REF_SCENARIO = {"tests": [
@@ -55,10 +55,21 @@ def say(path, msg):
         f.write(line + "\n")
 
 
-def jetson_models():
+def _params_b(txt):
+    t = (txt or "").strip().upper()
+    try:
+        return float(t[:-1]) / (1000 if t.endswith("M") else 1)
+    except ValueError:
+        return 0.0
+
+
+def jetson_models(min_b=3.9):
+    """4B ve üzeri modeller, küçükten büyüğe: [(ad, parametre, kuantizasyon, GB)]."""
     with urllib.request.urlopen(URL + "/api/tags", timeout=8) as r:
         ms = json.load(r)["models"]
-    return [m["name"] for m in sorted(ms, key=lambda m: m["size"])]
+    out = [(m["name"], m["details"].get("parameter_size", "?"), m["details"].get("quantization_level", "?"), round(m["size"] / 1e9, 1))
+           for m in sorted(ms, key=lambda m: m["size"]) if _params_b(m["details"].get("parameter_size")) >= min_b]
+    return out
 
 
 def make_run(base, dest, model):
@@ -135,17 +146,19 @@ def bench_model(model, base, out, ref_metrics, logf):
     return res
 
 
-def report(results, out):
+def report(results, out, meta=None, mode=""):
     agents = ["spec", "scenario", "stimulus", "measure"]
     L = ["# Jetson LLM karşılaştırması", "", f"Tarih: {time.strftime('%Y-%m-%d %H:%M')} · {len(results)} model · tolerans %{int(TOL * 100)}", "",
          "Hücre: `puan (süre sn, deneme sayısı)`. Puan 1.0 = hedef davranış tam. Süre toplam LLM+deneme süresi.", "",
-         "| Model | " + " | ".join(agents) + " |", "|---|" + "---|" * len(agents)]
+         f"Mod: **{mode or 'TEMEL'}**", "",
+         "| Model | Param · Kuant. | " + " | ".join(agents) + " |", "|---|---|" + "---|" * len(agents)]
     for m, r in results.items():
         cells = []
         for a in agents:
             x = r.get(a, {})
             cells.append("—" if not x else f"{'✓' if x.get('ok') else '✗'} {x.get('score', 0):.2f} ({x.get('seconds', 0):.0f}s, {x.get('attempts', 0)}x)")
-        L.append(f"| {m} | " + " | ".join(cells) + " |")
+        pm = (meta or {}).get(m)
+        L.append(f"| {m} | {pm[0] + ' · ' + pm[1] if pm else '?'} | " + " | ".join(cells) + " |")
     L += ["", "## Ajan başına öneri", ""]
     for a in agents:
         rows = [(m, r[a]) for m, r in results.items() if a in r]
@@ -186,8 +199,10 @@ def main():
         say(logf, "HATA: referans testbench çalışmadı; bench durduruldu.")
         return 3
     (out / "ref_metrics.json").write_text(json.dumps(metrics, indent=1))
-    models = ARGS.models.split(",") if ARGS.models else jetson_models()
-    say(logf, f"Modeller (küçükten büyüğe): {models}")
+    meta = {n: (p, q, g) for n, p, q, g in jetson_models(0)}
+    models = ARGS.models.split(",") if ARGS.models else [m[0] for m in jetson_models(ARGS.min_b)]
+    mode = "İYİLEŞTİRİLMİŞ (şema+örnek+RAG+taslak)" if os.environ.get("TMAGE_IMPROVED") == "1" else "TEMEL"
+    say(logf, f"Mod: {mode}. Modeller (>= {ARGS.min_b}B, küçükten büyüğe): " + ", ".join(f"{m} [{meta.get(m, ('?', '?', 0))[0]} {meta.get(m, ('?', '?', 0))[1]}]" for m in models))
     results = {}
     for m in models:
         say(logf, f"== {m}")
@@ -198,7 +213,7 @@ def main():
             say(logf, f"  model atlandı: {traceback.format_exc()[-300:]}")
             results[m] = {}
         say(logf, f"  süre: {int(time.time() - t0)} sn")
-        report(results, out)
+        report(results, out, meta, mode)
     say(logf, "Bench bitti. Rapor: " + str(out / "report.md"))
     return 0
 
@@ -207,6 +222,10 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--models", default="")
     ap.add_argument("--timeout", type=int, default=420)
+    ap.add_argument("--min-b", type=float, default=3.9, help="en küçük model boyutu (milyar parametre)")
+    ap.add_argument("--improved", action="store_true", help="şema+örnek+RAG+taslak modu")
     ap.add_argument("--base", default=str(sorted((ROOT / "runs").glob("*_da_test1"))[-1]) if list((ROOT / "runs").glob("*_da_test1")) else "")
     ARGS = ap.parse_args()
+    if ARGS.improved:
+        os.environ["TMAGE_IMPROVED"] = "1"
     sys.exit(main())

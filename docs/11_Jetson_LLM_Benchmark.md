@@ -35,4 +35,4 @@ python3 engine/bench.py --models qwen3.5:4b,mistral:latest --timeout 420
 | measure | 33 sn | 283 |
 ~6.6 token/sn. JSON geçerliydi ama testbench'te yer tutucu ve eksik kaynak vardı → [[08_Ajanlar_Arasi_Veri_Aktarimi]] kuralları ve ön doğrulama eklendi.
 
-Sonuçlar: *bench çalıştırılınca buraya eklenecek.*
+Sonuçlar ve öneriler: [[16_Rapor_Jetson_LLM]].

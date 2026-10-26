@@ -26,9 +26,9 @@ def run_hspice(workdir, netlist, timeout=300):
         p = subprocess.run(["hspice", "-i", netlist, "-o", base], cwd=workdir, env=hspice_env(), capture_output=True, text=True, timeout=timeout)
         out, rc = (p.stdout or "") + (p.stderr or ""), p.returncode
     except subprocess.TimeoutExpired:
-        out, rc = f"ZAMAN AŞIMI ({timeout} sn)", -1
+        out, rc = f"TIMEOUT ({timeout} s)", -1
     except FileNotFoundError:
-        out, rc = "hspice komutu bulunamadı (env.sh / kurulum)", -2
+        out, rc = "hspice command not found (check env.sh / installation)", -2
     return {"rc": rc, "stdout": out, "ms": int((time.time() - t0) * 1000), "base": base}
 
 
@@ -61,7 +61,7 @@ def read_measures(workdir, base):
 def lis_problems(workdir, base):
     f = Path(workdir) / f"{base}.lis"
     if not f.exists():
-        return {"errors": ["çıktı (.lis) oluşmadı"], "warnings": [], "license": ""}
+        return {"errors": ["output (.lis) was not created"], "warnings": [], "license": ""}
     txt = f.read_text(errors="replace")
     errs = [l.strip() for l in txt.splitlines() if "**error**" in l.lower() or "fatal" in l.lower()][:12]
     warns = [l.strip() for l in txt.splitlines() if "**warning**" in l.lower()][:8]

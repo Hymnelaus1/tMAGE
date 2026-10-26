@@ -6,6 +6,7 @@ import os
 import re
 import shutil
 import socket
+import threading
 import time
 import urllib.parse
 import urllib.request
@@ -254,8 +255,19 @@ class H(BaseHTTPRequestHandler):
                 try:
                     with urllib.request.urlopen(url + "/api/tags", timeout=5) as r:
                         d = json.load(r)
-                    models = [{"name": m["name"], "size_gb": round(m.get("size", 0) / 1e9, 1),
-                               "params": m.get("details", {}).get("parameter_size", "")} for m in d.get("models", [])]
+                    def pb(t):  # "4.2B" / "494.03M" -> milyar
+                        t = (t or "").upper()
+                        try:
+                            return float(t[:-1]) / (1000 if t.endswith("M") else 1)
+                        except ValueError:
+                            return 0.0
+                    models = []
+                    for m in d.get("models", []):
+                        det, gb = m.get("details", {}), round(m.get("size", 0) / 1e9, 1)
+                        # 4B altı model kullanılmaz; ~9 GB üstü Orin Nano belleğine sığmaz (Ollama çöker)
+                        why = "4B altı" if pb(det.get("parameter_size")) < 3.9 else ("bellek yetersiz" if gb > 9 else "")
+                        models.append({"name": m["name"], "size_gb": gb, "params": det.get("parameter_size", ""),
+                                       "quant": det.get("quantization_level", ""), "ok": not why, "why": why})
                     self._json({"ok": True, "ms": int((time.time() - t0) * 1000), "models": models})
                 except Exception as e:
                     self._json({"ok": False, "error": f"Bağlanılamadı: {e}"})
@@ -315,9 +327,11 @@ class H(BaseHTTPRequestHandler):
                     elif t.exists():
                         t.unlink()
                 handoff.init_run(d, json.loads((d / "job.json").read_text()), load_catalog())
-                subprocess.Popen([sys.executable, str(ROOT / "engine" / "pipeline.py"), str(d)], start_new_session=True,
-                                 stdout=subprocess.DEVNULL, stderr=open(d / "pipeline.err", "w"))
-                glog(f"koşu başlatıldı: {d.name}")
+                env = dict(os.environ, TMAGE_IMPROVED=os.environ.get("TMAGE_IMPROVED", "1"))  # varsayılan: iyileştirilmiş mod
+                proc = subprocess.Popen([sys.executable, str(ROOT / "engine" / "pipeline.py"), str(d)], start_new_session=True, env=env,
+                                        stdout=subprocess.DEVNULL, stderr=open(d / "pipeline.err", "w"))
+                threading.Thread(target=proc.wait, daemon=True).start()  # biten süreç zombi kalmasın (aksi hâlde 'çalışıyor' görünür)
+                glog(f"run started: {d.name}")
                 self._json({"ok": True})
             elif u.path == "/api/parse":
                 text = body.get("text", "")
@@ -342,7 +356,7 @@ class H(BaseHTTPRequestHandler):
                 if body.get("netlist_text"):
                     (d / "circuit.sp").write_text(body["netlist_text"])
                 handoff.init_run(d, body, load_catalog())
-                glog(f"iş kaydedildi: {d.name} ({body.get('topology')}, {len(body.get('analyses', []))} analiz)")
+                glog(f"job saved: {d.name} ({body.get('topology')}, {len(body.get('analyses', []))} analyses)")
                 self._json({"ok": True, "dir": str(d), "stages": handoff.status(d)})
             else:
                 self._json({"error": "bulunamadı"}, 404)

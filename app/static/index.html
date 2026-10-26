@@ -5,21 +5,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>tMAGE</title>
 <style>
-  :root { --bg:#f5f6f8; --panel:#fff; --ink:#1b1d22; --muted:#6a707c; --line:#dfe2e8; --accent:#2457d6; --accent2:#e8eefc;
-          --ok:#1a7f4b; --bad:#c0392b; --warn:#a96b00; --code:#f0f2f6; }
-  @media (prefers-color-scheme: dark) { :root { --bg:#13151a; --panel:#1b1e25; --ink:#e8eaee; --muted:#9aa1ad; --line:#2d313a;
-          --accent:#6d97ff; --accent2:#222c47; --ok:#4cc38a; --bad:#ff7b6b; --warn:#e5b567; --code:#13151a; } }
+  :root { --bg:#eaf4f0; --panel:#ffffff; --ink:#0d2b28; --muted:#5b7873; --line:#c5dbd5; --accent:#1c7c74; --accent2:#dcefe9; --accent3:#6cc5a1;
+          --ok:#1a7f4b; --bad:#c0392b; --warn:#a96b00; --code:#f1f7f5; --grad:linear-gradient(90deg,#0d3b36,#1c7c74 55%,#7fd1ae); }
+  @media (prefers-color-scheme: dark) { :root { --bg:#0b1a19; --panel:#102523; --ink:#e3f1ed; --muted:#8fb0aa; --line:#25413e;
+          --accent:#4fc1b2; --accent2:#173a36; --accent3:#7fd1ae; --ok:#4cc38a; --bad:#ff7b6b; --warn:#e5b567; --code:#0b1a19;
+          --grad:linear-gradient(90deg,#4fc1b2,#7fd1ae); } }
   * { box-sizing:border-box; }
-  body { margin:0; background:var(--bg); color:var(--ink); font:14px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif; }
-  header { display:flex; flex-wrap:wrap; align-items:center; gap:10px 16px; padding:12px 24px; background:var(--panel); border-bottom:1px solid var(--line); position:sticky; top:0; z-index:5; }
-  header h1 { margin:0; font-size:20px; letter-spacing:.02em; } header h1 small { font-weight:400; color:var(--muted); font-size:12px; margin-left:8px; }
+  body { margin:0; background:var(--bg) radial-gradient(1200px 500px at 85% -10%, color-mix(in srgb, var(--accent3) 22%, transparent), transparent 70%); background-attachment:fixed; color:var(--ink); font:14px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif; }
+  header { display:flex; flex-wrap:wrap; align-items:center; gap:10px 18px; padding:12px 28px 15px; background:color-mix(in srgb, var(--panel) 88%, transparent); backdrop-filter:blur(6px); position:sticky; top:0; z-index:5; }
+  header::after { content:""; position:absolute; left:0; right:0; bottom:0; height:3px; background:var(--grad); }
+  .brand { display:flex; align-items:center; gap:12px; } .brand svg { width:34px; height:34px; flex:none; }
+  header h1 { margin:0; font-size:26px; font-weight:800; letter-spacing:-.045em; color:var(--ink); line-height:1; }
+  header h1 small { display:block; font-weight:500; color:var(--muted); font-size:11.5px; letter-spacing:0; margin:5px 0 0; }
   .chip { font-size:12px; padding:2px 10px; border-radius:99px; border:1px solid var(--line); color:var(--muted); }
   .chip.ok { color:var(--ok); border-color:var(--ok); } .chip.bad { color:var(--bad); border-color:var(--bad); }
   main { display:grid; grid-template-columns:minmax(0,1fr) 340px; gap:18px; padding:18px 24px 40px; max-width:1300px; margin:0 auto; align-items:start; }
   @media (max-width:980px) { main { grid-template-columns:1fr; padding:12px; } aside { position:static !important; } }
-  section.card, aside .card { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:14px 16px; margin-bottom:16px; }
-  h2 { font-size:15px; margin:0 0 4px; display:flex; align-items:center; gap:8px; }
-  h2 .n { background:var(--accent); color:#fff; width:22px; height:22px; border-radius:50%; font-size:12px; display:inline-flex; align-items:center; justify-content:center; }
+  section.card, aside .card { background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px 18px; margin-bottom:16px; box-shadow:0 8px 24px -18px color-mix(in srgb, var(--ink) 35%, transparent); }
+  h2 { font-size:17px; font-weight:800; letter-spacing:-.02em; margin:0 0 4px; display:flex; align-items:center; gap:10px; color:var(--ink); }
+  h2 .n { color:var(--accent); font-size:13px; font-weight:800; letter-spacing:.08em; }
+  h2 .ic { width:20px; height:20px; stroke:var(--accent); fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; flex:none; }
+  h2::after { content:""; flex:1; height:3px; border-radius:3px; background:var(--grad); opacity:.55; max-width:90px; margin-left:4px; }
   .sub { color:var(--muted); font-size:12.5px; margin:0 0 10px; }
   label.f { display:flex; flex-direction:column; gap:3px; font-size:12px; color:var(--muted); min-width:0; }
   input, select, textarea, button { font:inherit; font-size:13px; }
@@ -27,7 +33,7 @@
   textarea { font-family:ui-monospace,Consolas,monospace; font-size:12px; height:200px; resize:vertical; }
   button { padding:6px 12px; border-radius:8px; border:1px solid var(--line); background:var(--panel); color:var(--ink); cursor:pointer; }
   button:hover:not(:disabled) { border-color:var(--accent); } button:disabled { opacity:.5; cursor:default; }
-  button.primary { background:var(--accent); border-color:var(--accent); color:#fff; font-weight:600; }
+  button.primary { background:linear-gradient(90deg,#14665f,#1c7c74); border-color:#14665f; color:#fff; font-weight:700; } button.primary:hover:not(:disabled) { filter:brightness(1.08); }
   .row { display:flex; flex-wrap:wrap; gap:10px 14px; margin-bottom:10px; align-items:flex-end; } .row > * { flex:1 1 150px; } .row > .nofl { flex:0 0 auto; }
   .tabs { display:flex; gap:4px; margin-bottom:10px; } .tabs button.on { border-color:var(--accent); background:var(--accent2); color:var(--accent); font-weight:600; }
   .fb { border:1px solid var(--line); border-radius:8px; overflow:hidden; } .fb .bar { display:flex; gap:6px; padding:6px; background:var(--code); border-bottom:1px solid var(--line); flex-wrap:wrap; }
@@ -49,7 +55,7 @@
   .an .pr { display:none; gap:8px 12px; flex-wrap:wrap; margin:8px 0 2px 26px; } .an.on .pr { display:flex; } .an .pr label { width:130px; }
   table { width:100%; border-collapse:collapse; } td { padding:5px 6px; border-bottom:1px solid var(--line); vertical-align:middle; } td.a { width:46%; } td small { color:var(--muted); display:block; font-size:11.5px; }
   .ck { display:flex; gap:8px; align-items:center; font-size:13px; } .corners { display:flex; gap:12px; flex-wrap:wrap; }
-  aside { position:sticky; top:68px; } aside h3 { font-size:13px; margin:0 0 8px; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); }
+  aside { position:sticky; top:68px; } aside h3 { font-size:12px; margin:0 0 8px; text-transform:uppercase; letter-spacing:.09em; color:var(--accent); font-weight:800; display:flex; align-items:center; gap:8px; } aside h3 .ic { width:16px; height:16px; stroke:var(--accent); fill:none; stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round; }
   dl.sum { margin:0; font-size:13px; } dl.sum dt { color:var(--muted); font-size:11.5px; margin-top:8px; } dl.sum dd { margin:0; word-break:break-word; }
   .warn { color:var(--warn); font-size:12.5px; margin:3px 0; } .okmsg { color:var(--ok); font-size:12.5px; }
   .job { display:flex; justify-content:space-between; font-size:12.5px; padding:4px 0; border-bottom:1px solid var(--line); } .job span { color:var(--muted); }
@@ -63,7 +69,7 @@
 </head>
 <body>
 <header>
-  <h1>tMAGE<small>Analog devreler için çok ajanlı testbench üretim motoru</small></h1>
+  <div class="brand"><svg viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0d3b36"/><stop offset="1" stop-color="#2a9d8f"/></linearGradient></defs><rect width="32" height="32" rx="9" fill="url(#lg)"/><path d="M5 17h5l3-9 5 16 3-7h6" fill="none" stroke="#bff0dc" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><h1>tMAGE<small>Analog devreler için çok ajanlı testbench üretim motoru</small></h1></div>
   <span class="chip" id="chipSrv">sunucu</span>
   <span class="chip" id="chipLlm">LLM: kontrol edilmedi</span>
 </header>
@@ -71,7 +77,7 @@
 <div>
 
 <section class="card">
-  <h2><span class="n">1</span>Devre</h2>
+  <h2><span class="n">01</span><svg class="ic" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9.5" y="9.5" width="5" height="5"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg>Devre</h2>
   <p class="sub">Kendi devre netlistini ver: dosyadan seç ya da yapıştır.</p>
   <div class="row"><label class="f">Proje adı<input type="text" id="name" placeholder="örn. da_deneme1"></label></div>
   <div class="tabs"><button id="tabFile" class="on">Dosyadan seç</button><button id="tabPaste">Yapıştır</button></div>
@@ -81,7 +87,7 @@
         <button id="fbUp" title="Üst klasör">↑</button>
         <input type="text" id="fbPath">
         <button id="fbGo">Git</button>
-        <button id="fbHome">Ev</button><button id="fbUsb">USB tb/inputs</button><button id="fbCirc">circuits</button>
+        <button id="fbHome">Ev</button><button id="fbKit">Kit örnekleri</button><button id="fbUsb">USB tb/inputs</button><button id="fbCirc">circuits</button>
       </div>
       <div class="list" id="fbList"></div>
     </div>
@@ -99,13 +105,13 @@
 </section>
 
 <section class="card">
-  <h2><span class="n">2</span>Topoloji</h2>
+  <h2><span class="n">02</span><svg class="ic" viewBox="0 0 24 24"><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="6" r="2.6"/><circle cx="18" cy="18" r="2.6"/><path d="M8.3 10.8l7.4-3.6M8.3 13.2l7.4 3.6"/></svg>Topoloji</h2>
   <p class="sub">Testbench bu topolojiye göre kurulacak. Dosyadan tahmin varsa işaretlenir.</p>
   <div class="topos" id="topos"></div>
 </section>
 
 <section class="card">
-  <h2><span class="n">3</span>Teknoloji ve simülatör</h2>
+  <h2><span class="n">03</span><svg class="ic" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 12.5l9 5 9-5"/><path d="M3 17l9 5 9-5"/></svg>Teknoloji ve simülatör</h2>
   <p class="sub">Ana hedef SAED 90 nm. Kitteki 130 nm kıyas için duruyor.</p>
   <div class="row">
     <label class="f">Teknoloji<select id="tech"></select></label>
@@ -121,14 +127,14 @@
 </section>
 
 <section class="card">
-  <h2><span class="n">4</span>Analizler</h2>
+  <h2><span class="n">04</span><svg class="ic" viewBox="0 0 24 24"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg>Analizler</h2>
   <p class="sub">Hangi analizlerin testbench'e girmesini seç. Topolojiye göre önerilenler işaretlenir.</p>
   <div class="row"><button id="anDef" class="nofl">Topoloji varsayılanları</button><button id="anNone" class="nofl">Hepsini kapat</button><span class="hint" id="anCount"></span></div>
   <div id="analyses"></div>
 </section>
 
 <section class="card">
-  <h2><span class="n">5</span>LLM seçimi</h2>
+  <h2><span class="n">05</span><svg class="ic" viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="11" rx="3.5"/><path d="M12 8V5"/><circle cx="12" cy="3.6" r="1.2"/><path d="M9 13h.01M15 13h.01M9.5 16.2h5"/></svg>LLM seçimi</h2>
   <p class="sub">Her ajan için model seç. Jetson Orin Nano'daki Ollama modelleri canlı listelenir.</p>
   <div class="row">
     <label class="f">Sağlayıcı<select id="backend"></select></label>
@@ -136,24 +142,31 @@
     <button id="fetchModels" class="nofl">Modelleri getir</button>
   </div>
   <div class="hint" id="modelInfo"></div>
+  <div class="row"><label class="f" style="max-width:260px">Aday sayısı (oylama)<select id="nCand"><option value="1">1 (hızlı, oylama yok)</option><option value="3">3 (oylama)</option><option value="5">5 (oylama, yavaş)</option></select></label>
+    <label class="f" style="max-width:200px">Tolerans (%)<input type="text" id="tolPct" value="5"></label></div>
   <div class="ck" style="margin:10px 0"><input type="checkbox" id="same"><label for="same">Tüm ajanlar aynı modeli kullansın</label>
     <select id="sameModel" style="max-width:260px"></select></div>
   <table id="agents"></table>
+  <div id="voteBox" style="display:none;margin-top:14px">
+    <div class="grp" style="margin-top:0">Hakem: oylama</div>
+    <div class="hint" style="margin-bottom:8px">Her aday testbench'i farklı bir modelle üretilir; sonuçlar toleransla kümelenir, çoğunluk kazanır. Farklı model aileleri seçmek daha güvenilirdir.</div>
+    <div id="voters"></div>
+  </div>
 </section>
 
 </div>
 <aside>
   <div class="card">
-    <h3>Özet</h3>
+    <h3><svg class="ic" viewBox="0 0 24 24"><path d="M8 6h12M8 12h12M8 18h12"/><path d="M3.5 6h.01M3.5 12h.01M3.5 18h.01"/></svg>Özet</h3>
     <dl class="sum" id="sum"></dl>
     <div id="warns" style="margin-top:10px"></div>
     <div style="margin-top:12px"><button class="primary" id="save" style="width:100%">İş tanımını kaydet</button></div>
     <div class="hint" style="margin-top:6px">Kayıt: ~/tmage/runs/…/job.json. Testbench üretimi sonraki adımda bağlanacak.</div>
     <div id="saveMsg" style="margin-top:6px"></div>
   </div>
-  <div class="card"><h3>Son işler</h3><div id="jobs" class="hint">yok</div></div>
+  <div class="card"><h3><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Son işler</h3><div id="jobs" class="hint">yok</div></div>
   <div class="card" id="runCard" style="display:none">
-    <h3>Koşu <span id="runName" style="text-transform:none;letter-spacing:0;color:var(--ink)"></span></h3>
+    <h3><svg class="ic" viewBox="0 0 24 24"><path d="M7 4.5l12 7.5-12 7.5z"/></svg>Koşu <span id="runName" style="text-transform:none;letter-spacing:0;color:var(--ink)"></span></h3>
     <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px"><span class="chip" id="runState">hazır</span><span class="hint" id="runStage"></span></div>
     <div class="stg" id="runStages"></div>
     <button class="primary" id="runGo" style="width:100%;margin:8px 0">Koşuyu başlat</button>
@@ -262,6 +275,7 @@ $('pasteGo').onclick = async () => {
 $('fbGo').onclick = () => fbLoad($('fbPath').value);
 $('fbPath').onkeydown = e => { if (e.key === 'Enter') fbLoad($('fbPath').value); };
 $('fbHome').onclick = () => fbLoad(C.home);
+$('fbKit').onclick = () => fbLoad(C.home + '/tmage/knowledge/inputs');
 $('fbCirc').onclick = () => fbLoad(C.home + '/tmage/circuits');
 $('fbUsb').onclick = () => fbLoad((C.usb_tb || '/run/media') + (C.usb_tb ? '/inputs' : ''));
 $('name').oninput = e => { S.name = e.target.value; persist(); };
@@ -367,6 +381,27 @@ function renderLlm() {
     sel.onchange = () => { L.agents[a.id] = sel.value; persist(); };
     tr.children[1].appendChild(sel); t.appendChild(tr);
   }
+  renderVoters(names);
+}
+const PREFERRED_VOTERS = ['qwen3:4b-instruct', 'qwen2.5:7b', 'command-r7b:latest', 'qwen3.5:4b', 'mistral:latest'];
+function renderVoters(names) {
+  const n = parseInt(S.nCand || '1', 10), box = $('voteBox'), L = S.llm;
+  box.style.display = n > 1 ? '' : 'none'; if (n <= 1) return;
+  L.voters = (L.voters || []).slice(0, n);
+  const pref = PREFERRED_VOTERS.filter(m => names.includes(m));
+  // Kullanıcı elle seçmediyse varsayılanlar her çizimde güncel model listesinden (farklı ailelerden) yeniden hesaplanır
+  for (let i = 0; i < n; i++) if (!L.votersManual || !L.voters[i]) L.voters[i] = pref[i % Math.max(pref.length, 1)] || names[i % Math.max(names.length, 1)] || '';
+  const w = $('voters'); w.textContent = '';
+  for (let i = 0; i < n; i++) {
+    const row = document.createElement('div'); row.className = 'row'; row.style.marginBottom = '6px';
+    const lab = document.createElement('label'); lab.className = 'f'; lab.textContent = 'Oy ' + (i + 1) + '. model';
+    const sel = document.createElement('select'); sel.add(new Option('(seç)', ''));
+    names.forEach(m => sel.add(new Option(m, m))); if (L.voters[i] && !names.includes(L.voters[i])) sel.add(new Option(L.voters[i], L.voters[i]));
+    sel.value = L.voters[i] || ''; sel.onchange = () => { L.voters[i] = sel.value; L.votersManual = true; renderVoters(names); persist(); };
+    lab.appendChild(sel); row.appendChild(lab); w.appendChild(row);
+  }
+  const fam = new Set(L.voters.map(m => (m || '').split(/[:\d.]/)[0]));
+  if (fam.size < Math.min(n, 2)) { const h = document.createElement('div'); h.className = 'warn'; h.textContent = 'Uyarı: aynı model ailesi seçili; ortak hatalar oylamada elenmez.'; w.appendChild(h); }
 }
 async function fetchModels() {
   const L = S.llm; if (!L.url) return;
@@ -374,8 +409,8 @@ async function fetchModels() {
   const d = await api('/api/models?url=' + encodeURIComponent(L.url));
   const chip = $('chipLlm');
   if (d.ok) {
-    L.models = d.models; chip.className = 'chip ok'; chip.textContent = 'Jetson: bağlı · ' + d.ms + ' ms';
-    $('modelInfo').textContent = d.models.length + ' model bulundu: ' + d.models.map(m => m.name + ' (' + (m.params || m.size_gb + ' GB') + ')').join(', ');
+    const skipped = d.models.filter(m => m.ok === false); L.models = d.models.filter(m => m.ok !== false); chip.className = 'chip ok'; chip.textContent = 'Jetson: bağlı · ' + d.ms + ' ms';
+    $('modelInfo').textContent = L.models.length + ' kullanılabilir model: ' + L.models.map(m => m.name + ' (' + (m.params || m.size_gb + ' GB') + (m.quant ? ' ' + m.quant : '') + ')').join(', ') + (skipped.length ? ' · dışarıda: ' + skipped.map(m => m.name + ' (' + m.why + ')').join(', ') : '');
   } else {
     chip.className = 'chip bad'; chip.textContent = 'Jetson: erişilemiyor';
     $('modelInfo').textContent = d.error + ' · Tailscale bağlı mı ve Jetson açık mı?';
@@ -385,6 +420,8 @@ async function fetchModels() {
 $('backend').onchange = e => { S.llm.backend = e.target.value; if (S.llm.backend === 'ollama') S.llm.url = S.llm.url || C.env.ollama_url; renderLlm(); persist(); if (S.llm.backend === 'ollama') fetchModels(); };
 $('llmUrl').oninput = e => { S.llm.url = e.target.value; persist(); };
 $('fetchModels').onclick = fetchModels;
+$('nCand').onchange = e => { S.nCand = e.target.value; renderLlm(); persist(); };
+$('tolPct').oninput = e => { S.tolPct = e.target.value; persist(); };
 $('same').onchange = e => { S.llm.same = e.target.checked; renderLlm(); persist(); };
 $('sameModel').onchange = e => { S.llm.sameModel = e.target.value; renderLlm(); persist(); };
 
@@ -406,6 +443,7 @@ function renderSummary() {
   const rows = [['Proje', S.name || '—'], ['Devre', S.circuit ? S.circuit.name : '—'], ['Topoloji', t ? t.label : '—'],
     ['Teknoloji', techObj().label + ' · ' + S.sim + ' · ' + S.vdd + ' V'], ['Köşeler', S.corners.join(', ') || '—'],
     ['Analizler', on.length ? on.join(', ') : '—'], ['LLM', (C.backends.find(b => b.id === L.backend) || {}).label + (L.same && L.sameModel ? ' · ' + L.sameModel : '')]];
+  if (parseInt(S.nCand || '1', 10) > 1) rows.push(['Oylama', S.nCand + ' aday: ' + (L.voters || []).join(', ')]);
   $('sum').innerHTML = rows.map(r => '<dt>' + r[0] + '</dt><dd>' + esc(r[1]) + '</dd>').join('');
   const w = problems();
   $('warns').innerHTML = w.length ? w.map(x => '<div class="warn">• ' + esc(x) + '</div>').join('') : '<div class="okmsg">Hazır.</div>';
@@ -413,13 +451,15 @@ function renderSummary() {
 $('save').onclick = async () => {
   const w = problems(), msg = $('saveMsg');
   if (w.length && !confirm('Eksikler var:\n' + w.join('\n') + '\n\nYine de kaydedilsin mi?')) return;
+  if (S.circuit && S.circuit.srcTech && S.circuit.srcTech !== S.tech && !(S.circuit.adapted && S.circuit.adapted.tech === S.tech)) await doAdapt();
   const L = S.llm;
   const job = {name:S.name || 'devre', topology:S.topology, technology:{id:S.tech, simulator:S.sim, vdd:S.vdd, pdk:S.pdk, temps:S.temps, corners:S.corners},
     circuit:S.circuit ? {path:S.circuit.path, name:S.circuit.name, parsed:S.circuit.parsed} : null,
     netlist_text:S.circuit ? S.circuit.text : '', netlist_original:S.circuit && S.circuit.orig ? S.circuit.orig : '',
     adaptation:S.circuit && S.circuit.adapted ? S.circuit.adapted : null,
     analyses:C.analyses.filter(a => (S.analyses[a.id] || {}).on).map(a => ({id:a.id, label:a.label, spice:a.spice, metrics:a.metrics, params:S.analyses[a.id].p})),
-    llm:{backend:L.backend, url:L.url, agents:Object.fromEntries(C.agents.map(a => [a.id, L.same ? L.sameModel : (L.agents[a.id] || '')]))}};
+    verification:{method:'voting', n:parseInt(S.nCand || '1', 10), tolerance_pct:parseFloat(S.tolPct || '5')},
+    llm:{backend:L.backend, url:L.url, voters:(parseInt(S.nCand || '1', 10) > 1 ? (L.voters || []) : []), agents:Object.fromEntries(C.agents.map(a => [a.id, L.same ? L.sameModel : (L.agents[a.id] || '')]))}};
   const d = await api('/api/jobs', {method:'POST', body:JSON.stringify(job)});
   msg.className = d.ok ? 'okmsg' : 'warn'; msg.textContent = d.ok ? 'Kaydedildi: ' + d.dir + ' · aşamalar: ' + d.stages.map(x => x.label).join(' → ') : 'Hata: ' + d.error;
   loadJobs(); if (d.ok) selectRun(d.dir.split('/').pop(), job.name);
@@ -475,8 +515,9 @@ $('runGo').onclick = async () => {
   if (!S.pdk) { renderTech(true); } else renderTech(false);
   renderTopos(); renderCircuit();
   if (Object.keys(S.analyses).length) renderAnalyses(); else if (S.topology) applyDefaults(); else renderAnalyses();
+  $('nCand').value = S.nCand || '1'; $('tolPct').value = S.tolPct || '5';
   renderLlm(); renderSummary(); loadJobs();
-  fbLoad(C.usb_tb ? C.usb_tb + '/inputs' : C.home);
+  fbLoad(C.home + '/tmage/knowledge/inputs');
   if (S.llm.backend === 'ollama') fetchModels();
 })();
 </script>

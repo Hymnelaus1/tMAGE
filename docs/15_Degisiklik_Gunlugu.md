@@ -15,3 +15,6 @@ tags: [tmage, gunluk]
 - Boru hattı v0 ve loglama; ilk koşu VPN kopması nedeniyle yarıda kaldı ([[09_Loglama]])
 - Benchmark aracı eklendi ([[11_Jetson_LLM_Benchmark]])
 - Bu belgeler ve yerel git deposu oluşturuldu
+- Jetson benchmark çalıştırıldı (4B+ modeller, temel ve iyileştirilmiş mod); gpt-oss:20b Ollama'yı çökertti ([[16_Rapor_Jetson_LLM]])
+- İyileştirmeler: script-önce spec/scenario, taslak testbench/`.meas`, RAG (`knowledge/`), JSON şeması, kesilme tespiti
+- Arayüz yeniden tasarlandı (sunum paleti, logo, ikonlar); `scripts/vpn.sh` ile hep açık VPN servisi

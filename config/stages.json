@@ -14,8 +14,8 @@
    "needs": [],
    "goal": "Devreyi anla: portların rollerini, devre özetini ve varsayımları çıkar.",
    "output": {
-    "port_roles": "{port: giris_pozitif|giris_negatif|cikis|besleme_pozitif|besleme_negatif|referans|diger}",
-    "circuit_summary": "string, 2-4 cümle",
+    "port_roles": "{port: input_pos|input_neg|output|supply_pos|supply_neg|reference|other|unknown}",
+    "circuit_summary": "string, at most 2 sentences",
     "assumptions": "[string]",
     "open_questions": "[string]"
    }
@@ -28,7 +28,7 @@
    ],
    "goal": "Seçilen her analiz için hangi testbench'in kurulacağına karar ver. Yalnızca context.analyses içindekileri kullan.",
    "output": {
-    "tests": "[{id, analysis_id, purpose, connections:{port:kaynak/yük}, sweep:{...}, metrics:[...]}]",
+    "tests": "[{id, analysis_id, purpose, connections:{...}, sweep:{...}, metrics:[...]}]",
     "order": "[test id]"
    }
   },

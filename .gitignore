@@ -16,3 +16,10 @@ __pycache__/
 *.pyc
 docs/.obsidian/workspace*.json
 docs/.obsidian/cache
+knowledge/inputs/
+knowledge/examples/
+knowledge/manual/
+
+# Benchmark ciktilari ve gecici denemeler
+batch/
+work/

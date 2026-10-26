@@ -4,49 +4,65 @@
    "id": "DA",
    "label": "Fark Yükselteci (DA)",
    "desc": "Aktif yüklü diferansiyel çift. DC, AC kazanç/BW/PM, CMRR, PSRR.",
-   "ports": "vinp vinn vout vdd vss"
+   "ports": "vinp vinn vout vdd vss",
+   "label_en": "Differential amplifier (DA)",
+   "desc_en": "Diode-loaded differential pair: DC, AC gain/BW/PM, CMRR, PSRR."
   },
   {
    "id": "FCO",
    "label": "Katlanmış Kaskod OTA (FCO)",
    "desc": "Yüksek kazançlı tek katlı OTA. Kazanç, GBW, faz payı, slew.",
-   "ports": "vinp vinn vout vdd vss"
+   "ports": "vinp vinn vout vdd vss",
+   "label_en": "Folded-cascode OTA (FCO)",
+   "desc_en": "High-gain single-stage OTA: gain, GBW, phase margin, slew."
   },
   {
    "id": "TSO",
    "label": "İki Katlı Opamp (TSO)",
    "desc": "Miller kompanzasyonlu iki katlı opamp. Kazanç, faz payı, slew rate.",
-   "ports": "vinp vinn vout vdd vss"
+   "ports": "vinp vinn vout vdd vss",
+   "label_en": "Two-stage op-amp (TSO)",
+   "desc_en": "Miller-compensated two-stage op-amp: gain, phase margin, slew rate."
   },
   {
    "id": "BGR",
    "label": "Bandgap Referans (BGR)",
    "desc": "Sıcaklık süpürmesi, besleme hassasiyeti, PSRR, startup.",
-   "ports": "vdd vss vref"
+   "ports": "vdd vss vref",
+   "label_en": "Bandgap reference (BGR)",
+   "desc_en": "Temperature sweep, supply sensitivity, PSRR, startup."
   },
   {
    "id": "COMP",
    "label": "Karşılaştırıcı (latch)",
    "desc": "Yayılım gecikmesi, ofset, latch süresi, güç. Kitteki comparator.sp'den.",
-   "ports": "in inn out vdd vss"
+   "ports": "in inn out vdd vss",
+   "label_en": "Latched comparator (COMP)",
+   "desc_en": "Propagation delay, offset, latch time, power."
   },
   {
    "id": "OSC",
    "label": "CMOS osilatör",
    "desc": "Salınım frekansı, faz gürültüsü, güç. Kitteki cmos_osc.sp'den (HB analizi).",
-   "ports": "vdd vss out"
+   "ports": "vdd vss out",
+   "label_en": "CMOS oscillator (OSC)",
+   "desc_en": "Oscillation frequency, phase noise, power (harmonic balance)."
   },
   {
    "id": "LNA",
    "label": "Düşük gürültülü yükselteç (LNA)",
    "desc": "S11, S21, S12, gürültü figürü, güç. Kitteki lna.sp'den.",
-   "ports": "in out vdd"
+   "ports": "in out vdd",
+   "label_en": "Low-noise amplifier (LNA)",
+   "desc_en": "S11, S21, S12, noise figure, power."
   },
   {
    "id": "CUSTOM",
    "label": "Özel / diğer",
    "desc": "Topolojiyi kendin tanımla, analizleri elle seç.",
-   "ports": ""
+   "ports": "",
+   "label_en": "Custom / other",
+   "desc_en": "User-defined topology; analyses chosen manually."
   }
  ],
  "technologies": [
@@ -101,6 +117,11 @@
     "Çekirdek 1.2 V; model adları n12/p12 (LVT: n12_lvt, HVT: n12_hvt).",
     "BJT_12 (VPNP/LPNP) yalnızca TT_12 içinde hazır gelir; diğer köşelerde ayrıca .lib eklenir.",
     "Lmin 0.09 µm. Eski devrelerdeki W/L değerleri yeniden boyutlandırılmalı (sizing kapsam dışı)."
+   ],
+   "notes_en": [
+    "1.2 V core; model names n12/p12 (LVT: n12_lvt, HVT: n12_hvt).",
+    "BJT_12 (VPNP/LPNP) is only included in TT_12; for other corners add the .lib section separately.",
+    "Lmin 0.09 um. W/L values of older circuits must be re-sized (sizing is out of scope)."
    ]
   },
   {
@@ -141,6 +162,9 @@
    },
    "notes": [
     "ngspice ile çalışır; X1 alt devre çağrısı (Xm ... model)."
+   ],
+   "notes_en": [
+    "Runs with ngspice; subcircuit-style transistor instances (Xm ... model)."
    ]
   },
   {
@@ -177,6 +201,9 @@
    "param_defaults": {},
    "notes": [
     "Kit referansı: ±1.2 V çift besleme, model dosyası 130nm.txt."
+   ],
+   "notes_en": [
+    "Kit reference: +/-1.2 V dual supply, model file 130nm.txt."
    ]
   }
  ],
@@ -202,7 +229,9 @@
     "COMP",
     "OSC",
     "LNA"
-   ]
+   ],
+   "label_en": "DC operating point",
+   "desc_en": "Bias currents/voltages of all transistors, saturation check."
   },
   {
    "id": "ac_loop",
@@ -246,7 +275,9 @@
     "DA",
     "FCO",
     "TSO"
-   ]
+   ],
+   "label_en": "Open-loop gain / BW / phase margin",
+   "desc_en": "DC gain, 3 dB bandwidth, GBW, phase margin."
   },
   {
    "id": "cmrr",
@@ -276,7 +307,9 @@
     "DA",
     "FCO",
     "TSO"
-   ]
+   ],
+   "label_en": "CMRR",
+   "desc_en": "Common-mode rejection ratio (differential gain minus common-mode gain)."
   },
   {
    "id": "psrr",
@@ -307,7 +340,9 @@
     "FCO",
     "TSO",
     "BGR"
-   ]
+   ],
+   "label_en": "PSRR",
+   "desc_en": "Power-supply rejection ratio with the AC stimulus on the supply."
   },
   {
    "id": "noise",
@@ -336,18 +371,19 @@
    "on": [
     "FCO",
     "BGR"
-   ]
+   ],
+   "label_en": "Noise",
+   "desc_en": "Input-referred total noise and spectral density."
   },
   {
    "id": "tran_slew",
    "group": "Geçici",
-   "label": "Slew rate / yerleşme",
+   "label": "Slew rate / yerleşme süresi",
    "spice": ".tran",
-   "desc": "Birim kazanç tamponunda basamak yanıtı: slew, yerleşme süresi, yüzde hata.",
+   "desc": "Birim kazançlı tamponda basamak yanıtı: slew rate (%20–%80) ve yerleşme süresi (son değerin ±tolerans bandına girmesi).",
    "metrics": [
     "slewrate",
-    "tdlay2",
-    "perc"
+    "tsettle"
    ],
    "params": [
     {
@@ -357,22 +393,214 @@
      "u": "V"
     },
     {
+     "k": "vcm",
+     "l": "Ortak mod",
+     "d": 0.6,
+     "u": "V"
+    },
+    {
      "k": "tstop",
      "l": "Süre",
-     "d": 5,
+     "d": 6,
      "u": "µs"
+    },
+    {
+     "k": "tol_pct",
+     "l": "Yerleşme bandı",
+     "d": 1,
+     "u": "%"
     },
     {
      "k": "cl",
      "l": "Yük kapasitesi",
      "d": 0.5,
      "u": "pF"
+    },
+    {
+     "k": "slew_min",
+     "l": "Slew min (spec)",
+     "d": 0,
+     "u": "V/µs"
+    },
+    {
+     "k": "ts_max",
+     "l": "Yerleşme max (spec)",
+     "d": 0,
+     "u": "µs"
     }
    ],
    "on": [
+    "DA",
     "FCO",
     "TSO"
-   ]
+   ],
+   "label_en": "Slew rate / settling time",
+   "desc_en": "Unity-gain buffer step response: slew rate (20-80%) and settling time into a tolerance band of the final value."
+  },
+  {
+   "id": "cl_gain",
+   "group": "AC",
+   "label": "Kapalı çevrim kazanç kontrolü",
+   "spice": ".ac",
+   "desc": "Geri beslemeli yükselteç: ölçülen kazanç ideal değerle uyuşuyor mu (1 = birim kazanç tamponu, >1 = eviren olmayan, dirençli geri besleme).",
+   "metrics": [
+    "cl_gain",
+    "cl_gain_err",
+    "cl_bw"
+   ],
+   "params": [
+    {
+     "k": "gain_ideal",
+     "l": "İdeal kazanç (V/V)",
+     "d": 1,
+     "u": ""
+    },
+    {
+     "k": "vcm",
+     "l": "Ortak mod",
+     "d": 0.6,
+     "u": "V"
+    },
+    {
+     "k": "fstart",
+     "l": "Başlangıç",
+     "d": 1,
+     "u": "Hz"
+    },
+    {
+     "k": "fstop",
+     "l": "Bitiş",
+     "d": 1000000000.0,
+     "u": "Hz"
+    },
+    {
+     "k": "pts",
+     "l": "Nokta/dekat",
+     "d": 20,
+     "u": ""
+    },
+    {
+     "k": "cl",
+     "l": "Yük kapasitesi",
+     "d": 0.5,
+     "u": "pF"
+    },
+    {
+     "k": "tol_db",
+     "l": "Kazanç hatası max (spec)",
+     "d": 1,
+     "u": "dB"
+    }
+   ],
+   "on": [
+    "DA",
+    "FCO",
+    "TSO"
+   ],
+   "label_en": "Closed-loop gain check",
+   "desc_en": "Feedback amplifier: measured gain vs ideal (1 = unity-gain buffer, >1 = non-inverting with resistive feedback)."
+  },
+  {
+   "id": "offset",
+   "group": "DC",
+   "label": "Giriş ofset gerilimi",
+   "spice": ".dc",
+   "desc": "Birim kazançlı tamponda çıkış − giriş: ofset spesifikasyona uygun mu.",
+   "metrics": [
+    "vos"
+   ],
+   "params": [
+    {
+     "k": "vcm",
+     "l": "Ortak mod",
+     "d": 0.6,
+     "u": "V"
+    },
+    {
+     "k": "vos_max",
+     "l": "Ofset max (spec)",
+     "d": 10,
+     "u": "mV"
+    }
+   ],
+   "on": [
+    "DA",
+    "FCO",
+    "TSO"
+   ],
+   "label_en": "Input offset voltage",
+   "desc_en": "Unity-gain buffer output minus input: is the offset within the specification."
+  },
+  {
+   "id": "vos_temp",
+   "group": "Süpürme",
+   "label": "Ofset sıcaklık süpürmesi (DC)",
+   "spice": ".dc temp",
+   "desc": "Sıcaklığa göre giriş ofseti: en küçük/en büyük değer ve sıcaklık kayması (µV/°C).",
+   "metrics": [
+    "vos_min",
+    "vos_max",
+    "vos_drift"
+   ],
+   "params": [
+    {
+     "k": "tmin",
+     "l": "Min",
+     "d": -40,
+     "u": "°C"
+    },
+    {
+     "k": "tmax",
+     "l": "Maks",
+     "d": 125,
+     "u": "°C"
+    },
+    {
+     "k": "tstep",
+     "l": "Adım",
+     "d": 5,
+     "u": "°C"
+    },
+    {
+     "k": "vcm",
+     "l": "Ortak mod",
+     "d": 0.6,
+     "u": "V"
+    },
+    {
+     "k": "drift_max",
+     "l": "Kayma max (spec)",
+     "d": 0,
+     "u": "µV/°C"
+    }
+   ],
+   "on": [
+    "DA",
+    "FCO",
+    "TSO"
+   ],
+   "label_en": "Offset vs temperature (DC sweep)",
+   "desc_en": "Input offset over temperature: min/max and drift in uV/degC."
+  },
+  {
+   "id": "verilog_a",
+   "group": "Davranışsal",
+   "label": "Verilog-A modeli (.hdl)",
+   "spice": ".hdl",
+   "desc": "Davranışsal (Verilog-A) bir bloğu testbench'e dahil et. HSPICE Verilog-A'yı C'ye derler; MSI'de gcc ve glibc-devel kurulu olmalı.",
+   "metrics": [],
+   "params": [
+    {
+     "k": "file",
+     "l": "Verilog-A dosyası (.va)",
+     "d": "",
+     "u": ""
+    }
+   ],
+   "on": [],
+   "requires": "gcc",
+   "label_en": "Verilog-A model (.hdl)",
+   "desc_en": "Include a behavioural Verilog-A block in the testbench (needs gcc and glibc-devel on the host)."
   },
   {
    "id": "tran_start",
@@ -400,7 +628,9 @@
    ],
    "on": [
     "BGR"
-   ]
+   ],
+   "label_en": "Startup",
+   "desc_en": "Reference settles to the correct state after a supply ramp (critical for BGR)."
   },
   {
    "id": "comp_tran",
@@ -436,7 +666,9 @@
    ],
    "on": [
     "COMP"
-   ]
+   ],
+   "label_en": "Comparator delay / offset",
+   "desc_en": "Propagation delay, latch delay and input offset from a ramp input."
   },
   {
    "id": "osc_pn",
@@ -472,7 +704,9 @@
    ],
    "on": [
     "OSC"
-   ]
+   ],
+   "label_en": "Oscillator frequency / phase noise",
+   "desc_en": "Oscillation frequency, phase noise at an offset, peak amplitude."
   },
   {
    "id": "rf_sparam",
@@ -509,7 +743,9 @@
    ],
    "on": [
     "LNA"
-   ]
+   ],
+   "label_en": "S-parameters / noise figure",
+   "desc_en": "S11, S12, S21, S22 and NF at the target frequency and across the band."
   },
   {
    "id": "dc_transfer",
@@ -546,7 +782,9 @@
    "on": [
     "DA",
     "TSO"
-   ]
+   ],
+   "label_en": "DC transfer / offset / swing",
+   "desc_en": "Input sweep: output swing, input offset, common-mode input range."
   },
   {
    "id": "temp_sweep",
@@ -581,7 +819,9 @@
    ],
    "on": [
     "BGR"
-   ]
+   ],
+   "label_en": "Temperature sweep",
+   "desc_en": "Reference voltage temperature coefficient (ppm/degC) and curve."
   },
   {
    "id": "supply_sweep",
@@ -617,7 +857,9 @@
    ],
    "on": [
     "BGR"
-   ]
+   ],
+   "label_en": "Supply sweep (line regulation)",
+   "desc_en": "Output change versus supply: dif_vsup, minimum operating supply."
   },
   {
    "id": "power_area",
@@ -638,7 +880,9 @@
     "COMP",
     "OSC",
     "LNA"
-   ]
+   ],
+   "label_en": "Power and area estimate",
+   "desc_en": "Static power consumption and total active area."
   },
   {
    "id": "corners",
@@ -657,7 +901,9 @@
      "u": "%"
     }
    ],
-   "on": []
+   "on": [],
+   "label_en": "PVT corners",
+   "desc_en": "Repeat selected analyses over corner x temperature x supply combinations."
   },
   {
    "id": "montecarlo",
@@ -677,7 +923,9 @@
      "u": ""
     }
    ],
-   "on": []
+   "on": [],
+   "label_en": "Monte Carlo",
+   "desc_en": "Mismatch effect: offset and gain distribution."
   }
  ],
  "agents": [
@@ -703,8 +951,8 @@
   },
   {
    "id": "judge",
-   "label": "Hakem (LLM-as-judge)",
-   "desc": "Sonuçları değerlendirir ve raporlar."
+   "label": "Hakem: rapor açıklaması",
+   "desc": "İsteğe bağlı. Karar oylama ve kurallarla verilir; bu model yalnızca sonucu anlatır."
   }
  ],
  "backends": [

@@ -18,6 +18,7 @@ tags: [tmage, indeks]
 10. [[10_Dogrulama_Oylama]]: neden hakem yerine oylama
 11. [[11_Jetson_LLM_Benchmark]]: her ajan için model seçimi
 12. [[12_Duman_Testi_Sonuclari]]: ilk HSPICE sonuçları
+13. [[16_Rapor_Jetson_LLM]]: model karşılaştırma raporu ve iyileştirmeler
 
 ## Operasyon
 - [[13_Sorun_Giderme]]: karşılaşılan hatalar ve çözümleri
