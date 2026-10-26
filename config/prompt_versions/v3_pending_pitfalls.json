@@ -1,13 +1,52 @@
 {
  "_note": "Proposed additions, NOT active. Not read by the pipeline. Apply to config/agent_prompts.json only after batch/model_bench_20261026 finishes (editing config/ mid-run would change prompts for later models).",
  "measure": [
-  {"error": "'.meas dc vos find par('v(vout)-v(vinp)') at=0.6' with '.dc Vin -0.05 0.05 0.05': HSPICE warns 'Measurement time value specified exceeds analysis limit' and the measure FAILS (seen in qwen2.5:7b FCO run 1 and 2, all 3 candidates).",
-   "fix": "The 'at=' value must lie inside the swept range. For an offset test use the sweep point where the input difference is 0 (e.g. at=0 when the sweep is -0.05..0.05 around 0), not the supply or common-mode voltage."},
-  {"error": "Measure value of exactly 25.0 or 1.0 for vos, vfin, gaincm, gainpsrr or cl_gain.",
-   "fix": "These are not measurements: they are the temperature (25) or alter# (1) columns shown when a measure failed. A failed measure is printed as 'failed'. Re-check the .meas (sweep range, trigger level, node names)."}
+  {
+   "error": "'.meas dc vos find par('v(vout)-v(vinp)') at=0.6' with '.dc Vin -0.05 0.05 0.05': HSPICE warns 'Measurement time value specified exceeds analysis limit' and the measure FAILS (seen in qwen2.5:7b FCO run 1 and 2, all 3 candidates).",
+   "fix": "The 'at=' value must lie inside the swept range. For an offset test use the sweep point where the input difference is 0 (e.g. at=0 when the sweep is -0.05..0.05 around 0), not the supply or common-mode voltage."
+  },
+  {
+   "error": "Measure value of exactly 25.0 or 1.0 for vos, vfin, gaincm, gainpsrr or cl_gain.",
+   "fix": "These are not measurements: they are the temperature (25) or alter# (1) columns shown when a measure failed. A failed measure is printed as 'failed'. Re-check the .meas (sweep range, trigger level, node names)."
+  },
+  {
+   "error": "'.meas ... param=' equation with 'td=' (qwen2.5:7b tran_slew, 12x): 'Invalid keyword td in .MEASURE Equation Evaluation. It is ignored.'",
+   "fix": "td, rise, fall belong to trig/targ/find/when measures only. A param= equation takes just an expression of earlier measure names."
+  },
+  {
+   "error": "'Unable to find referenced node vout#; Output variable ignored' (qwen2.5:7b psrr/cmrr, 25x): the .meas used a node name that does not exist in that testbench.",
+   "fix": "Copy node names letter for letter from the testbench you were given (the DUT output is the node connected to the vout port); never invent vout1, out_p, etc."
+  },
+  {
+   "error": "'Undefined parameter or function definition gainvv/gain for cmrr' (qwen2.5:7b 8x, qwen3.5:4b 7x): cmrr measured inside a single testbench from names that live in another one.",
+   "fix": "Measure only gain in the open-loop test and gaincm in the common-mode test; the system computes cmrr = gain - gaincm."
+  },
+  {
+   "error": "'Measurement time value specified exceeds analysis limit in measure variable vfin' (qwen3.5:4b tran_slew, 10x).",
+   "fix": "Sample times (at=) must be <= the .tran stop time of that testbench; take tstop from the .tran card you wrote."
+  },
+  {
+   "error": "Stage 'measure' did not produce valid output in 3 attempts, candidate dropped (qwen2.5-coder:7b, 11x).",
+   "fix": "Return compact JSON only: one statement per metric, no comments, no prose before or after the object."
+  }
  ],
  "stimulus": [
-  {"error": "Offset test swept the input around 0 V (-0.05..0.05) while the circuit has symmetric supplies, but the common mode/at value was taken from the single-supply case (VDD/2 = 0.6).",
-   "fix": "Take the sweep centre from context.circuit.supply_hint: symmetric supply -> centre 0 V; single supply -> centre VDD/2. Use the same centre in the .meas 'at=' value."}
- ]
+  {
+   "error": "Offset test swept the input around 0 V (-0.05..0.05) while the circuit has symmetric supplies, but the common mode/at value was taken from the single-supply case (VDD/2 = 0.6).",
+   "fix": "Take the sweep centre from context.circuit.supply_hint: symmetric supply -> centre 0 V; single supply -> centre VDD/2. Use the same centre in the .meas 'at=' value."
+  },
+  {
+   "error": "'Value of resistance rf defined is limited to RESMIN' then cl_gain=-560 dB, cl_gain_err=560 (qwen3.5:4b, 24x): feedback resistor written as 0 or a tiny value.",
+   "fix": "Closed-loop gain test: use Rf and Rg of at least 1k (e.g. Rg 1k, Rf 9k for gain 10). Never 0 or sub-ohm values."
+  },
+  {
+   "error": "'pulse vin period too small, reset' (qwen3.5:4b tran_slew).",
+   "fix": "pulse period must be larger than td-free rise + width + fall (e.g. 'pulse(0 0.2 10n 1n 1n 100n 220n)')."
+  },
+  {
+   "error": "Tests silently left out of the stimulus output: offset 29x, vos_temp 29x, power_area 29x, cmrr 20x, tran_slew 20x, psrr 18x (all models, worst qwen3.5:4b).",
+   "fix": "Return exactly one testbench per entry of context.analyses; count them before answering. Missing tests are replaced by the script draft and counted against the model."
+  }
+ ],
+ "_observed_in": "batch/model_bench_20261026, aggregated from logs/run.log of all runs (counts are log lines, not distinct runs)"
 }
