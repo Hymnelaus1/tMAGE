@@ -1,19 +1,87 @@
-# tMAGE
+# tMAGE: testbench Multi-Agent Generation Engine
 
-Analog devreler için **çok ajanlı testbench üretim motoru** (GTÜ ELM491 bitirme projesi). Kullanıcı devresini ve topolojisini seçer; sistem LLM ajanlarıyla testbench üretir, HSPICE ile simüle eder, doğrular ve raporlar.
+GTU ELM491 graduation project. Given an analog circuit netlist, a topology and a set of analyses, small local LLM agents write HSPICE testbenches. The system simulates them, **verifies the results by majority voting plus sanity rules** and writes a report. Sizing and optimisation are out of scope.
 
-Ayrıntılı belgeler ve **nasıl yapıldığı** notları: [`docs/`](docs/00_Ana_Sayfa.md) (Obsidian kasası olarak da açılır: Obsidian → *Open folder as vault* → `docs/`).
+*(Türkçe: Analog devre netlistini ve analizleri seçersiniz; LLM ajanları HSPICE testbench'lerini yazar, sistem simüle eder, oylama ve kural kontrolüyle doğrular, rapor üretir. Belgeler `docs/` altında Türkçedir.)*
 
-## Hızlı başlangıç
-```bash
-cp config/env.sh.example config/env.sh          # lisans ve yolları doldur
-cp config/jetson.env.example config/jetson.env   # Ollama (Jetson) adresi
-./run.sh                                         # arayüz: http://127.0.0.1:8765
+Students: Orhan Haluk Tascioglu, Nisa Bekci. Advisor: Prof. Dr. Engin Afacan.
+
+## Status
+
+Work in progress, **results are preliminary**. The model benchmark (9 models x 3 circuits x 3 runs x 3 voted candidates) is still running; see [ROADMAP.md](ROADMAP.md) and [docs/22_Benchmark_Bulgulari.md](docs/22_Benchmark_Bulgulari.md).
+
+| | |
+|---|---|
+| Circuits with script drafts | DA (diff amp), FCO (folded-cascode OTA), TSO (two-stage op-amp) |
+| Circuits without drafts yet | BGR (bandgap), LNA |
+| Not supported yet | COMP, OSC (flat netlists, no `.subckt`; OSC needs harmonic balance) |
+| Technology | SAED 90 nm, HSPICE X-2025.06-SP2 |
+| LLM runtime | Ollama on a Jetson Orin Nano (8 GB), models of 4B parameters or more |
+| UI | Local web UI (Turkish), stdlib Python only |
+
+## How it works
+
 ```
-Gereksinimler: Python 3.9 (yalnızca standart kütüphane), HSPICE X-2025.06-SP2 + SAED90nm PDK, VPN (lisans için), Ollama sunucusu.
+job.json -> context.json -> spec -> scenario -> [DUT precheck]
+         -> N candidates { stimulus -> measure -> HSPICE } -> verify (rules + vote) -> report
+```
 
-## Yapı
-`app/` web arayüzü · `engine/` boru hattı, loglama, benchmark · `config/` katalog ve şemalar · `docs/` belgeler · `runs/` koşu çıktıları (depoya girmez)
+Design rules that came out of testing small models:
 
-## Gizlilik
-`.ovpn` dosyaları, `env.sh`, `jetson.env`, koşu çıktıları ve loglar `.gitignore` ile dışarıda tutulur. Lisans/Site ID bilgileri depoya yazılmaz. Depoyu uzağa itecekseniz **özel (private)** tutun.
+* Everything deterministic is done by **script** (spec, scenario, testbench and `.meas` drafts); the LLM only refines.
+* The model gets a **verified draft** plus matching real examples from the kit (RAG) and a short English prompt with a list of known errors and fixes.
+* Wrong outputs are caught by **sanity ranges** and by **voting across candidates**; a failing test falls back to the script draft and is flagged (the report shows the model's own contribution).
+* Prompts, context, logs and reports an LLM sees are English; only the UI and `docs/` are Turkish.
+
+## Repository layout
+
+| Path | Content |
+|---|---|
+| `app/` | Web UI (`server.py`, `static/index.html`) |
+| `config/` | topology/technology/analysis catalog, stage schemas, agent prompts, `prompt_versions/` |
+| `engine/` | pipeline, context hand-off, RAG and script drafts, Ollama client, HSPICE runner, batch runner |
+| `scripts/` | VPN service, model benchmark, mixed-model voting, ranking, findings scanner |
+| `docs/` | Obsidian vault (Turkish): design notes, change log, observed errors, prompts, HSPICE manual notes |
+
+Not in the repository (git-ignored): run outputs (`runs/`, `batch/`), the kit netlists and models (`knowledge/inputs`), the HSPICE manual text, and local config (`config/env.sh`, `config/jetson.env`).
+
+## Quick start
+
+```bash
+cp config/env.sh.example config/env.sh      # tool paths and license server
+cp config/jetson.env.example config/jetson.env
+source config/env.sh
+./run.sh                                    # UI at http://127.0.0.1:8765
+python3 engine/batch.py --only DA --reps 3 --n 3 --voters qwen3:4b-instruct,qwen3:4b-instruct,qwen3:4b-instruct --agent qwen3:4b-instruct
+```
+
+Requires Python 3.9 (standard library only), HSPICE X-2025.06-SP2 with a reachable license (university VPN), the SAED 90 nm PDK and an Ollama server with the models you select.
+
+## Versions
+
+Every version is tagged; `git log --oneline` and the GitHub tags/releases list them.
+
+| Tag | What it is |
+|---|---|
+| `v0.1.0` | First version: UI, pipeline, logging, docs |
+| `v0.2.0` | Improved mode: script-first spec/scenario, drafts, RAG, batch runner |
+| `v0.3.0` | English prompts, HSPICE-manual rules, benchmark and findings tooling, prompt versions |
+| `v0.3.1` | Pitfalls aggregated from the first benchmark logs (proposed, not yet active) |
+
+Earlier prompt sets are kept as files in `config/prompt_versions/` (`v1_old`, `v2_manual`, `v3_pending_pitfalls.json`).
+
+## Known issues
+
+* `engine/sim.py` `read_measures()` turns a *failed* `.meas` into the temperature column value (25.0) or alter# (1.0). Details: `docs/20_Gorulen_Hatalar.md`. Fix is planned right after the running benchmark.
+* Sizes come from 130 nm kit netlists, so results validate the flow, not a real 90 nm design.
+* `gpt-oss:20b` crashes Ollama on the 8 GB Jetson.
+
+## Documentation
+
+`docs/` also opens as an Obsidian vault (Obsidian > *Open folder as vault* > `docs/`).
+
+Start with `docs/17_Handoff_for_new_chat.md` (project state, access, lessons) and `docs/18_Degisiklik_Gunlugu.md` (chronological change log).
+
+## Privacy
+
+`.ovpn` files, `config/env.sh`, `config/jetson.env`, run outputs and logs are git-ignored. License and site IDs must not be committed. Keep this repository **private**.
