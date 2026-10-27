@@ -1,0 +1,91 @@
+{
+ "order": [
+  "spec",
+  "scenario",
+  "stimulus",
+  "measure",
+  "verify",
+  "report"
+ ],
+ "stages": {
+  "spec": {
+   "agent": "spec",
+   "label": "Spesifikasyon",
+   "needs": [],
+   "goal": "Understand the circuit: extract the role of each port, a circuit summary and assumptions.",
+   "output": {
+    "port_roles": "{port: input_pos|input_neg|output|supply_pos|supply_neg|reference|other|unknown}",
+    "circuit_summary": "string, at most 2 sentences",
+    "assumptions": "[string]",
+    "open_questions": "[string]"
+   }
+  },
+  "scenario": {
+   "agent": "scenario",
+   "label": "Test senaryosu",
+   "needs": [
+    "spec"
+   ],
+   "goal": "Decide which testbench to build for each selected analysis. Use only the analyses listed in context.analyses.",
+   "output": {
+    "tests": "[{id, analysis_id, purpose, connections:{...}, sweep:{...}, metrics:[...]}]",
+    "order": "[test id]"
+   }
+  },
+  "stimulus": {
+   "agent": "stimulus",
+   "label": "Stimulus / netlist",
+   "needs": [
+    "spec",
+    "scenario"
+   ],
+   "goal": "Write the runnable testbench BODY for each test: sources, load, DUT instance and analysis commands. Rules: ground node is 0; instantiate the DUT as 'X0 <ports in order> <subckt_name>' (port order is context.circuit.ports); for a single supply use VSS=0 and VDD=context.technology.vdd; set the input common mode to about VDD/2; do NOT write .lib, .inc, .end or .subckt (the system adds them); do NOT write .meas (the measure agent writes them); take analysis parameters from context.analyses[].params. Each testbench is a separate, self-contained file. IMPORTANT: do NOT use placeholders ({...}, 'context.', etc.); write all numbers literally. Example AC testbench body (VDD=1.2 V, DUT ports vinp vinn vout vdd vss): 'Vdd vdd 0 1.2\\nVss vss 0 0\\nVcm cm 0 0.6\\nVin vinp cm DC 0 AC 0.5\\nVinn vinn cm DC 0 AC -0.5\\nX0 vinp vinn vout vdd vss da\\nCl vout 0 0.5p\\n.ac dec 20 1 1e9'. This is only a format example; adapt port order and names to your own circuit.",
+   "output": {
+    "testbenches": "[{test_id, file, netlist_text}]"
+   }
+  },
+  "measure": {
+   "agent": "measure",
+   "label": "Ölçüm",
+   "needs": [
+    "spec",
+    "scenario",
+    "stimulus"
+   ],
+   "goal": "Write only the .meas lines for each testbench and state the expected range. Metric names MUST be the SAME as context.analyses[].metrics (e.g. gain, phase_margin). Use the node names from the testbench. Do NOT write .end in measurement lines. The statement field must be a complete '.meas ...' line; use '\\n' for several lines.",
+   "output": {
+    "measurements": "[{test_id, name, statement, expect:{min, max, unit}}]"
+   }
+  },
+  "verify": {
+   "agent": "verify",
+   "label": "Doğrulama (oylama + kural)",
+   "needs": [
+    "scenario",
+    "stimulus",
+    "measure"
+   ],
+   "goal": "Cluster the simulation results, apply the rule checks and select the winning candidate.",
+   "output": {
+    "runs": "[{candidate, metrics:{}, rules_passed:bool}]",
+    "clusters": "[...]",
+    "winner": "candidate",
+    "flags": "[string]"
+   }
+  },
+  "report": {
+   "agent": "report",
+   "label": "Rapor",
+   "needs": [
+    "spec",
+    "scenario",
+    "measure",
+    "verify"
+   ],
+   "goal": "Describe the result briefly and correctly. Do not invent new numbers; use only the values in the verify output.",
+   "output": {
+    "markdown": "string"
+   }
+  }
+ }
+}

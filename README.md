@@ -6,7 +6,7 @@ Students: Orhan Haluk Tascioglu, Nisa Bekci. Advisor: Prof. Dr. Engin Afacan.
 
 ## Status
 
-Work in progress, **results are preliminary**. The model benchmark (9 models x 3 circuits x 3 runs x 3 voted candidates) is still running; see [ROADMAP.md](ROADMAP.md) and [docs/22_Benchmark_Findings.md](docs/22_Benchmark_Findings.md).
+Work in progress, **results are preliminary**. The model benchmark (9 models x 3 circuits x 3 runs x 3 voted candidates) is finished: [docs/23_Model_Benchmark_Report.md](docs/23_Model_Benchmark_Report.md). Next: mixed-model voting, see [ROADMAP.md](ROADMAP.md).
 
 | | |
 |---|---|
@@ -43,11 +43,12 @@ Design rules that came out of testing small models:
 | ✅ | Script-first pipeline: spec, scenario, testbench and `.meas` drafts, RAG, JSON schema, English prompts |
 | ✅ | Majority voting with sanity rules, batch runner, full logging |
 | ✅ | End-to-end runs on DA, FCO and TSO |
-| 🔄 | Model benchmark on the Jetson (9 models, 3 circuits, 3 runs each) |
+| ✅ | Model benchmark on the Jetson (9 models, 3 circuits, 3 runs each) |
 | ✅ | Verilog-A toolchain works (smoke test) |
 | ✅ | GitHub repository, versions as tags, automatic local and GitHub backup |
-| ❌ | Fix the failed-`.meas` parsing bug and recompute all scores |
-| ❌ | Mixed-model voting with the best 3 models per circuit |
+| ✅ | Failed-`.meas` parsing bug fixed, all scores recomputed |
+| 🔄 | Mixed-model voting (command-r7b, qwen3:4b-instruct, deepseek-coder:6.7b) |
+| ❌ | RAG over books and papers (modular RAG study) |
 | ❌ | Ablation of the improvements (script-first, drafts, RAG, schema, prompts, language) |
 | ❌ | BGR and LNA drafts; COMP and OSC through a `.subckt` wrapper |
 | ❌ | Corners x temperature x supply (PVT) and Monte Carlo |
@@ -114,7 +115,7 @@ Earlier prompt sets are kept as files in `config/prompt_versions/` (`v1_old`, `v
 
 ## Known issues
 
-* `engine/sim.py` `read_measures()` turns a *failed* `.meas` into the temperature column value (25.0) or alter# (1.0). Details: `docs/20_Observed_Errors.md`. Fix is planned right after the running benchmark.
+* Models of different families rarely agree on small circuits without script drafts; see the benchmark report.
 * Sizes come from 130 nm kit netlists, so results validate the flow, not a real 90 nm design.
 * `gpt-oss:20b` crashes Ollama on the 8 GB Jetson.
 

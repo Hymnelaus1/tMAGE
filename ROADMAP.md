@@ -11,10 +11,11 @@ Status: `done`, `running`, `next`, `later`. Order inside a section is priority.
 - [x] Documents translated to English, files renamed
 - [ ] UI texts, code comments and `config/` labels translated to English (after the benchmark, the running benchmark executes those files)
 - [x] GitHub repository, tags, automatic local and GitHub backup
-- [ ] Model benchmark finished (9 models, running)
-- [ ] `sim.py` failed-`.meas` bug fixed, scores recomputed
-- [ ] Pitfalls from `config/prompt_versions/v3_pending_pitfalls.json` activated
-- [ ] Per-circuit ranking and mixed-model voting with the top 3
+- [x] Model benchmark finished (9 models, 81 runs, `docs/23_Model_Benchmark_Report.md`)
+- [x] `sim.py` failed-`.meas` bug fixed, scores recomputed
+- [x] Pitfalls from `config/prompt_versions/v3_pending_pitfalls.json` activated (`v3_pitfalls`)
+- [ ] Mixed-model voting: command-r7b + qwen3:4b-instruct + deepseek-coder:6.7b (running next)
+- [ ] RAG over books and papers (modular RAG, see below)
 - [ ] Model-contribution metric in the report
 - [ ] Ablation of the improvements, English vs Turkish prompts
 - [ ] BGR and LNA drafts and RAG examples
@@ -26,17 +27,21 @@ Status: `done`, `running`, `next`, `later`. Order inside a section is priority.
 - [ ] SKY130 / ngspice fallback plan
 - [ ] Final report and presentation
 
-## Now: finish the model benchmark (running)
+## Done: model benchmark
 
-* `running` 9 models x DA/FCO/TSO x 3 runs x 3 candidates, each model alone (`scripts/model_bench.sh`). Findings are scanned automatically into `docs/22_Benchmark_Findings.md`.
-* `next` Fix `sim.py` `read_measures()` (failed `.meas` must not become 25.0/1.0) and **recompute all scores from the saved `.ms0/.mt0` files** without re-running HSPICE.
-* `next` Activate `config/prompt_versions/v3_pending_pitfalls.json` in `agent_prompts.json` (commit separately so v2 stays comparable).
+* `done` 9 models x DA/FCO/TSO x 3 runs x 3 candidates, each model alone (`scripts/model_bench.sh`). Findings are scanned automatically into `docs/22_Benchmark_Findings.md`.
+* `done` `sim.py` fixed (failed `.meas` no longer becomes 25.0/1.0); all scores recomputed offline by `scripts/recompute_scores.py` into `docs/23_Model_Benchmark_Report.md`.
+* `done` Benchmark pitfalls activated (`config/prompt_versions/v3_pitfalls`; v2 stays for comparison).
 
 ## Next: decide the models
 
 * `next` Rank models per circuit (`scripts/rank_models.py`) from the corrected scores.
 * `next` **Mixed-model voting**: per circuit, the top 3 models of *different base models* vote (`scripts/mixed_vote.sh`). Question: does a diverse vote beat same-model voting?
 * `next` Report the model's own contribution (share of testbenches/measures the model wrote vs. script draft fallbacks).
+
+## Knowledge base (RAG)
+
+* `next` Study modular RAG over analog-design books and FCO/TSO papers (design equations, typical metric ranges, test recipes). Start small: a curated, per-topology note set with metadata (topology, metric, test) instead of raw PDFs; evaluate with the benchmark (same circuits, with/without RAG).
 
 ## Evidence for the thesis
 

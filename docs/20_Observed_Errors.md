@@ -35,7 +35,7 @@ Detailed context: `17_Handoff_for_new_chat.md` sections 7-8. Prompts: `19_Agent_
 
 ## Found in benchmark 20261026 (model_bench_20261026)
 
-### A. Code bug: `engine/sim.py read_measures()` turns a failed measurement into a wrong number
+### A. Code bug (FIXED 2026-10-27, commit 070b21b): `engine/sim.py read_measures()` turned a failed measurement into a wrong number
 HSPICE writes a failed measurement as `failed`. The parser counts this word as a separate "name", the number columns shift, and the `temper` (25) / `alter#` (1) value is read as a measurement:
 ```
  vos     temper    alter#
