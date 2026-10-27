@@ -32,30 +32,53 @@ def run_hspice(workdir, netlist, timeout=300):
     return {"rc": rc, "stdout": out, "ms": int((time.time() - t0) * 1000), "base": base}
 
 
-def read_measures(workdir, base):
-    """.mt0/.ma0/.ms0 dosyalarından ölçümleri {ad: değer} olarak okur."""
-    res = {}
+def parse_measure_file(path):
+    """Parses one .mt0/.ma0/.ms0 file into ({name: value}, [failed names]).
+
+    Layout: a header of measure names, then one row of values. A failed measure prints the token 'failed'
+    in its own column, so values are matched to names by position (never by zipping the leading floats).
+    """
+    toks = []
+    for ln in Path(path).read_text(errors="replace").splitlines():
+        if ln.startswith(("$", ".")):
+            continue
+        toks += ln.split()
+
+    def is_value(t):
+        if t.lower() == "failed":
+            return True
+        try:
+            float(t)
+            return True
+        except ValueError:
+            return False
+
+    k = 0
+    while k < len(toks) and not is_value(toks[k]):
+        k += 1
+    names, vals = [t.lower() for t in toks[:k]], toks[k:k + k]
+    good, bad = {}, []
+    for n, v in zip(names, vals):
+        if n in ("temper", "alter#"):
+            continue
+        if v.lower() == "failed":
+            bad.append(n)
+        else:
+            good[n] = float(v)
+    return good, bad
+
+
+def read_measures(workdir, base, with_failed=False):
+    """Reads measures from .mt0/.ma0/.ms0 as {name: value}. Failed measures are left out (never a fake number);
+    with_failed=True also returns the list of failed measure names."""
+    res, failed = {}, []
     for ext in ("mt0", "ma0", "ms0"):
         f = Path(workdir) / f"{base}.{ext}"
-        if not f.exists():
-            continue
-        toks = []
-        for ln in f.read_text(errors="replace").splitlines():
-            if ln.startswith(("$", ".")):
-                continue
-            toks += ln.split()
-        names, vals = [], []
-        for t in toks:
-            try:
-                vals.append(float(t))
-            except ValueError:
-                if vals:
-                    break
-                names.append(t.lower())
-        for n, v in zip(names, vals):
-            if n not in ("temper", "alter#"):
-                res[n] = v
-    return res
+        if f.exists():
+            g, b = parse_measure_file(f)
+            res.update(g)
+            failed += b
+    return (res, failed) if with_failed else res
 
 
 def lis_problems(workdir, base):

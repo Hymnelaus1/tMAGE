@@ -317,17 +317,19 @@ class Pipeline:
             prob = sim.lis_problems(wd, tid)
             if "Unable to checkout" in r["stdout"] or "Unable to checkout" in (wd / f"{tid}.lis").read_text(errors="replace"):
                 raise LicenseError("HSPICE could not get a license (Unable to checkout). Check the VPN connection.")
-            vals = sim.read_measures(wd, tid)
+            vals, failed = sim.read_measures(wd, tid, with_failed=True)
             self.lg.info(f"HSPICE {tid}: rc={r['rc']} {r['ms']} ms, measures={len(vals)}, errors={len(prob['errors'])}  {prob['license']}",
                          test=tid, ms=r["ms"], measures=vals, errors=prob["errors"])
             used_fallback = False
-            if (prob["errors"] or not vals) and handoff.improved():
+            if (prob["errors"] or not vals or failed) and handoff.improved():
                 fb = self.fallback(wd, tid)
                 if fb:
-                    self.lg.warn(f"{tid}: model output failed ({(prob['errors'] or ['no measures'])[0][:90]}); script draft used")
-                    vals, prob, used_fallback = fb[0], fb[1], True
+                    self.lg.warn(f"{tid}: model output failed ({(prob['errors'] or ['failed .meas: ' + ', '.join(failed)] if failed else ['no measures'])[0][:90]}); script draft used")
+                    vals, prob, used_fallback, failed = fb[0], fb[1], True, []
             for w in prob["warnings"][:3]:
                 self.lg.warn(f"{tid}: {w}")
+            if failed:
+                issues.append(f"{tid}: measure(s) failed in HSPICE (no value): " + ", ".join(failed))
             if prob["errors"]:
                 issues.append(f"{tid}: simulation error: " + " | ".join(prob["errors"][:3]))
             elif not vals:
