@@ -28,8 +28,8 @@ def pool(files, min_clean):
         for mdir, topos in data.items():
             clean = sum(1 for reps in topos.values() for r in reps if r["winner"])
             sj = base / mdir / "summary.json"
-            name = next(c["model"] for t in json.loads(sj.read_text()).values() for r in t for c in r["candidates"])
-            if clean >= min_clean and name in allowed:
+            name = next((c["model"] for t in json.loads(sj.read_text()).values() for r in t for c in r.get("candidates", [])), None)
+            if name and clean >= min_clean and name in allowed:
                 best[name] = max(best.get(name, 0), clean)
     return best
 
