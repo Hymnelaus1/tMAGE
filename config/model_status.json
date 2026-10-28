@@ -1,0 +1,14 @@
+{
+ "_note": "Which models take part in runs. 'offline' = installed (or kept in this list) but NOT used in new runs; nothing is deleted. Rule: never models below 4B.",
+ "active": ["qwen3:4b-instruct", "qwen3:4b-instruct-2507-q8_0", "command-r7b:latest"],
+ "probation": ["deepseek-coder:6.7b", "qwen2.5-coder:7b"],
+ "new_under_test_2026-10-28": ["qwen3:8b", "llama3.1:8b", "gemma4:e4b", "nemotron-3-nano:4b"],
+ "offline": {
+  "qwen3.5:4b": "0 of 9 clean majorities (tran_slew measures fail)",
+  "qwen3.5:4b-q8_0": "0 of 9 (cl_gain measures fail)",
+  "qwen2.5:7b": "1 of 9, failed .meas, 2 timeouts",
+  "ministral-3:8b": "0 of 9, 3 timeouts, 43 draft fallbacks",
+  "yi-coder:9b": "proposed 2026-10-28, not pulled (not in the first 4)",
+  "glm4:9b": "proposed 2026-10-28, not pulled (not in the first 4)"
+ }
+}

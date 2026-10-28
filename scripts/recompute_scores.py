@@ -6,7 +6,7 @@ re-parsed with the fixed parser; a test whose measure printed 'failed' (and did 
 makes the candidate fail its sanity check. Candidates are then re-clustered exactly like Pipeline.cluster (5 %).
 
 Writes docs/23_Model_Benchmark_Report.md and <batch>/recomputed.json.
-Usage: python3 scripts/recompute_scores.py [batch/model_bench_20261026]
+Usage: python3 scripts/recompute_scores.py [batch/model_bench_20261026 [docs/<report>.md]]
 """
 import collections
 import json
@@ -21,7 +21,7 @@ import sim  # noqa: E402
 from pipeline import RULES  # noqa: E402
 
 BASE = Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / "batch" / "model_bench_20261026"
-OUT = ROOT / "docs" / "23_Model_Benchmark_Report.md"
+OUT = Path(sys.argv[2]) if len(sys.argv) > 2 else ROOT / "docs" / "23_Model_Benchmark_Report.md"
 TOL = 0.05
 REF = {"DA": {"gain": 42.58, "bw": 70e6, "phase_margin": 63.6, "psrr": 72.4, "vos": -1.6e-3, "zpower": 0.161e-3},
        "FCO": {"gain": 29.7, "bw": 6.8e6, "phase_margin": 90.9, "psrr": 43.8, "zpower": 76e-6},
