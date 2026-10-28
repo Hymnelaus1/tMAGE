@@ -1,0 +1,301 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-20 -70 2920 1546" width="2920" height="1546" font-family="DejaVu Sans, Arial, sans-serif">
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#44505F"/></marker></defs>
+<rect x="-20" y="-70" width="2920" height="1546" fill="#FFFFFF"/>
+<text x="0" y="-25" font-size="34" font-weight="bold" fill="#1F2A37">tMAGE: project node map (scripts, pipeline, LLM and tool connections)</text>
+<rect x="0" y="0" width="770" height="436" rx="18" fill="#D9F0DF" fill-opacity="0.35" stroke="#3E9A5A" stroke-width="2.5" stroke-dasharray="10 7"/>
+<text x="22" y="36" font-size="24" font-weight="bold" fill="#1F2A37">User interface</text>
+<rect x="0" y="520" width="770" height="436" rx="18" fill="#E4DDF4" fill-opacity="0.35" stroke="#6B52B3" stroke-width="2.5" stroke-dasharray="10 7"/>
+<text x="22" y="556" font-size="24" font-weight="bold" fill="#1F2A37">External systems</text>
+<rect x="850" y="0" width="1140" height="626" rx="18" fill="#FBE0E0" fill-opacity="0.35" stroke="#C0504D" stroke-width="2.5" stroke-dasharray="10 7"/>
+<text x="872" y="36" font-size="24" font-weight="bold" fill="#1F2A37">Engine (engine/)</text>
+<rect x="2090" y="0" width="770" height="626" rx="18" fill="#FFF6C9" fill-opacity="0.35" stroke="#B8A000" stroke-width="2.5" stroke-dasharray="10 7"/>
+<text x="2112" y="36" font-size="24" font-weight="bold" fill="#1F2A37">Prompts and knowledge</text>
+<rect x="850" y="760" width="1140" height="626" rx="18" fill="#D6EEF5" fill-opacity="0.35" stroke="#2E8FA8" stroke-width="2.5" stroke-dasharray="10 7"/>
+<text x="872" y="796" font-size="24" font-weight="bold" fill="#1F2A37">Experiment and analysis scripts (scripts/)</text>
+<rect x="2090" y="760" width="770" height="626" rx="18" fill="#FBE6CC" fill-opacity="0.35" stroke="#D9822B" stroke-width="2.5" stroke-dasharray="10 7"/>
+<text x="2112" y="796" font-size="24" font-weight="bold" fill="#1F2A37">Data and documents</text>
+<path d="M370,136.0 C380.5,136.0 389.5,136.0 400,136.0" stroke="#44505F" stroke-width="2" stroke-opacity="0.6" fill="none" marker-end="url(#a)"/>
+<path d="M570.0,246 C570.0,235.5 570.0,226.5 570.0,216" stroke="#44505F" stroke-width="2" stroke-opacity="0.6" fill="none" marker-end="url(#a)"/>
+<path d="M370,326.0 C380.5,326.0 389.5,136.0 400,136.0" stroke="#44505F" stroke-width="2" stroke-opacity="0.6" fill="none" marker-end="url(#a)"/>
+<path d="M740,136.0 C789.0,136.0 831.0,136.0 880,136.0" stroke="#44505F" stroke-width="2" stroke-opacity="0.6" fill="none" marker-end="url(#a)"/>
+<path d="M740,136.0 C1223.0,136.0 1637.0,896.0 2120,896.0" stroke="#44505F" stroke-width="2" stroke-opacity="0.6" fill="none" marker-end="url(#a)"/>
+<path d="M740,136.0 C918.5,136.0 1071.5,326.0 1250,326.0" stroke="#44505F" stroke-width="2" stroke-opacity="0.6" fill="none" marker-end="url(#a)"/>
+<path d="M1220,136.0 C1230.5,136.0 1239.5,136.0 1250,136.0" stroke="#44505F" stroke-width="2" stroke-opacity="0.6" fill="none" marker-end="url(#a)"/>
+<path d="M1220,136.0 C1360.0,136.0 1480.0,136.0 1620,136.0" stroke="#44505F" stroke-width="2" stroke-opacity="0.6" fill="none" marker-end="url(#a)"/>
+<path d="M1050.0,216 C1050.0,226.5 1050.0,235.5 1050.0,246" stroke="#44505F" stroke-width="2" stroke-opacity="0.6" fill="none" marker-end="url(#a)"/>
+<path d="M1220,136.0 C1230.5,136.0 1239.5,326.0 1250,326.0" stroke="#44505F" stroke-width="2" stroke-opacity="0.6" fill="none" marker-end="url(#a)"/>
+<path d="M1220,136.0 C1360.0,136.0 1480.0,326.0 1620,326.0" stroke="#44505F" stroke-width="2" stroke-opacity="0.6" fill="none" marker-end="url(#a)"/>
+<path d="M880,326.0 C701.5,326.0 548.5,656.0 370,656.0" stroke="#44505F" stroke-width="2" stroke-opacity="0.6" fill="none" marker-end="url(#a)"/>
+<path d="M1250,326.0 C1071.5,326.0 918.5,656.0 740,656.0" stroke="#44505F" stroke-width="2" stroke-opacity="0.6" fill="none" marker-end="url(#a)"/>
+<path d="M400,656.0 C389.5,656.0 380.5,846.0 370,846.0" stroke="#44505F" stroke-width="2" stroke-opacity="0.6" fill="none" marker-end="url(#a)"/>
+<path d="M880,136.0 C701.5,136.0 548.5,846.0 370,846.0" stroke="#44505F" stroke-width="2" stroke-opacity="0.6" fill="none" marker-end="url(#a)"/>
+<path d="M1590,136.0 C1775.5,136.0 1934.5,136.0 2120,136.0" stroke="#44505F" stroke-width="2" stroke-opacity="0.6" fill="none" marker-end="url(#a)"/>
+<path d="M1590,136.0 C1905.0,136.0 2175.0,136.0 2490,136.0" stroke="#44505F" stroke-width="2" stroke-opacity="0.6" fill="none" marker-end="url(#a)"/>
+<path d="M2290.0,216 C2290.0,226.5 2290.0,235.5 2290.0,246" stroke="#44505F" stroke-width="2" stroke-opacity="0.6" fill="none" marker-end="url(#a)"/>
+<path d="M1960,136.0 C2145.5,136.0 2304.5,326.0 2490,326.0" stroke="#44505F" stroke-width="2" stroke-opacity="0.6" fill="none" marker-end="url(#a)"/>
+<path d="M1960,136.0 C2016.0,136.0 2064.0,516.0 2120,516.0" stroke="#44505F" stroke-width="2" stroke-opacity="0.6" fill="none" marker-end="url(#a)"/>
+<path d="M1220,136.0 C1535.0,136.0 1805.0,896.0 2120,896.0" stroke="#44505F" stroke-width="2" stroke-opacity="0.6" fill="none" marker-end="url(#a)"/>
+<path d="M1790.0,406 C1790.0,549.5 2290.0,672.5 2290.0,816" stroke="#44505F" stroke-width="2" stroke-opacity="0.6" fill="none" marker-end="url(#a)"/>
+<path d="M1250,516.0 C1239.5,516.0 1230.5,326.0 1220,326.0" stroke="#44505F" stroke-width="2" stroke-opacity="0.6" fill="none" marker-end="url(#a)"/>
+<path d="M880,516.0 C831.0,516.0 789.0,136.0 740,136.0" stroke="#44505F" stroke-width="2" stroke-opacity="0.6" fill="none" marker-end="url(#a)"/>
+<path d="M1220,516.0 C1664.5,516.0 2045.5,896.0 2490,896.0" stroke="#44505F" stroke-width="2" stroke-opacity="0.6" fill="none" marker-end="url(#a)"/>
+<path d="M1050.0,816 C1050.0,739.0 1050.0,673.0 1050.0,596" stroke="#44505F" stroke-width="2" stroke-opacity="0.6" fill="none" marker-end="url(#a)"/>
+<path d="M1420.0,816 C1420.0,739.0 1050.0,673.0 1050.0,596" stroke="#44505F" stroke-width="2" stroke-opacity="0.6" fill="none" marker-end="url(#a)"/>
+<path d="M2490,896.0 C2304.5,896.0 2145.5,896.0 1960,896.0" stroke="#44505F" stroke-width="2" stroke-opacity="0.6" fill="none" marker-end="url(#a)"/>
+<path d="M2490,896.0 C2045.5,896.0 1664.5,1086.0 1220,1086.0" stroke="#44505F" stroke-width="2" stroke-opacity="0.6" fill="none" marker-end="url(#a)"/>
+<path d="M2490,896.0 C2175.0,896.0 1905.0,1086.0 1590,1086.0" stroke="#44505F" stroke-width="2" stroke-opacity="0.6" fill="none" marker-end="url(#a)"/>
+<path d="M2120,896.0 C2064.0,896.0 2016.0,1086.0 1960,1086.0" stroke="#44505F" stroke-width="2" stroke-opacity="0.6" fill="none" marker-end="url(#a)"/>
+<path d="M1220,1086.0 C1535.0,1086.0 1805.0,1086.0 2120,1086.0" stroke="#44505F" stroke-width="2" stroke-opacity="0.6" fill="none" marker-end="url(#a)"/>
+<path d="M1590,1086.0 C1775.5,1086.0 1934.5,1086.0 2120,1086.0" stroke="#44505F" stroke-width="2" stroke-opacity="0.6" fill="none" marker-end="url(#a)"/>
+<path d="M1960,1086.0 C2016.0,1086.0 2064.0,1086.0 2120,1086.0" stroke="#44505F" stroke-width="2" stroke-opacity="0.6" fill="none" marker-end="url(#a)"/>
+<path d="M1220,1276.0 C1535.0,1276.0 1805.0,1086.0 2120,1086.0" stroke="#44505F" stroke-width="2" stroke-opacity="0.6" fill="none" marker-end="url(#a)"/>
+<path d="M1590,1276.0 C1905.0,1276.0 2175.0,1086.0 2490,1086.0" stroke="#44505F" stroke-width="2" stroke-opacity="0.6" fill="none" marker-end="url(#a)"/>
+<path d="M1250,1276.0 C1071.5,1276.0 918.5,846.0 740,846.0" stroke="#44505F" stroke-width="2" stroke-opacity="0.6" fill="none" marker-end="url(#a)"/>
+<path d="M1620,1276.0 C1182.5,1276.0 807.5,846.0 370,846.0" stroke="#44505F" stroke-width="2" stroke-opacity="0.6" fill="none" marker-end="url(#a)"/>
+<path d="M1590,1276.0 C1775.5,1276.0 1934.5,1276.0 2120,1276.0" stroke="#44505F" stroke-width="2" stroke-opacity="0.6" fill="none" marker-end="url(#a)"/>
+<path d="M2460,1086.0 C2470.5,1086.0 2479.5,1276.0 2490,1276.0" stroke="#44505F" stroke-width="2" stroke-opacity="0.6" fill="none" marker-end="url(#a)"/>
+<rect x="30" y="56" width="340" height="160" rx="12" fill="#D9F0DF" stroke="#3E9A5A" stroke-width="2.5"/>
+<text x="200.0" y="86" font-size="19" font-weight="bold" fill="#1F2A37" text-anchor="middle">app/static/index.html</text>
+<text x="200.0" y="110" font-size="14.5" fill="#44505F" text-anchor="middle" font-style="italic">Web UI in the browser</text>
+<text x="46" y="138" font-size="13.5" fill="#1F2A37">• pick netlist, topology, technology, corner</text>
+<text x="46" y="158" font-size="13.5" fill="#1F2A37">• choose analyses, models, voting N</text>
+<text x="46" y="178" font-size="13.5" fill="#1F2A37">• live status, report view</text>
+<rect x="400" y="56" width="340" height="160" rx="12" fill="#D9F0DF" stroke="#3E9A5A" stroke-width="2.5"/>
+<text x="570.0" y="86" font-size="19" font-weight="bold" fill="#1F2A37" text-anchor="middle">app/server.py</text>
+<text x="570.0" y="110" font-size="14.5" fill="#44505F" text-anchor="middle" font-style="italic">HTTP server, stdlib only</text>
+<text x="416" y="138" font-size="13.5" fill="#1F2A37">• parses netlist, guesses topology/technology</text>
+<text x="416" y="158" font-size="13.5" fill="#1F2A37">• adapts the netlist to SAED 90 nm</text>
+<text x="416" y="178" font-size="13.5" fill="#1F2A37">• writes job.json, starts the pipeline</text>
+<text x="416" y="198" font-size="13.5" fill="#1F2A37">• status API, reaper for zombie runs</text>
+<rect x="30" y="246" width="340" height="160" rx="12" fill="#D9F0DF" stroke="#3E9A5A" stroke-width="2.5"/>
+<text x="200.0" y="276" font-size="19" font-weight="bold" fill="#1F2A37" text-anchor="middle">run.sh</text>
+<text x="200.0" y="300" font-size="14.5" fill="#44505F" text-anchor="middle" font-style="italic">Starts the UI on 127.0.0.1:8765</text>
+<text x="46" y="328" font-size="13.5" fill="#1F2A37">• loads config/env.sh and jetson.env</text>
+<rect x="400" y="246" width="340" height="160" rx="12" fill="#D9F0DF" stroke="#3E9A5A" stroke-width="2.5"/>
+<text x="570.0" y="276" font-size="19" font-weight="bold" fill="#1F2A37" text-anchor="middle">config/catalog.json</text>
+<text x="570.0" y="300" font-size="14.5" fill="#44505F" text-anchor="middle" font-style="italic">Topologies, technologies, analyses</text>
+<text x="416" y="328" font-size="13.5" fill="#1F2A37">• metrics and parameters per analysis</text>
+<text x="416" y="348" font-size="13.5" fill="#1F2A37">• UI labels (still partly Turkish)</text>
+<rect x="30" y="576" width="340" height="160" rx="12" fill="#E4DDF4" stroke="#6B52B3" stroke-width="2.5"/>
+<text x="200.0" y="606" font-size="19" font-weight="bold" fill="#1F2A37" text-anchor="middle">Jetson Orin Nano / Ollama</text>
+<text x="200.0" y="630" font-size="14.5" fill="#44505F" text-anchor="middle" font-style="italic">LLM server, port 11434</text>
+<text x="46" y="658" font-size="13.5" fill="#1F2A37">• models of 4B or more only</text>
+<text x="46" y="678" font-size="13.5" fill="#1F2A37">• temp 0.2, num_ctx 8192</text>
+<rect x="400" y="576" width="340" height="160" rx="12" fill="#E4DDF4" stroke="#6B52B3" stroke-width="2.5"/>
+<text x="570.0" y="606" font-size="17.6" font-weight="bold" fill="#1F2A37" text-anchor="middle">HSPICE X-2025.06 + SAED 90 nm</text>
+<text x="570.0" y="630" font-size="14.5" fill="#44505F" text-anchor="middle" font-style="italic">Circuit simulator</text>
+<text x="416" y="658" font-size="13.5" fill="#1F2A37">• runs each testbench</text>
+<text x="416" y="678" font-size="13.5" fill="#1F2A37">• writes .lis .ms0 .mt0 .ma0</text>
+<rect x="30" y="766" width="340" height="160" rx="12" fill="#E4DDF4" stroke="#6B52B3" stroke-width="2.5"/>
+<text x="200.0" y="796" font-size="19" font-weight="bold" fill="#1F2A37" text-anchor="middle">University license server</text>
+<text x="200.0" y="820" font-size="14.5" fill="#44505F" text-anchor="middle" font-style="italic">Reached through the split-tunnel VPN</text>
+<text x="46" y="848" font-size="13.5" fill="#1F2A37">• scripts/vpn.sh (local only)</text>
+<text x="46" y="868" font-size="13.5" fill="#1F2A37">• pipeline pre-checks the port</text>
+<rect x="400" y="766" width="340" height="160" rx="12" fill="#E4DDF4" stroke="#6B52B3" stroke-width="2.5"/>
+<text x="570.0" y="796" font-size="19" font-weight="bold" fill="#1F2A37" text-anchor="middle">GitHub Hymnelaus1/tMAGE</text>
+<text x="570.0" y="820" font-size="14.5" fill="#44505F" text-anchor="middle" font-style="italic">Private repository</text>
+<text x="416" y="848" font-size="13.5" fill="#1F2A37">• tags v0.1.0 to v0.3.1</text>
+<text x="416" y="868" font-size="13.5" fill="#1F2A37">• no Synopsys material, no secrets</text>
+<rect x="880" y="56" width="340" height="160" rx="12" fill="#FBE0E0" stroke="#C0504D" stroke-width="2.5"/>
+<text x="1050.0" y="86" font-size="19" font-weight="bold" fill="#1F2A37" text-anchor="middle">engine/pipeline.py</text>
+<text x="1050.0" y="110" font-size="14.5" fill="#44505F" text-anchor="middle" font-style="italic">Pipeline class: the whole flow</text>
+<text x="896" y="138" font-size="13.5" fill="#1F2A37">• spec, scenario, DUT precheck</text>
+<text x="896" y="158" font-size="13.5" fill="#1F2A37">• N candidates: stimulus, measure, HSPICE</text>
+<text x="896" y="178" font-size="13.5" fill="#1F2A37">• script-draft fallback, sanity rules</text>
+<text x="896" y="198" font-size="13.5" fill="#1F2A37">• 5 % cluster vote, spec checks, report</text>
+<rect x="1250" y="56" width="340" height="160" rx="12" fill="#FBE0E0" stroke="#C0504D" stroke-width="2.5"/>
+<text x="1420.0" y="86" font-size="19" font-weight="bold" fill="#1F2A37" text-anchor="middle">engine/handoff.py</text>
+<text x="1420.0" y="110" font-size="14.5" fill="#44505F" text-anchor="middle" font-style="italic">Data hand-off between agents</text>
+<text x="1266" y="138" font-size="13.5" fill="#1F2A37">• builds context.json</text>
+<text x="1266" y="158" font-size="13.5" fill="#1F2A37">• stage files and JSON schemas</text>
+<text x="1266" y="178" font-size="13.5" fill="#1F2A37">• builds the messages and system prompt</text>
+<rect x="1620" y="56" width="340" height="160" rx="12" fill="#FBE0E0" stroke="#C0504D" stroke-width="2.5"/>
+<text x="1790.0" y="86" font-size="19" font-weight="bold" fill="#1F2A37" text-anchor="middle">engine/rag.py</text>
+<text x="1790.0" y="110" font-size="14.5" fill="#44505F" text-anchor="middle" font-style="italic">Knowledge base and script drafts</text>
+<text x="1636" y="138" font-size="13.5" fill="#1F2A37">• retrieves matching kit examples</text>
+<text x="1636" y="158" font-size="13.5" fill="#1F2A37">• drafts: testbench and .meas per analysis</text>
+<rect x="880" y="246" width="340" height="160" rx="12" fill="#FBE0E0" stroke="#C0504D" stroke-width="2.5"/>
+<text x="1050.0" y="276" font-size="19" font-weight="bold" fill="#1F2A37" text-anchor="middle">engine/llm.py</text>
+<text x="1050.0" y="300" font-size="14.5" fill="#44505F" text-anchor="middle" font-style="italic">Ollama chat call</text>
+<text x="896" y="328" font-size="13.5" fill="#1F2A37">• JSON mode or schema</text>
+<text x="896" y="348" font-size="13.5" fill="#1F2A37">• JSON parse and repair</text>
+<rect x="1250" y="246" width="340" height="160" rx="12" fill="#FBE0E0" stroke="#C0504D" stroke-width="2.5"/>
+<text x="1420.0" y="276" font-size="19" font-weight="bold" fill="#1F2A37" text-anchor="middle">engine/sim.py</text>
+<text x="1420.0" y="300" font-size="14.5" fill="#44505F" text-anchor="middle" font-style="italic">HSPICE runner and output reader</text>
+<text x="1266" y="328" font-size="13.5" fill="#1F2A37">• parse_measure_file: failed is not a value</text>
+<text x="1266" y="348" font-size="13.5" fill="#1F2A37">• lis_problems: errors and warnings</text>
+<rect x="1620" y="246" width="340" height="160" rx="12" fill="#FBE0E0" stroke="#C0504D" stroke-width="2.5"/>
+<text x="1790.0" y="276" font-size="19" font-weight="bold" fill="#1F2A37" text-anchor="middle">engine/log.py</text>
+<text x="1790.0" y="300" font-size="14.5" fill="#44505F" text-anchor="middle" font-style="italic">Per-run logger</text>
+<text x="1636" y="328" font-size="13.5" fill="#1F2A37">• run.log, trace.jsonl, status.json</text>
+<text x="1636" y="348" font-size="13.5" fill="#1F2A37">• full prompts and HSPICE output</text>
+<rect x="880" y="436" width="340" height="160" rx="12" fill="#FBE0E0" stroke="#C0504D" stroke-width="2.5"/>
+<text x="1050.0" y="466" font-size="19" font-weight="bold" fill="#1F2A37" text-anchor="middle">engine/batch.py</text>
+<text x="1050.0" y="490" font-size="14.5" fill="#44505F" text-anchor="middle" font-style="italic">Batch runner through the UI API</text>
+<text x="896" y="518" font-size="13.5" fill="#1F2A37">• REPS runs per circuit, --voters --agent</text>
+<text x="896" y="538" font-size="13.5" fill="#1F2A37">• summary.json and SUMMARY.md</text>
+<rect x="1250" y="436" width="340" height="160" rx="12" fill="#FBE0E0" stroke="#C0504D" stroke-width="2.5"/>
+<text x="1420.0" y="466" font-size="19" font-weight="bold" fill="#1F2A37" text-anchor="middle">engine/bench.py</text>
+<text x="1420.0" y="490" font-size="14.5" fill="#44505F" text-anchor="middle" font-style="italic">Older per-agent model test</text>
+<text x="1266" y="518" font-size="13.5" fill="#1F2A37">• scores each model per stage</text>
+<rect x="2120" y="56" width="340" height="160" rx="12" fill="#FFF6C9" stroke="#B8A000" stroke-width="2.5"/>
+<text x="2290.0" y="86" font-size="19" font-weight="bold" fill="#1F2A37" text-anchor="middle">config/agent_prompts.json</text>
+<text x="2290.0" y="110" font-size="14.5" fill="#44505F" text-anchor="middle" font-style="italic">Common prompt, rules and pitfalls per stage</text>
+<text x="2136" y="138" font-size="13.5" fill="#1F2A37">• spec, scenario, stimulus, measure, report</text>
+<text x="2136" y="158" font-size="13.5" fill="#1F2A37">• pitfalls = observed errors and fixes</text>
+<rect x="2490" y="56" width="340" height="160" rx="12" fill="#FFF6C9" stroke="#B8A000" stroke-width="2.5"/>
+<text x="2660.0" y="86" font-size="19" font-weight="bold" fill="#1F2A37" text-anchor="middle">config/stages.json</text>
+<text x="2660.0" y="110" font-size="14.5" fill="#44505F" text-anchor="middle" font-style="italic">Stage goals and output schemas</text>
+<text x="2506" y="138" font-size="13.5" fill="#1F2A37">• JSON schema per stage</text>
+<rect x="2120" y="246" width="340" height="160" rx="12" fill="#FFF6C9" stroke="#B8A000" stroke-width="2.5"/>
+<text x="2290.0" y="276" font-size="19" font-weight="bold" fill="#1F2A37" text-anchor="middle">config/prompt_versions/</text>
+<text x="2290.0" y="300" font-size="14.5" fill="#44505F" text-anchor="middle" font-style="italic">Old prompt sets for rollback</text>
+<text x="2136" y="328" font-size="13.5" fill="#1F2A37">• v1_old, v2_manual, v3_pitfalls</text>
+<rect x="2490" y="246" width="340" height="160" rx="12" fill="#FFF6C9" stroke="#B8A000" stroke-width="2.5"/>
+<text x="2660.0" y="276" font-size="19" font-weight="bold" fill="#1F2A37" text-anchor="middle">knowledge/inputs/</text>
+<text x="2660.0" y="300" font-size="14.5" fill="#44505F" text-anchor="middle" font-style="italic">Kit netlists, parameter files</text>
+<text x="2506" y="328" font-size="13.5" fill="#1F2A37">• SkyWater models (Apache-2.0)</text>
+<text x="2506" y="348" font-size="13.5" fill="#1F2A37">• vendor models are git-ignored</text>
+<rect x="2120" y="436" width="340" height="160" rx="12" fill="#FFF6C9" stroke="#B8A000" stroke-width="2.5"/>
+<text x="2290.0" y="466" font-size="15.9" font-weight="bold" fill="#1F2A37" text-anchor="middle">knowledge/examples + ref_da.json</text>
+<text x="2290.0" y="490" font-size="14.5" fill="#44505F" text-anchor="middle" font-style="italic">RAG examples and the hand reference</text>
+<text x="2136" y="518" font-size="13.5" fill="#1F2A37">• DA 42.58 dB, FCO 29.7 dB, TSO 43.2 dB</text>
+<rect x="2490" y="436" width="340" height="160" rx="12" fill="#FFF6C9" stroke="#B8A000" stroke-width="2.5"/>
+<text x="2660.0" y="466" font-size="19" font-weight="bold" fill="#1F2A37" text-anchor="middle">config/env.sh, jetson.env</text>
+<text x="2660.0" y="490" font-size="14.5" fill="#44505F" text-anchor="middle" font-style="italic">Local settings (not in git)</text>
+<text x="2506" y="518" font-size="13.5" fill="#1F2A37">• tool paths, license server, Ollama address</text>
+<rect x="880" y="816" width="340" height="160" rx="12" fill="#D6EEF5" stroke="#2E8FA8" stroke-width="2.5"/>
+<text x="1050.0" y="846" font-size="19" font-weight="bold" fill="#1F2A37" text-anchor="middle">model_bench.sh</text>
+<text x="1050.0" y="870" font-size="14.5" fill="#44505F" text-anchor="middle" font-style="italic">Each model alone on DA, FCO, TSO</text>
+<text x="896" y="898" font-size="13.5" fill="#1F2A37">• 3 runs x 3 candidates</text>
+<rect x="1250" y="816" width="340" height="160" rx="12" fill="#D6EEF5" stroke="#2E8FA8" stroke-width="2.5"/>
+<text x="1420.0" y="846" font-size="19" font-weight="bold" fill="#1F2A37" text-anchor="middle">mixed_vote.sh</text>
+<text x="1420.0" y="870" font-size="14.5" fill="#44505F" text-anchor="middle" font-style="italic">Mixed-model voting</text>
+<text x="1266" y="898" font-size="13.5" fill="#1F2A37">• one model per candidate</text>
+<rect x="1620" y="816" width="340" height="160" rx="12" fill="#D6EEF5" stroke="#2E8FA8" stroke-width="2.5"/>
+<text x="1790.0" y="846" font-size="19" font-weight="bold" fill="#1F2A37" text-anchor="middle">rank_models.py</text>
+<text x="1790.0" y="870" font-size="14.5" fill="#44505F" text-anchor="middle" font-style="italic">Top 3 models per circuit</text>
+<text x="1636" y="898" font-size="13.5" fill="#1F2A37">• clean majority, accuracy, speed</text>
+<rect x="880" y="1006" width="340" height="160" rx="12" fill="#D6EEF5" stroke="#2E8FA8" stroke-width="2.5"/>
+<text x="1050.0" y="1036" font-size="19" font-weight="bold" fill="#1F2A37" text-anchor="middle">recompute_scores.py</text>
+<text x="1050.0" y="1060" font-size="14.5" fill="#44505F" text-anchor="middle" font-style="italic">Offline re-scoring</text>
+<text x="896" y="1088" font-size="13.5" fill="#1F2A37">• re-parses .ms0/.mt0, re-clusters</text>
+<text x="896" y="1108" font-size="13.5" fill="#1F2A37">• writes docs/23</text>
+<rect x="1250" y="1006" width="340" height="160" rx="12" fill="#D6EEF5" stroke="#2E8FA8" stroke-width="2.5"/>
+<text x="1420.0" y="1036" font-size="17.0" font-weight="bold" fill="#1F2A37" text-anchor="middle">scan_findings.py, scan_loop.sh</text>
+<text x="1420.0" y="1060" font-size="14.5" fill="#44505F" text-anchor="middle" font-style="italic">Read-only findings scan</text>
+<text x="1266" y="1088" font-size="13.5" fill="#1F2A37">• writes docs/22</text>
+<rect x="1620" y="1006" width="340" height="160" rx="12" fill="#D6EEF5" stroke="#2E8FA8" stroke-width="2.5"/>
+<text x="1790.0" y="1036" font-size="19" font-weight="bold" fill="#1F2A37" text-anchor="middle">collect_logs.py</text>
+<text x="1790.0" y="1060" font-size="14.5" fill="#44505F" text-anchor="middle" font-style="italic">All run logs in one place</text>
+<text x="1636" y="1088" font-size="13.5" fill="#1F2A37">• writes docs/24 and the raw log archive</text>
+<rect x="880" y="1196" width="340" height="160" rx="12" fill="#D6EEF5" stroke="#2E8FA8" stroke-width="2.5"/>
+<text x="1050.0" y="1226" font-size="14.2" font-weight="bold" fill="#1F2A37" text-anchor="middle">make_figures.py, make_project_map.py</text>
+<text x="1050.0" y="1250" font-size="14.5" fill="#44505F" text-anchor="middle" font-style="italic">README figures and this map</text>
+<text x="896" y="1278" font-size="13.5" fill="#1F2A37">• SVG, PNG, Obsidian Canvas</text>
+<rect x="1250" y="1196" width="340" height="160" rx="12" fill="#D6EEF5" stroke="#2E8FA8" stroke-width="2.5"/>
+<text x="1420.0" y="1226" font-size="18.2" font-weight="bold" fill="#1F2A37" text-anchor="middle">backup.sh, install_backup.sh</text>
+<text x="1420.0" y="1250" font-size="14.5" fill="#44505F" text-anchor="middle" font-style="italic">Automatic backup</text>
+<text x="1266" y="1278" font-size="13.5" fill="#1F2A37">• post-commit hook + 2-hourly timer</text>
+<text x="1266" y="1298" font-size="13.5" fill="#1F2A37">• local snapshot, then push</text>
+<rect x="1620" y="1196" width="340" height="160" rx="12" fill="#D6EEF5" stroke="#2E8FA8" stroke-width="2.5"/>
+<text x="1790.0" y="1226" font-size="19" font-weight="bold" fill="#1F2A37" text-anchor="middle">vpn.sh</text>
+<text x="1790.0" y="1250" font-size="14.5" fill="#44505F" text-anchor="middle" font-style="italic">University VPN service (local only)</text>
+<text x="1636" y="1278" font-size="13.5" fill="#1F2A37">• always-on split tunnel</text>
+<rect x="2120" y="816" width="340" height="160" rx="12" fill="#FBE6CC" stroke="#D9822B" stroke-width="2.5"/>
+<text x="2290.0" y="846" font-size="19" font-weight="bold" fill="#1F2A37" text-anchor="middle">runs/&lt;id&gt;/</text>
+<text x="2290.0" y="870" font-size="14.5" fill="#44505F" text-anchor="middle" font-style="italic">One folder per run</text>
+<text x="2136" y="898" font-size="13.5" fill="#1F2A37">• context.json, stages/, work/cand*</text>
+<text x="2136" y="918" font-size="13.5" fill="#1F2A37">• run.log, trace.jsonl, report.md</text>
+<rect x="2490" y="816" width="340" height="160" rx="12" fill="#FBE6CC" stroke="#D9822B" stroke-width="2.5"/>
+<text x="2660.0" y="846" font-size="19" font-weight="bold" fill="#1F2A37" text-anchor="middle">batch/&lt;name&gt;/</text>
+<text x="2660.0" y="870" font-size="14.5" fill="#44505F" text-anchor="middle" font-style="italic">Benchmark and mixed-vote results</text>
+<text x="2506" y="898" font-size="13.5" fill="#1F2A37">• model x circuit x rep, summary.json</text>
+<rect x="2120" y="1006" width="340" height="160" rx="12" fill="#FBE6CC" stroke="#D9822B" stroke-width="2.5"/>
+<text x="2290.0" y="1036" font-size="19" font-weight="bold" fill="#1F2A37" text-anchor="middle">docs/ (Obsidian vault)</text>
+<text x="2290.0" y="1060" font-size="14.5" fill="#44505F" text-anchor="middle" font-style="italic">Notes, reports, change log</text>
+<text x="2136" y="1088" font-size="13.5" fill="#1F2A37">• 17 hand-off, 18 change log, 20 errors</text>
+<text x="2136" y="1108" font-size="13.5" fill="#1F2A37">• 22 to 25 generated reports, session notes</text>
+<rect x="2490" y="1006" width="340" height="160" rx="12" fill="#FBE6CC" stroke="#D9822B" stroke-width="2.5"/>
+<text x="2660.0" y="1036" font-size="19" font-weight="bold" fill="#1F2A37" text-anchor="middle">/data/tmage_backups/</text>
+<text x="2660.0" y="1060" font-size="14.5" fill="#44505F" text-anchor="middle" font-style="italic">Local snapshots and git bundles</text>
+<text x="2506" y="1088" font-size="13.5" fill="#1F2A37">• keeps 48</text>
+<rect x="2120" y="1196" width="340" height="160" rx="12" fill="#FBE6CC" stroke="#D9822B" stroke-width="2.5"/>
+<text x="2290.0" y="1226" font-size="19" font-weight="bold" fill="#1F2A37" text-anchor="middle">~/tmage_teste/</text>
+<text x="2290.0" y="1250" font-size="14.5" fill="#44505F" text-anchor="middle" font-style="italic">Test and backup copy of everything</text>
+<text x="2136" y="1278" font-size="13.5" fill="#1F2A37">• no remote, no hook</text>
+<rect x="2490" y="1196" width="340" height="160" rx="12" fill="#FBE6CC" stroke="#D9822B" stroke-width="2.5"/>
+<text x="2660.0" y="1226" font-size="19" font-weight="bold" fill="#1F2A37" text-anchor="middle">README.md, ROADMAP.md</text>
+<text x="2660.0" y="1250" font-size="14.5" fill="#44505F" text-anchor="middle" font-style="italic">Project status and plan</text>
+<text x="2506" y="1278" font-size="13.5" fill="#1F2A37">• checklist, versions, known issues</text>
+<rect x="326.8" y="119.0" width="116.39999999999999" height="22" rx="5" fill="#FFFFFF" fill-opacity="0.92" stroke="#C5CCD6"/>
+<text x="385.0" y="135.0" font-size="14" fill="#1F2A37" text-anchor="middle">job.json, /api</text>
+<rect x="542.2" y="214.0" width="55.599999999999994" height="22" rx="5" fill="#FFFFFF" fill-opacity="0.92" stroke="#C5CCD6"/>
+<text x="570.0" y="230.0" font-size="14" fill="#1F2A37" text-anchor="middle">labels</text>
+<rect x="357.2" y="214.0" width="55.599999999999994" height="22" rx="5" fill="#FFFFFF" fill-opacity="0.92" stroke="#C5CCD6"/>
+<text x="385.0" y="230.0" font-size="14" fill="#1F2A37" text-anchor="middle">starts</text>
+<rect x="767.0" y="119.0" width="86.0" height="22" rx="5" fill="#FFFFFF" fill-opacity="0.92" stroke="#C5CCD6"/>
+<text x="810.0" y="135.0" font-size="14" fill="#1F2A37" text-anchor="middle">spawns run</text>
+<rect x="1345.2" y="499.0" width="169.6" height="22" rx="5" fill="#FFFFFF" fill-opacity="0.92" stroke="#C5CCD6"/>
+<text x="1430.0" y="515.0" font-size="14" fill="#1F2A37" text-anchor="middle">creates, reads status</text>
+<rect x="936.8" y="214.0" width="116.39999999999999" height="22" rx="5" fill="#FFFFFF" fill-opacity="0.92" stroke="#C5CCD6"/>
+<text x="995.0" y="230.0" font-size="14" fill="#1F2A37" text-anchor="middle">adapt PDK path</text>
+<rect x="1173.0" y="119.0" width="124.0" height="22" rx="5" fill="#FFFFFF" fill-opacity="0.92" stroke="#C5CCD6"/>
+<text x="1235.0" y="135.0" font-size="14" fill="#1F2A37" text-anchor="middle">context, stages</text>
+<rect x="1354.2" y="119.0" width="131.6" height="22" rx="5" fill="#FFFFFF" fill-opacity="0.92" stroke="#C5CCD6"/>
+<text x="1420.0" y="135.0" font-size="14" fill="#1F2A37" text-anchor="middle">drafts, examples</text>
+<rect x="991.8" y="214.0" width="116.39999999999999" height="22" rx="5" fill="#FFFFFF" fill-opacity="0.92" stroke="#C5CCD6"/>
+<text x="1050.0" y="230.0" font-size="14" fill="#1F2A37" text-anchor="middle">chat per stage</text>
+<rect x="1173.0" y="214.0" width="124.0" height="22" rx="5" fill="#FFFFFF" fill-opacity="0.92" stroke="#C5CCD6"/>
+<text x="1235.0" y="230.0" font-size="14" fill="#1F2A37" text-anchor="middle">run testbenches</text>
+<rect x="1392.2" y="214.0" width="55.599999999999994" height="22" rx="5" fill="#FFFFFF" fill-opacity="0.92" stroke="#C5CCD6"/>
+<text x="1420.0" y="230.0" font-size="14" fill="#1F2A37" text-anchor="middle">events</text>
+<rect x="570.6" y="474.0" width="108.8" height="22" rx="5" fill="#FFFFFF" fill-opacity="0.92" stroke="#C5CCD6"/>
+<text x="625.0" y="490.0" font-size="14" fill="#1F2A37" text-anchor="middle">prompts, JSON</text>
+<rect x="955.8" y="474.0" width="78.39999999999999" height="22" rx="5" fill="#FFFFFF" fill-opacity="0.92" stroke="#C5CCD6"/>
+<text x="995.0" y="490.0" font-size="14" fill="#1F2A37" text-anchor="middle">hspice -i</text>
+<rect x="349.6" y="734.0" width="70.8" height="22" rx="5" fill="#FFFFFF" fill-opacity="0.92" stroke="#C5CCD6"/>
+<text x="385.0" y="750.0" font-size="14" fill="#1F2A37" text-anchor="middle">checkout</text>
+<rect x="566.8" y="474.0" width="116.39999999999999" height="22" rx="5" fill="#FFFFFF" fill-opacity="0.92" stroke="#C5CCD6"/>
+<text x="625.0" y="490.0" font-size="14" fill="#1F2A37" text-anchor="middle">port pre-check</text>
+<rect x="1808.2" y="119.0" width="93.6" height="22" rx="5" fill="#FFFFFF" fill-opacity="0.92" stroke="#C5CCD6"/>
+<text x="1855.0" y="135.0" font-size="14" fill="#1F2A37" text-anchor="middle">reads rules</text>
+<rect x="2008.4" y="119.0" width="63.199999999999996" height="22" rx="5" fill="#FFFFFF" fill-opacity="0.92" stroke="#C5CCD6"/>
+<text x="2040.0" y="135.0" font-size="14" fill="#1F2A37" text-anchor="middle">schemas</text>
+<rect x="2254.6" y="214.0" width="70.8" height="22" rx="5" fill="#FFFFFF" fill-opacity="0.92" stroke="#C5CCD6"/>
+<text x="2290.0" y="230.0" font-size="14" fill="#1F2A37" text-anchor="middle">versions</text>
+<rect x="2174.4" y="214.0" width="101.19999999999999" height="22" rx="5" fill="#FFFFFF" fill-opacity="0.92" stroke="#C5CCD6"/>
+<text x="2225.0" y="230.0" font-size="14" fill="#1F2A37" text-anchor="middle">kit netlists</text>
+<rect x="2004.6" y="309.0" width="70.8" height="22" rx="5" fill="#FFFFFF" fill-opacity="0.92" stroke="#C5CCD6"/>
+<text x="2040.0" y="325.0" font-size="14" fill="#1F2A37" text-anchor="middle">examples</text>
+<rect x="1642.2" y="499.0" width="55.599999999999994" height="22" rx="5" fill="#FFFFFF" fill-opacity="0.92" stroke="#C5CCD6"/>
+<text x="1670.0" y="515.0" font-size="14" fill="#1F2A37" text-anchor="middle">writes</text>
+<rect x="2008.4" y="594.0" width="63.199999999999996" height="22" rx="5" fill="#FFFFFF" fill-opacity="0.92" stroke="#C5CCD6"/>
+<text x="2040.0" y="610.0" font-size="14" fill="#1F2A37" text-anchor="middle">run.log</text>
+<rect x="1192.0" y="404.0" width="86.0" height="22" rx="5" fill="#FFFFFF" fill-opacity="0.92" stroke="#C5CCD6"/>
+<text x="1235.0" y="420.0" font-size="14" fill="#1F2A37" text-anchor="middle">model test</text>
+<rect x="770.8" y="309.0" width="78.39999999999999" height="22" rx="5" fill="#FFFFFF" fill-opacity="0.92" stroke="#C5CCD6"/>
+<text x="810.0" y="325.0" font-size="14" fill="#1F2A37" text-anchor="middle">POST jobs</text>
+<rect x="1823.4" y="689.0" width="63.199999999999996" height="22" rx="5" fill="#FFFFFF" fill-opacity="0.92" stroke="#C5CCD6"/>
+<text x="1855.0" y="705.0" font-size="14" fill="#1F2A37" text-anchor="middle">summary</text>
+<rect x="1010.8" y="689.0" width="78.39999999999999" height="22" rx="5" fill="#FFFFFF" fill-opacity="0.92" stroke="#C5CCD6"/>
+<text x="1050.0" y="705.0" font-size="14" fill="#1F2A37" text-anchor="middle">per model</text>
+<rect x="1207.2" y="689.0" width="55.599999999999994" height="22" rx="5" fill="#FFFFFF" fill-opacity="0.92" stroke="#C5CCD6"/>
+<text x="1235.0" y="705.0" font-size="14" fill="#1F2A37" text-anchor="middle">voters</text>
+<rect x="1638.4" y="1069.0" width="63.199999999999996" height="22" rx="5" fill="#FFFFFF" fill-opacity="0.92" stroke="#C5CCD6"/>
+<text x="1670.0" y="1085.0" font-size="14" fill="#1F2A37" text-anchor="middle">docs/23</text>
+<rect x="1823.4" y="1069.0" width="63.199999999999996" height="22" rx="5" fill="#FFFFFF" fill-opacity="0.92" stroke="#C5CCD6"/>
+<text x="1855.0" y="1085.0" font-size="14" fill="#1F2A37" text-anchor="middle">docs/22</text>
+<rect x="2008.4" y="1069.0" width="63.199999999999996" height="22" rx="5" fill="#FFFFFF" fill-opacity="0.92" stroke="#C5CCD6"/>
+<text x="2040.0" y="1085.0" font-size="14" fill="#1F2A37" text-anchor="middle">docs/24</text>
+<rect x="1611.8" y="1164.0" width="116.39999999999999" height="22" rx="5" fill="#FFFFFF" fill-opacity="0.92" stroke="#C5CCD6"/>
+<text x="1670.0" y="1180.0" font-size="14" fill="#1F2A37" text-anchor="middle">images, canvas</text>
+<rect x="2004.6" y="1164.0" width="70.8" height="22" rx="5" fill="#FFFFFF" fill-opacity="0.92" stroke="#C5CCD6"/>
+<text x="2040.0" y="1180.0" font-size="14" fill="#1F2A37" text-anchor="middle">snapshot</text>
+<rect x="974.8" y="1044.0" width="40.4" height="22" rx="5" fill="#FFFFFF" fill-opacity="0.92" stroke="#C5CCD6"/>
+<text x="995.0" y="1060.0" font-size="14" fill="#1F2A37" text-anchor="middle">push</text>
+<rect x="967.2" y="1044.0" width="55.599999999999994" height="22" rx="5" fill="#FFFFFF" fill-opacity="0.92" stroke="#C5CCD6"/>
+<text x="995.0" y="1060.0" font-size="14" fill="#1F2A37" text-anchor="middle">tunnel</text>
+<rect x="1808.2" y="1259.0" width="93.6" height="22" rx="5" fill="#FFFFFF" fill-opacity="0.92" stroke="#C5CCD6"/>
+<text x="1855.0" y="1275.0" font-size="14" fill="#1F2A37" text-anchor="middle">manual copy</text>
+</svg>

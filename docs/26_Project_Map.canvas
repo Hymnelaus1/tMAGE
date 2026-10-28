@@ -1,0 +1,791 @@
+{
+ "nodes": [
+  {
+   "id": "g_User i",
+   "type": "group",
+   "label": "User interface",
+   "x": 0,
+   "y": 0,
+   "width": 770,
+   "height": 436,
+   "color": "4"
+  },
+  {
+   "id": "g_Extern",
+   "type": "group",
+   "label": "External systems",
+   "x": 0,
+   "y": 520,
+   "width": 770,
+   "height": 436,
+   "color": "6"
+  },
+  {
+   "id": "g_Engine",
+   "type": "group",
+   "label": "Engine (engine/)",
+   "x": 850,
+   "y": 0,
+   "width": 1140,
+   "height": 626,
+   "color": "1"
+  },
+  {
+   "id": "g_Prompt",
+   "type": "group",
+   "label": "Prompts and knowledge",
+   "x": 2090,
+   "y": 0,
+   "width": 770,
+   "height": 626,
+   "color": "3"
+  },
+  {
+   "id": "g_Experi",
+   "type": "group",
+   "label": "Experiment and analysis scripts (scripts/)",
+   "x": 850,
+   "y": 760,
+   "width": 1140,
+   "height": 626,
+   "color": "5"
+  },
+  {
+   "id": "g_Data a",
+   "type": "group",
+   "label": "Data and documents",
+   "x": 2090,
+   "y": 760,
+   "width": 770,
+   "height": 626,
+   "color": "2"
+  },
+  {
+   "id": "html",
+   "type": "text",
+   "text": "### app/static/index.html\n**Web UI in the browser**\n\n- pick netlist, topology, technology, corner\n- choose analyses, models, voting N\n- live status, report view",
+   "x": 30,
+   "y": 56,
+   "width": 340,
+   "height": 160,
+   "color": "4"
+  },
+  {
+   "id": "server",
+   "type": "text",
+   "text": "### app/server.py\n**HTTP server, stdlib only**\n\n- parses netlist, guesses topology/technology\n- adapts the netlist to SAED 90 nm\n- writes job.json, starts the pipeline\n- status API, reaper for zombie runs",
+   "x": 400,
+   "y": 56,
+   "width": 340,
+   "height": 160,
+   "color": "4"
+  },
+  {
+   "id": "runsh",
+   "type": "text",
+   "text": "### run.sh\n**Starts the UI on 127.0.0.1:8765**\n\n- loads config/env.sh and jetson.env",
+   "x": 30,
+   "y": 246,
+   "width": 340,
+   "height": 160,
+   "color": "4"
+  },
+  {
+   "id": "catalog",
+   "type": "text",
+   "text": "### config/catalog.json\n**Topologies, technologies, analyses**\n\n- metrics and parameters per analysis\n- UI labels (still partly Turkish)",
+   "x": 400,
+   "y": 246,
+   "width": 340,
+   "height": 160,
+   "color": "4"
+  },
+  {
+   "id": "ollama",
+   "type": "text",
+   "text": "### Jetson Orin Nano / Ollama\n**LLM server, port 11434**\n\n- models of 4B or more only\n- temp 0.2, num_ctx 8192",
+   "x": 30,
+   "y": 576,
+   "width": 340,
+   "height": 160,
+   "color": "6"
+  },
+  {
+   "id": "hspice",
+   "type": "text",
+   "text": "### HSPICE X-2025.06 + SAED 90 nm\n**Circuit simulator**\n\n- runs each testbench\n- writes .lis .ms0 .mt0 .ma0",
+   "x": 400,
+   "y": 576,
+   "width": 340,
+   "height": 160,
+   "color": "6"
+  },
+  {
+   "id": "lic",
+   "type": "text",
+   "text": "### University license server\n**Reached through the split-tunnel VPN**\n\n- scripts/vpn.sh (local only)\n- pipeline pre-checks the port",
+   "x": 30,
+   "y": 766,
+   "width": 340,
+   "height": 160,
+   "color": "6"
+  },
+  {
+   "id": "github",
+   "type": "text",
+   "text": "### GitHub Hymnelaus1/tMAGE\n**Private repository**\n\n- tags v0.1.0 to v0.3.1\n- no Synopsys material, no secrets",
+   "x": 400,
+   "y": 766,
+   "width": 340,
+   "height": 160,
+   "color": "6"
+  },
+  {
+   "id": "pipeline",
+   "type": "text",
+   "text": "### engine/pipeline.py\n**Pipeline class: the whole flow**\n\n- spec, scenario, DUT precheck\n- N candidates: stimulus, measure, HSPICE\n- script-draft fallback, sanity rules\n- 5 % cluster vote, spec checks, report",
+   "x": 880,
+   "y": 56,
+   "width": 340,
+   "height": 160,
+   "color": "1"
+  },
+  {
+   "id": "handoff",
+   "type": "text",
+   "text": "### engine/handoff.py\n**Data hand-off between agents**\n\n- builds context.json\n- stage files and JSON schemas\n- builds the messages and system prompt",
+   "x": 1250,
+   "y": 56,
+   "width": 340,
+   "height": 160,
+   "color": "1"
+  },
+  {
+   "id": "rag",
+   "type": "text",
+   "text": "### engine/rag.py\n**Knowledge base and script drafts**\n\n- retrieves matching kit examples\n- drafts: testbench and .meas per analysis",
+   "x": 1620,
+   "y": 56,
+   "width": 340,
+   "height": 160,
+   "color": "1"
+  },
+  {
+   "id": "llm",
+   "type": "text",
+   "text": "### engine/llm.py\n**Ollama chat call**\n\n- JSON mode or schema\n- JSON parse and repair",
+   "x": 880,
+   "y": 246,
+   "width": 340,
+   "height": 160,
+   "color": "1"
+  },
+  {
+   "id": "sim",
+   "type": "text",
+   "text": "### engine/sim.py\n**HSPICE runner and output reader**\n\n- parse_measure_file: failed is not a value\n- lis_problems: errors and warnings",
+   "x": 1250,
+   "y": 246,
+   "width": 340,
+   "height": 160,
+   "color": "1"
+  },
+  {
+   "id": "log",
+   "type": "text",
+   "text": "### engine/log.py\n**Per-run logger**\n\n- run.log, trace.jsonl, status.json\n- full prompts and HSPICE output",
+   "x": 1620,
+   "y": 246,
+   "width": 340,
+   "height": 160,
+   "color": "1"
+  },
+  {
+   "id": "batch",
+   "type": "text",
+   "text": "### engine/batch.py\n**Batch runner through the UI API**\n\n- REPS runs per circuit, --voters --agent\n- summary.json and SUMMARY.md",
+   "x": 880,
+   "y": 436,
+   "width": 340,
+   "height": 160,
+   "color": "1"
+  },
+  {
+   "id": "bench",
+   "type": "text",
+   "text": "### engine/bench.py\n**Older per-agent model test**\n\n- scores each model per stage",
+   "x": 1250,
+   "y": 436,
+   "width": 340,
+   "height": 160,
+   "color": "1"
+  },
+  {
+   "id": "prompts",
+   "type": "text",
+   "text": "### config/agent_prompts.json\n**Common prompt, rules and pitfalls per stage**\n\n- spec, scenario, stimulus, measure, report\n- pitfalls = observed errors and fixes",
+   "x": 2120,
+   "y": 56,
+   "width": 340,
+   "height": 160,
+   "color": "3"
+  },
+  {
+   "id": "stages",
+   "type": "text",
+   "text": "### config/stages.json\n**Stage goals and output schemas**\n\n- JSON schema per stage",
+   "x": 2490,
+   "y": 56,
+   "width": 340,
+   "height": 160,
+   "color": "3"
+  },
+  {
+   "id": "pv",
+   "type": "text",
+   "text": "### config/prompt_versions/\n**Old prompt sets for rollback**\n\n- v1_old, v2_manual, v3_pitfalls",
+   "x": 2120,
+   "y": 246,
+   "width": 340,
+   "height": 160,
+   "color": "3"
+  },
+  {
+   "id": "kin",
+   "type": "text",
+   "text": "### knowledge/inputs/\n**Kit netlists, parameter files**\n\n- SkyWater models (Apache-2.0)\n- vendor models are git-ignored",
+   "x": 2490,
+   "y": 246,
+   "width": 340,
+   "height": 160,
+   "color": "3"
+  },
+  {
+   "id": "kex",
+   "type": "text",
+   "text": "### knowledge/examples + ref_da.json\n**RAG examples and the hand reference**\n\n- DA 42.58 dB, FCO 29.7 dB, TSO 43.2 dB",
+   "x": 2120,
+   "y": 436,
+   "width": 340,
+   "height": 160,
+   "color": "3"
+  },
+  {
+   "id": "envf",
+   "type": "text",
+   "text": "### config/env.sh, jetson.env\n**Local settings (not in git)**\n\n- tool paths, license server, Ollama address",
+   "x": 2490,
+   "y": 436,
+   "width": 340,
+   "height": 160,
+   "color": "3"
+  },
+  {
+   "id": "mbench",
+   "type": "text",
+   "text": "### model_bench.sh\n**Each model alone on DA, FCO, TSO**\n\n- 3 runs x 3 candidates",
+   "x": 880,
+   "y": 816,
+   "width": 340,
+   "height": 160,
+   "color": "5"
+  },
+  {
+   "id": "mixed",
+   "type": "text",
+   "text": "### mixed_vote.sh\n**Mixed-model voting**\n\n- one model per candidate",
+   "x": 1250,
+   "y": 816,
+   "width": 340,
+   "height": 160,
+   "color": "5"
+  },
+  {
+   "id": "rank",
+   "type": "text",
+   "text": "### rank_models.py\n**Top 3 models per circuit**\n\n- clean majority, accuracy, speed",
+   "x": 1620,
+   "y": 816,
+   "width": 340,
+   "height": 160,
+   "color": "5"
+  },
+  {
+   "id": "recomp",
+   "type": "text",
+   "text": "### recompute_scores.py\n**Offline re-scoring**\n\n- re-parses .ms0/.mt0, re-clusters\n- writes docs/23",
+   "x": 880,
+   "y": 1006,
+   "width": 340,
+   "height": 160,
+   "color": "5"
+  },
+  {
+   "id": "scan",
+   "type": "text",
+   "text": "### scan_findings.py, scan_loop.sh\n**Read-only findings scan**\n\n- writes docs/22",
+   "x": 1250,
+   "y": 1006,
+   "width": 340,
+   "height": 160,
+   "color": "5"
+  },
+  {
+   "id": "collect",
+   "type": "text",
+   "text": "### collect_logs.py\n**All run logs in one place**\n\n- writes docs/24 and the raw log archive",
+   "x": 1620,
+   "y": 1006,
+   "width": 340,
+   "height": 160,
+   "color": "5"
+  },
+  {
+   "id": "figs",
+   "type": "text",
+   "text": "### make_figures.py, make_project_map.py\n**README figures and this map**\n\n- SVG, PNG, Obsidian Canvas",
+   "x": 880,
+   "y": 1196,
+   "width": 340,
+   "height": 160,
+   "color": "5"
+  },
+  {
+   "id": "backup",
+   "type": "text",
+   "text": "### backup.sh, install_backup.sh\n**Automatic backup**\n\n- post-commit hook + 2-hourly timer\n- local snapshot, then push",
+   "x": 1250,
+   "y": 1196,
+   "width": 340,
+   "height": 160,
+   "color": "5"
+  },
+  {
+   "id": "vpn",
+   "type": "text",
+   "text": "### vpn.sh\n**University VPN service (local only)**\n\n- always-on split tunnel",
+   "x": 1620,
+   "y": 1196,
+   "width": 340,
+   "height": 160,
+   "color": "5"
+  },
+  {
+   "id": "runs",
+   "type": "text",
+   "text": "### runs/<id>/\n**One folder per run**\n\n- context.json, stages/, work/cand*\n- run.log, trace.jsonl, report.md",
+   "x": 2120,
+   "y": 816,
+   "width": 340,
+   "height": 160,
+   "color": "2"
+  },
+  {
+   "id": "batchd",
+   "type": "text",
+   "text": "### batch/<name>/\n**Benchmark and mixed-vote results**\n\n- model x circuit x rep, summary.json",
+   "x": 2490,
+   "y": 816,
+   "width": 340,
+   "height": 160,
+   "color": "2"
+  },
+  {
+   "id": "docs",
+   "type": "text",
+   "text": "### docs/ (Obsidian vault)\n**Notes, reports, change log**\n\n- 17 hand-off, 18 change log, 20 errors\n- 22 to 25 generated reports, session notes",
+   "x": 2120,
+   "y": 1006,
+   "width": 340,
+   "height": 160,
+   "color": "2"
+  },
+  {
+   "id": "snap",
+   "type": "text",
+   "text": "### /data/tmage_backups/\n**Local snapshots and git bundles**\n\n- keeps 48",
+   "x": 2490,
+   "y": 1006,
+   "width": 340,
+   "height": 160,
+   "color": "2"
+  },
+  {
+   "id": "test",
+   "type": "text",
+   "text": "### ~/tmage_teste/\n**Test and backup copy of everything**\n\n- no remote, no hook",
+   "x": 2120,
+   "y": 1196,
+   "width": 340,
+   "height": 160,
+   "color": "2"
+  },
+  {
+   "id": "road",
+   "type": "text",
+   "text": "### README.md, ROADMAP.md\n**Project status and plan**\n\n- checklist, versions, known issues",
+   "x": 2490,
+   "y": 1196,
+   "width": 340,
+   "height": 160,
+   "color": "2"
+  }
+ ],
+ "edges": [
+  {
+   "id": "e0",
+   "fromNode": "html",
+   "fromSide": "right",
+   "toNode": "server",
+   "toSide": "left",
+   "toEnd": "arrow",
+   "label": "job.json, /api"
+  },
+  {
+   "id": "e1",
+   "fromNode": "catalog",
+   "fromSide": "top",
+   "toNode": "server",
+   "toSide": "bottom",
+   "toEnd": "arrow",
+   "label": "labels"
+  },
+  {
+   "id": "e2",
+   "fromNode": "runsh",
+   "fromSide": "right",
+   "toNode": "server",
+   "toSide": "left",
+   "toEnd": "arrow",
+   "label": "starts"
+  },
+  {
+   "id": "e3",
+   "fromNode": "server",
+   "fromSide": "right",
+   "toNode": "pipeline",
+   "toSide": "left",
+   "toEnd": "arrow",
+   "label": "spawns run"
+  },
+  {
+   "id": "e4",
+   "fromNode": "server",
+   "fromSide": "right",
+   "toNode": "runs",
+   "toSide": "left",
+   "toEnd": "arrow",
+   "label": "creates, reads status"
+  },
+  {
+   "id": "e5",
+   "fromNode": "server",
+   "fromSide": "right",
+   "toNode": "sim",
+   "toSide": "left",
+   "toEnd": "arrow",
+   "label": "adapt PDK path"
+  },
+  {
+   "id": "e6",
+   "fromNode": "pipeline",
+   "fromSide": "right",
+   "toNode": "handoff",
+   "toSide": "left",
+   "toEnd": "arrow",
+   "label": "context, stages"
+  },
+  {
+   "id": "e7",
+   "fromNode": "pipeline",
+   "fromSide": "right",
+   "toNode": "rag",
+   "toSide": "left",
+   "toEnd": "arrow",
+   "label": "drafts, examples"
+  },
+  {
+   "id": "e8",
+   "fromNode": "pipeline",
+   "fromSide": "bottom",
+   "toNode": "llm",
+   "toSide": "top",
+   "toEnd": "arrow",
+   "label": "chat per stage"
+  },
+  {
+   "id": "e9",
+   "fromNode": "pipeline",
+   "fromSide": "right",
+   "toNode": "sim",
+   "toSide": "left",
+   "toEnd": "arrow",
+   "label": "run testbenches"
+  },
+  {
+   "id": "e10",
+   "fromNode": "pipeline",
+   "fromSide": "right",
+   "toNode": "log",
+   "toSide": "left",
+   "toEnd": "arrow",
+   "label": "events"
+  },
+  {
+   "id": "e11",
+   "fromNode": "llm",
+   "fromSide": "left",
+   "toNode": "ollama",
+   "toSide": "right",
+   "toEnd": "arrow",
+   "label": "prompts, JSON"
+  },
+  {
+   "id": "e12",
+   "fromNode": "sim",
+   "fromSide": "left",
+   "toNode": "hspice",
+   "toSide": "right",
+   "toEnd": "arrow",
+   "label": "hspice -i"
+  },
+  {
+   "id": "e13",
+   "fromNode": "hspice",
+   "fromSide": "left",
+   "toNode": "lic",
+   "toSide": "right",
+   "toEnd": "arrow",
+   "label": "checkout"
+  },
+  {
+   "id": "e14",
+   "fromNode": "pipeline",
+   "fromSide": "left",
+   "toNode": "lic",
+   "toSide": "right",
+   "toEnd": "arrow",
+   "label": "port pre-check"
+  },
+  {
+   "id": "e15",
+   "fromNode": "handoff",
+   "fromSide": "right",
+   "toNode": "prompts",
+   "toSide": "left",
+   "toEnd": "arrow",
+   "label": "reads rules"
+  },
+  {
+   "id": "e16",
+   "fromNode": "handoff",
+   "fromSide": "right",
+   "toNode": "stages",
+   "toSide": "left",
+   "toEnd": "arrow",
+   "label": "schemas"
+  },
+  {
+   "id": "e17",
+   "fromNode": "prompts",
+   "fromSide": "bottom",
+   "toNode": "pv",
+   "toSide": "top",
+   "toEnd": "arrow",
+   "label": "versions"
+  },
+  {
+   "id": "e18",
+   "fromNode": "rag",
+   "fromSide": "right",
+   "toNode": "kin",
+   "toSide": "left",
+   "toEnd": "arrow",
+   "label": "kit netlists"
+  },
+  {
+   "id": "e19",
+   "fromNode": "rag",
+   "fromSide": "right",
+   "toNode": "kex",
+   "toSide": "left",
+   "toEnd": "arrow",
+   "label": "examples"
+  },
+  {
+   "id": "e20",
+   "fromNode": "pipeline",
+   "fromSide": "right",
+   "toNode": "runs",
+   "toSide": "left",
+   "toEnd": "arrow",
+   "label": "writes"
+  },
+  {
+   "id": "e21",
+   "fromNode": "log",
+   "fromSide": "bottom",
+   "toNode": "runs",
+   "toSide": "top",
+   "toEnd": "arrow",
+   "label": "run.log"
+  },
+  {
+   "id": "e22",
+   "fromNode": "bench",
+   "fromSide": "left",
+   "toNode": "llm",
+   "toSide": "right",
+   "toEnd": "arrow",
+   "label": "model test"
+  },
+  {
+   "id": "e23",
+   "fromNode": "batch",
+   "fromSide": "left",
+   "toNode": "server",
+   "toSide": "right",
+   "toEnd": "arrow",
+   "label": "POST jobs"
+  },
+  {
+   "id": "e24",
+   "fromNode": "batch",
+   "fromSide": "right",
+   "toNode": "batchd",
+   "toSide": "left",
+   "toEnd": "arrow",
+   "label": "summary"
+  },
+  {
+   "id": "e25",
+   "fromNode": "mbench",
+   "fromSide": "top",
+   "toNode": "batch",
+   "toSide": "bottom",
+   "toEnd": "arrow",
+   "label": "per model"
+  },
+  {
+   "id": "e26",
+   "fromNode": "mixed",
+   "fromSide": "top",
+   "toNode": "batch",
+   "toSide": "bottom",
+   "toEnd": "arrow",
+   "label": "voters"
+  },
+  {
+   "id": "e27",
+   "fromNode": "batchd",
+   "fromSide": "left",
+   "toNode": "rank",
+   "toSide": "right",
+   "toEnd": "arrow"
+  },
+  {
+   "id": "e28",
+   "fromNode": "batchd",
+   "fromSide": "left",
+   "toNode": "recomp",
+   "toSide": "right",
+   "toEnd": "arrow"
+  },
+  {
+   "id": "e29",
+   "fromNode": "batchd",
+   "fromSide": "left",
+   "toNode": "scan",
+   "toSide": "right",
+   "toEnd": "arrow"
+  },
+  {
+   "id": "e30",
+   "fromNode": "runs",
+   "fromSide": "left",
+   "toNode": "collect",
+   "toSide": "right",
+   "toEnd": "arrow"
+  },
+  {
+   "id": "e31",
+   "fromNode": "recomp",
+   "fromSide": "right",
+   "toNode": "docs",
+   "toSide": "left",
+   "toEnd": "arrow",
+   "label": "docs/23"
+  },
+  {
+   "id": "e32",
+   "fromNode": "scan",
+   "fromSide": "right",
+   "toNode": "docs",
+   "toSide": "left",
+   "toEnd": "arrow",
+   "label": "docs/22"
+  },
+  {
+   "id": "e33",
+   "fromNode": "collect",
+   "fromSide": "right",
+   "toNode": "docs",
+   "toSide": "left",
+   "toEnd": "arrow",
+   "label": "docs/24"
+  },
+  {
+   "id": "e34",
+   "fromNode": "figs",
+   "fromSide": "right",
+   "toNode": "docs",
+   "toSide": "left",
+   "toEnd": "arrow",
+   "label": "images, canvas"
+  },
+  {
+   "id": "e35",
+   "fromNode": "backup",
+   "fromSide": "right",
+   "toNode": "snap",
+   "toSide": "left",
+   "toEnd": "arrow",
+   "label": "snapshot"
+  },
+  {
+   "id": "e36",
+   "fromNode": "backup",
+   "fromSide": "left",
+   "toNode": "github",
+   "toSide": "right",
+   "toEnd": "arrow",
+   "label": "push"
+  },
+  {
+   "id": "e37",
+   "fromNode": "vpn",
+   "fromSide": "left",
+   "toNode": "lic",
+   "toSide": "right",
+   "toEnd": "arrow",
+   "label": "tunnel"
+  },
+  {
+   "id": "e38",
+   "fromNode": "backup",
+   "fromSide": "right",
+   "toNode": "test",
+   "toSide": "left",
+   "toEnd": "arrow",
+   "label": "manual copy"
+  },
+  {
+   "id": "e39",
+   "fromNode": "docs",
+   "fromSide": "right",
+   "toNode": "road",
+   "toSide": "left",
+   "toEnd": "arrow"
+  }
+ ]
+}
