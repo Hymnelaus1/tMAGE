@@ -47,3 +47,8 @@ This note records the operations of the session in order. New entries are added 
 - **Pitfalls activated:** 6 measure and 4 stimulus pitfalls from `v3_pending_pitfalls.json` were added to `config/agent_prompts.json`; copy kept in `config/prompt_versions/v3_pitfalls/`. The 25.0/1.0 pitfall was left out (bug fixed). Because prompts changed, the next runs are not directly comparable to the v2 benchmark.
 - **Decision (user):** mixed-model voting uses command-r7b, qwen3:4b-instruct (Q4) and deepseek-coder:6.7b (different families, no fake values), even though deepseek is slow.
 - **Question (user):** feed books and FCO/TSO papers to the models through (modular) RAG? Added to the ROADMAP as a study; see the chat answer summarised in `ROADMAP.md`, section Knowledge base.
+
+## 2026-10-28
+
+- **All run logs in one place (user request):** `scripts/collect_logs.py` collects every `run.log` (UI runs, early batches, model benchmark, mixed vote; duplicates removed: 106 distinct runs) into `docs/24_All_Runs_Log.md` (group overview, index of all runs, most frequent errors/warnings, table of 25 errors and fixes) and `docs/logs/all_runs_raw.log.gz` (full text, license server and home path scrubbed). Re-run the script to refresh.
+- **Mixed vote (qwen3:4b-instruct + command-r7b + deepseek-coder:6.7b) analysed:** 7 of 9 runs had a majority, but deepseek's candidate was dropped in 7 runs (measure stage invalid JSON), so the vote was effectively two models; DA runs 1 and 2 split on `zpower` (7 % vs 5 % tolerance). Open items 19, 21-23 in `24_All_Runs_Log.md`.

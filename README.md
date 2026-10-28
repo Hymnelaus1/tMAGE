@@ -125,6 +125,8 @@ Earlier prompt sets are kept as files in `config/prompt_versions/` (`v1_old`, `v
 
 Start with `docs/17_Handoff_for_new_chat.md` (project state, access, lessons) and `docs/18_Change_Log_Benchmark.md` (chronological change log).
 
+All run logs and the error/fix table: `docs/24_All_Runs_Log.md`. Model results: `docs/23_Model_Benchmark_Report.md`.
+
 ## Privacy
 
 `.ovpn` files, `config/env.sh`, `config/jetson.env`, run outputs and logs are git-ignored. License and site IDs must not be committed. Keep this repository **private**.
