@@ -80,3 +80,10 @@ This note records the operations of the session in order. New entries are added 
 ## 2026-11-20 — LLM run report
 
 * `scripts/llm_run_report.py` (new) writes `28_LLM_Run_Report.md`: how a testbench is produced, what is measured, calls and failure causes per model and agent, script-draft fallbacks per model and test (167 runs, 1715 LLM calls, all prompt versions).
+
+## 2026-11-20 — CLI backends, coverage, PDF
+
+* **CLI backends** (`engine/llm.py`): model names `cli:claude`, `cli:claude:<alias>`, `cli:codex`, `cli:codex:<model>` run the system-installed CLI with the account already logged in there (no key handled by tMAGE). Tools are disabled, cwd is an empty temp dir (no project files, no CLAUDE.md), JSON-only instruction appended, no schema forcing. Registered in `config/catalog.json` as backend `cli`; can be mixed with Ollama models in `--voters`. Smoke-tested: `cli:claude:haiku` answered `{"ok": true}` in 1.8 s. `codex` is not installed here, its branch is untested. Runs with these models use the account's quota.
+* `scripts/run_coverage.py` -> `30_Run_Coverage.md` (which model x circuit x prompt-version runs exist, what is missing).
+* `29_Golden_Testbenches_and_Modular_RAG.md` (sources for golden testbenches, Modular RAG mapping).
+* `scripts/md_to_pdf.py` and `docs/pdf/tMAGE_LLM_Report_2026-11-20.pdf` (29 + 30 + 28). The PDF tool needs Python >= 3.10 and reportlab.

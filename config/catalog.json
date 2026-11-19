@@ -965,6 +965,12 @@
    "id": "openai",
    "label": "OpenAI uyumlu sunucu",
    "needs_url": true
+  },
+  {
+   "id": "cli",
+   "label": "Local CLI (Claude Code / Codex, logged-in account)",
+   "needs_url": false,
+   "models": ["cli:claude", "cli:claude:haiku", "cli:claude:sonnet", "cli:codex"]
   }
  ],
  "analyses_note": "Analiz komutları (.ac .tran .noise .dc .meas) teknolojiden bağımsızdır; teknolojiyle yalnızca model, besleme, köşe ve boyutlar değişir."
