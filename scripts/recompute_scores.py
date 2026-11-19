@@ -20,15 +20,17 @@ sys.path.insert(0, str(ROOT / "engine"))
 import sim  # noqa: E402
 from pipeline import RULES  # noqa: E402
 
-BASE = Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / "batch" / "model_bench_20261026"
-OUT = Path(sys.argv[2]) if len(sys.argv) > 2 else ROOT / "docs" / "23_Model_Benchmark_Report.md"
+BASE = (Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / "batch" / "model_bench_20261026").resolve()
+OUT = (Path(sys.argv[2]) if len(sys.argv) > 2 else ROOT / "docs" / "23_Model_Benchmark_Report.md").resolve()
 TOL = 0.05
 REF = {"DA": {"gain": 42.58, "bw": 70e6, "phase_margin": 63.6, "psrr": 72.4, "vos": -1.6e-3, "zpower": 0.161e-3},
        "FCO": {"gain": 29.7, "bw": 6.8e6, "phase_margin": 90.9, "psrr": 43.8, "zpower": 76e-6},
        "TSO": {"gain": 43.2, "bw": 9.2e6, "phase_margin": 87.1, "psrr": 41.9, "zpower": 172e-6}}
 SHORT = {"qwen3_4b-instruct": "qwen3:4b-instruct (Q4)", "qwen3_4b-instruct-2507-q8_0": "qwen3:4b-instruct Q8", "command-r7b_latest": "command-r7b",
          "deepseek-coder_6.7b": "deepseek-coder:6.7b", "qwen3.5_4b-q8_0": "qwen3.5:4b Q8", "qwen2.5-coder_7b": "qwen2.5-coder:7b",
-         "qwen2.5_7b": "qwen2.5:7b", "qwen3.5_4b": "qwen3.5:4b", "ministral-3_8b": "ministral-3:8b"}
+         "qwen2.5_7b": "qwen2.5:7b", "qwen3.5_4b": "qwen3.5:4b", "ministral-3_8b": "ministral-3:8b",
+         "qwen3_8b": "qwen3:8b", "llama3.1_8b": "llama3.1:8b", "gemma4_e4b": "gemma4:e4b", "nemotron-3-nano_4b": "nemotron-3-nano:4b",
+         "yi-coder_9b": "yi-coder:9b", "glm4_9b": "glm4:9b"}
 
 
 def rescore_candidate(cdir):

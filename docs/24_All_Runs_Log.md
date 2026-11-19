@@ -1,6 +1,6 @@
 # All runs: consolidated log
 
-Generated 2026-10-28 23:40 by `scripts/collect_logs.py`. 106 distinct runs from `runs/` and `batch/`; 11044 log lines; 53 errors; 4864 warnings.
+Generated 2026-11-20 00:24 by `scripts/collect_logs.py`. 166 distinct runs from `runs/` and `batch/`; 16234 log lines; 133 errors; 7003 warnings.
 
 * Full text of every run: `docs/logs/all_runs_raw.log.gz` (`zcat docs/logs/all_runs_raw.log.gz | less`). License server and home path are scrubbed.
 * Logs of the first two days (2026-10-25) are Turkish, later ones English; they are kept as recorded.
@@ -10,11 +10,13 @@ Generated 2026-10-28 23:40 by `scripts/collect_logs.py`. 106 distinct runs from 
 
 | Group | Runs | Errors | Warnings | Runs with a winner |
 |---|---|---|---|---|
-| runs | 9 | 1 | 99 | 0/9 |
+| runs | 10 | 1 | 107 | 0/10 |
 | batch/20261025_204154 | 4 | 1 | 194 | 0/4 |
 | batch/20261025_220928_v2 | 3 | 0 | 162 | 3/3 |
 | batch/model_bench_20261026 | 81 | 46 | 4070 | 78/81 |
 | batch/mixed_vote_20261027 | 9 | 5 | 339 | 9/9 |
+| batch/model_bench_new_20261028 | 54 | 78 | 2004 | 54/54 |
+| batch/random_triples_20261028 | 5 | 2 | 127 | 5/5 |
 
 ## 2. Index of all runs
 
@@ -126,6 +128,66 @@ Generated 2026-10-28 23:40 by `scripts/collect_logs.py`. 106 distinct runs from 
 | 104 | 2026-10-27 18:53:07 | batch/mixed_vote_20261027 | TSO/TSO/rep1 | TSO | command-r7b:latest, deepseek-coder:6.7b, qwen3:4b-instruct | 1 | 30 | 0 | [[0, 1]] |
 | 105 | 2026-10-27 19:14:27 | batch/mixed_vote_20261027 | TSO/TSO/rep2 | TSO | command-r7b:latest, deepseek-coder:6.7b, qwen3:4b-instruct | 1 | 26 | 0 | [[0, 1]] |
 | 106 | 2026-10-27 19:37:37 | batch/mixed_vote_20261027 | TSO/TSO/rep3 | TSO | command-r7b:latest, deepseek-coder:6.7b, qwen3:4b-instruct | 1 | 24 | 0 | [[0, 1]] |
+| 107 | 2026-10-29 00:42:48 | batch/model_bench_new_20261028 | qwen3_8b/DA/rep1 | DA | qwen3:8b | 0 | 34 | 0 | [[0, 1], [2]] |
+| 108 | 2026-10-29 01:04:48 | batch/model_bench_new_20261028 | qwen3_8b/DA/rep2 | DA | qwen3:8b | 0 | 66 | 0 | [[0, 1]] |
+| 109 | 2026-10-29 01:41:58 | batch/model_bench_new_20261028 | qwen3_8b/DA/rep3 | DA | qwen3:8b | 0 | 35 | 0 | [[0, 1, 2]] |
+| 110 | 2026-10-29 02:02:28 | batch/model_bench_new_20261028 | qwen3_8b/FCO/rep1 | FCO | qwen3:8b | 0 | 32 | 0 | [[0], [1], [2]] |
+| 111 | 2026-10-29 02:22:49 | batch/model_bench_new_20261028 | qwen3_8b/FCO/rep2 | FCO | qwen3:8b | 0 | 34 | 0 | [[0, 2], [1]] |
+| 112 | 2026-10-29 02:43:19 | batch/model_bench_new_20261028 | qwen3_8b/FCO/rep3 | FCO | qwen3:8b | 0 | 33 | 0 | [[0, 1, 2]] |
+| 113 | 2026-10-29 03:03:29 | batch/model_bench_new_20261028 | qwen3_8b/TSO/rep1 | TSO | qwen3:8b | 2 | 34 | 0 | [[0, 2], [1]] |
+| 114 | 2026-10-29 03:24:29 | batch/model_bench_new_20261028 | qwen3_8b/TSO/rep2 | TSO | qwen3:8b | 0 | 33 | 0 | [[0, 1, 2]] |
+| 115 | 2026-10-29 03:41:59 | batch/model_bench_new_20261028 | qwen3_8b/TSO/rep3 | TSO | qwen3:8b | 0 | 32 | 0 | [[0], [1], [2]] |
+| 116 | 2026-10-29 03:59:59 | batch/model_bench_new_20261028 | llama3.1_8b/DA/rep1 | DA | llama3.1:8b | 0 | 29 | 0 | [[0, 1, 2]] |
+| 117 | 2026-10-29 04:13:19 | batch/model_bench_new_20261028 | llama3.1_8b/DA/rep2 | DA | llama3.1:8b | 0 | 28 | 0 | [[0, 1, 2]] |
+| 118 | 2026-10-29 04:25:59 | batch/model_bench_new_20261028 | llama3.1_8b/DA/rep3 | DA | llama3.1:8b | 0 | 29 | 0 | [[0, 1], [2]] |
+| 119 | 2026-10-29 04:37:39 | batch/model_bench_new_20261028 | llama3.1_8b/FCO/rep1 | FCO | llama3.1:8b | 0 | 27 | 0 | [[0, 1], [2]] |
+| 120 | 2026-10-29 04:50:59 | batch/model_bench_new_20261028 | llama3.1_8b/FCO/rep2 | FCO | llama3.1:8b | 1 | 43 | 0 | [[0]] |
+| 121 | 2026-10-29 05:12:20 | batch/model_bench_new_20261028 | llama3.1_8b/FCO/rep3 | FCO | llama3.1:8b | 0 | 68 | 1 | [[1], [2]] |
+| 122 | 2026-10-29 05:37:00 | batch/model_bench_new_20261028 | llama3.1_8b/TSO/rep1 | TSO | llama3.1:8b | 0 | 28 | 0 | [[0, 1, 2]] |
+| 123 | 2026-10-29 05:50:20 | batch/model_bench_new_20261028 | llama3.1_8b/TSO/rep2 | TSO | llama3.1:8b | 0 | 79 | 0 | [[0], [2]] |
+| 124 | 2026-10-29 06:16:50 | batch/model_bench_new_20261028 | llama3.1_8b/TSO/rep3 | TSO | llama3.1:8b | 0 | 25 | 0 | [[0, 1, 2]] |
+| 125 | 2026-10-29 06:30:10 | batch/model_bench_new_20261028 | gemma4_e4b/DA/rep1 | DA | gemma4:e4b | 2 | 24 | 0 | [[0]] |
+| 126 | 2026-10-29 06:42:00 | batch/model_bench_new_20261028 | gemma4_e4b/DA/rep2 | DA | gemma4:e4b | 2 | 25 | 0 | [[0]] |
+| 127 | 2026-10-29 06:52:00 | batch/model_bench_new_20261028 | gemma4_e4b/DA/rep3 | DA | gemma4:e4b | 1 | 37 | 0 | [[0], [2]] |
+| 128 | 2026-10-29 07:00:50 | batch/model_bench_new_20261028 | gemma4_e4b/FCO/rep1 | FCO | gemma4:e4b | 3 | 0 | None | [] |
+| 129 | 2026-10-29 07:09:10 | batch/model_bench_new_20261028 | gemma4_e4b/FCO/rep2 | FCO | gemma4:e4b | 3 | 0 | None | [] |
+| 130 | 2026-10-29 07:17:20 | batch/model_bench_new_20261028 | gemma4_e4b/FCO/rep3 | FCO | gemma4:e4b | 2 | 14 | 1 | [[1]] |
+| 131 | 2026-10-29 07:25:10 | batch/model_bench_new_20261028 | gemma4_e4b/TSO/rep1 | TSO | gemma4:e4b | 3 | 5 | None | [] |
+| 132 | 2026-10-29 07:31:20 | batch/model_bench_new_20261028 | gemma4_e4b/TSO/rep2 | TSO | gemma4:e4b | 3 | 27 | None | [] |
+| 133 | 2026-10-29 07:43:40 | batch/model_bench_new_20261028 | gemma4_e4b/TSO/rep3 | TSO | gemma4:e4b | 2 | 51 | None | [] |
+| 134 | 2026-10-29 07:58:01 | batch/model_bench_new_20261028 | nemotron-3-nano_4b/DA/rep1 | DA | nemotron-3-nano:4b | 3 | 47 | None | [] |
+| 135 | 2026-10-29 08:12:41 | batch/model_bench_new_20261028 | nemotron-3-nano_4b/DA/rep2 | DA | nemotron-3-nano:4b | 3 | 0 | None | [] |
+| 136 | 2026-10-29 08:27:41 | batch/model_bench_new_20261028 | nemotron-3-nano_4b/DA/rep3 | DA | nemotron-3-nano:4b | 1 | 30 | 1 | [[1], [2]] |
+| 137 | 2026-10-29 08:40:31 | batch/model_bench_new_20261028 | nemotron-3-nano_4b/FCO/rep1 | FCO | nemotron-3-nano:4b | 2 | 118 | None | [] |
+| 138 | 2026-10-29 09:08:31 | batch/model_bench_new_20261028 | nemotron-3-nano_4b/FCO/rep2 | FCO | nemotron-3-nano:4b | 3 | 65 | None | [] |
+| 139 | 2026-10-29 09:25:01 | batch/model_bench_new_20261028 | nemotron-3-nano_4b/FCO/rep3 | FCO | nemotron-3-nano:4b | 3 | 54 | None | [] |
+| 140 | 2026-10-29 09:46:01 | batch/model_bench_new_20261028 | nemotron-3-nano_4b/TSO/rep1 | TSO | nemotron-3-nano:4b | 3 | 67 | None | [] |
+| 141 | 2026-10-29 09:57:11 | batch/model_bench_new_20261028 | nemotron-3-nano_4b/TSO/rep2 | TSO | nemotron-3-nano:4b | 1 | 84 | 1 | [[1]] |
+| 142 | 2026-10-29 10:10:21 | batch/model_bench_new_20261028 | nemotron-3-nano_4b/TSO/rep3 | TSO | nemotron-3-nano:4b | 2 | 77 | None | [] |
+| 143 | 2026-10-29 10:26:02 | batch/model_bench_new_20261028 | yi-coder_9b/DA/rep1 | DA | yi-coder:9b | 1 | 16 | 1 | [[1, 2]] |
+| 144 | 2026-10-29 10:46:02 | batch/model_bench_new_20261028 | yi-coder_9b/DA/rep2 | DA | yi-coder:9b | 2 | 14 | 1 | [[1]] |
+| 145 | 2026-10-29 11:12:52 | batch/model_bench_new_20261028 | yi-coder_9b/DA/rep3 | DA | yi-coder:9b | 2 | 14 | 1 | [[1]] |
+| 146 | 2026-10-29 11:37:12 | batch/model_bench_new_20261028 | yi-coder_9b/FCO/rep1 | FCO | yi-coder:9b | 1 | 16 | 1 | [[1, 2]] |
+| 147 | 2026-10-29 11:56:22 | batch/model_bench_new_20261028 | yi-coder_9b/FCO/rep2 | FCO | yi-coder:9b | 2 | 8 | 0 | [[0]] |
+| 148 | 2026-10-29 12:20:12 | batch/model_bench_new_20261028 | yi-coder_9b/FCO/rep3 | FCO | yi-coder:9b | 3 | 0 | None | [] |
+| 149 | 2026-10-29 12:49:22 | batch/model_bench_new_20261028 | yi-coder_9b/TSO/rep1 | TSO | yi-coder:9b | 2 | 10 | 1 | [[1]] |
+| 150 | 2026-10-29 13:13:12 | batch/model_bench_new_20261028 | yi-coder_9b/TSO/rep2 | TSO | yi-coder:9b | 2 | 8 | 0 | [[0]] |
+| 151 | 2026-10-29 13:36:32 | batch/model_bench_new_20261028 | yi-coder_9b/TSO/rep3 | TSO | yi-coder:9b | 3 | 0 | None | [] |
+| 152 | 2026-10-29 14:05:12 | batch/model_bench_new_20261028 | glm4_9b/DA/rep1 | DA | glm4:9b | 1 | 120 | 1 | [[1, 2]] |
+| 153 | 2026-10-29 14:43:23 | batch/model_bench_new_20261028 | glm4_9b/DA/rep2 | DA | glm4:9b | 2 | 50 | 2 | [[2]] |
+| 154 | 2026-10-29 15:18:03 | batch/model_bench_new_20261028 | glm4_9b/DA/rep3 | DA | glm4:9b | 3 | 12 | None | [] |
+| 155 | 2026-10-29 15:50:03 | batch/model_bench_new_20261028 | glm4_9b/FCO/rep1 | FCO | glm4:9b | 1 | 93 | 0 | [[0, 2]] |
+| 156 | 2026-10-29 16:19:33 | batch/model_bench_new_20261028 | glm4_9b/FCO/rep2 | FCO | glm4:9b | 2 | 27 | 1 | [[1]] |
+| 157 | 2026-10-29 16:49:13 | batch/model_bench_new_20261028 | glm4_9b/FCO/rep3 | FCO | glm4:9b | 2 | 42 | 2 | [[2]] |
+| 158 | 2026-10-29 17:05:33 | batch/model_bench_new_20261028 | glm4_9b/TSO/rep1 | TSO | glm4:9b | 2 | 38 | 0 | [[0]] |
+| 159 | 2026-10-29 17:40:43 | batch/model_bench_new_20261028 | glm4_9b/TSO/rep2 | TSO | glm4:9b | 2 | 55 | 0 | [[0]] |
+| 160 | 2026-10-29 18:21:13 | batch/model_bench_new_20261028 | glm4_9b/TSO/rep3 | TSO | glm4:9b | 0 | 67 | 0 | [[0, 1, 2]] |
+| 161 | 2026-10-29 18:45:24 | batch/random_triples_20261028 | T1/DA/DA/rep1 | DA | deepseek-coder:6.7b, llama3.1:8b, qwen3:8b | 0 | 29 | 0 | [[0], [1], [2]] |
+| 162 | 2026-10-29 19:02:34 | batch/random_triples_20261028 | T1/DA/DA/rep2 | DA | deepseek-coder:6.7b, llama3.1:8b, qwen3:8b | 0 | 29 | 0 | [[0, 2], [1]] |
+| 163 | 2026-10-29 19:21:14 | batch/random_triples_20261028 | T1/DA/DA/rep3 | DA | deepseek-coder:6.7b, llama3.1:8b, qwen3:8b | 0 | 29 | 0 | [[0, 2], [1]] |
+| 164 | 2026-10-29 19:37:14 | batch/random_triples_20261028 | T1/FCO/FCO/rep1 | FCO | deepseek-coder:6.7b, llama3.1:8b, qwen3:8b | 1 | 20 | 0 | [[0], [1]] |
+| 165 | 2026-10-29 19:59:54 | batch/random_triples_20261028 | T1/FCO/FCO/rep2 | FCO | deepseek-coder:6.7b, llama3.1:8b, qwen3:8b | 1 | 20 | 0 | [[0], [1]] |
+| 166 | 2026-10-29 20:23:04 | runs | 20261029_202304_batch_FCO_r3 | FCO | llama3.1:8b, qwen3:8b | 0 | 8 | - | - |
 
 ## 3. Most frequent errors and warnings (all runs)
 
@@ -133,44 +195,45 @@ Numbers are normalised (digits → `#`).
 
 ### Errors
 
-* 40x `Candidate # could not be produced and was dropped: Stage '..' did not produce valid output in # attempts.`
-* 4x `LLM call failed: Remote end closed connection without response`
-* 4x `LLM call failed: <urlopen error [Errno #] Connection refused>`
+* 117x `Candidate # could not be produced and was dropped: Stage '..' did not produce valid output in # attempts.`
+* 5x `LLM call failed: Remote end closed connection without response`
+* 5x `LLM call failed: <urlopen error [Errno #] Connection refused>`
 * 3x `LLM call failed: HTTP Error #: Internal Server Error`
 * 2x `Koşu hatası: '..' aşaması # denemede geçerli çıktı üretemedi.`
+* 1x `Candidate # could not be produced and was dropped: '..'`
 
 ### Warnings
 
-* 634x `measure: model wrote no measurements for '..'; completed from the script draft`
-* 608x `stimulus: testbench '..' was missing from the model output; completed from the script draft`
-* 231x `cmrr: **warning** (p#:x#m# (cmrr.sp:#)) Warning:  Acde = # may be too small in BSIM# model with w=# l=#.`
-* 228x `power_area: **warning** (p#:x#m# (power_area.sp:#)) Warning:  Acde = # may be too small in BSIM# model with w=# l=#.`
-* 226x `offset: **warning** (p#:x#m# (offset.sp:#)) Warning:  Acde = # may be too small in BSIM# model with w=# l=#.`
-* 223x `vos_temp: **warning** (p#:x#m# (vos_temp.sp:#)) Warning:  Acde = # may be too small in BSIM# model with w=# l=#.`
-* 215x `ac_loop: **warning** (p#:x#m# (ac_loop.sp:#)) Warning:  Acde = # may be too small in BSIM# model with w=# l=#.`
-* 214x `psrr: **warning** (p#:x#m# (psrr.sp:#)) Warning:  Acde = # may be too small in BSIM# model with w=# l=#.`
-* 205x `cl_gain: **warning** (p#:x#m# (cl_gain.sp:#)) Warning:  Acde = # may be too small in BSIM# model with w=# l=#.`
-* 187x `tran_slew: **warning** (p#:x#m# (tran_slew.sp:#)) Warning:  Acde = # may be too small in BSIM# model with w=# l=#.`
-* 127x `power_area: **warning** (n#:x#m# (power_area.sp:#)) Warning:  Acde = # may be too small in BSIM# model with w=# l=#.`
-* 126x `cmrr: **warning** (n#:x#m# (cmrr.sp:#)) Warning:  Acde = # may be too small in BSIM# model with w=# l=#.`
-* 126x `psrr: **warning** (n#:x#m# (psrr.sp:#)) Warning:  Acde = # may be too small in BSIM# model with w=# l=#.`
-* 126x `vos_temp: **warning** (n#:x#m# (vos_temp.sp:#)) Warning:  Acde = # may be too small in BSIM# model with w=# l=#.`
-* 123x `offset: **warning** (n#:x#m# (offset.sp:#)) Warning:  Acde = # may be too small in BSIM# model with w=# l=#.`
-* 122x `cl_gain: **warning** (n#:x#m# (cl_gain.sp:#)) Warning:  Acde = # may be too small in BSIM# model with w=# l=#.`
-* 117x `ac_loop: **warning** (n#:x#m# (ac_loop.sp:#)) Warning:  Acde = # may be too small in BSIM# model with w=# l=#.`
-* 93x `tran_slew: **warning** (n#:x#m# (tran_slew.sp:#)) Warning:  Acde = # may be too small in BSIM# model with w=# l=#.`
-* 52x `tran_slew: model output failed (no measures); script draft used`
+* 1032x `stimulus: testbench '..' was missing from the model output; completed from the script draft`
+* 893x `measure: model wrote no measurements for '..'; completed from the script draft`
+* 316x `cmrr: **warning** (p#:x#m# (cmrr.sp:#)) Warning:  Acde = # may be too small in BSIM# model with w=# l=#.`
+* 312x `power_area: **warning** (p#:x#m# (power_area.sp:#)) Warning:  Acde = # may be too small in BSIM# model with w=# l=#.`
+* 311x `vos_temp: **warning** (p#:x#m# (vos_temp.sp:#)) Warning:  Acde = # may be too small in BSIM# model with w=# l=#.`
+* 307x `offset: **warning** (p#:x#m# (offset.sp:#)) Warning:  Acde = # may be too small in BSIM# model with w=# l=#.`
+* 293x `psrr: **warning** (p#:x#m# (psrr.sp:#)) Warning:  Acde = # may be too small in BSIM# model with w=# l=#.`
+* 289x `cl_gain: **warning** (p#:x#m# (cl_gain.sp:#)) Warning:  Acde = # may be too small in BSIM# model with w=# l=#.`
+* 280x `ac_loop: **warning** (p#:x#m# (ac_loop.sp:#)) Warning:  Acde = # may be too small in BSIM# model with w=# l=#.`
+* 232x `tran_slew: **warning** (p#:x#m# (tran_slew.sp:#)) Warning:  Acde = # may be too small in BSIM# model with w=# l=#.`
+* 171x `vos_temp: **warning** (n#:x#m# (vos_temp.sp:#)) Warning:  Acde = # may be too small in BSIM# model with w=# l=#.`
+* 171x `power_area: **warning** (n#:x#m# (power_area.sp:#)) Warning:  Acde = # may be too small in BSIM# model with w=# l=#.`
+* 166x `cmrr: **warning** (n#:x#m# (cmrr.sp:#)) Warning:  Acde = # may be too small in BSIM# model with w=# l=#.`
+* 165x `psrr: **warning** (n#:x#m# (psrr.sp:#)) Warning:  Acde = # may be too small in BSIM# model with w=# l=#.`
+* 165x `cl_gain: **warning** (n#:x#m# (cl_gain.sp:#)) Warning:  Acde = # may be too small in BSIM# model with w=# l=#.`
+* 164x `offset: **warning** (n#:x#m# (offset.sp:#)) Warning:  Acde = # may be too small in BSIM# model with w=# l=#.`
+* 140x `ac_loop: **warning** (n#:x#m# (ac_loop.sp:#)) Warning:  Acde = # may be too small in BSIM# model with w=# l=#.`
+* 122x `tran_slew: model output failed (no measures); script draft used`
+* 113x `tran_slew: **warning** (n#:x#m# (tran_slew.sp:#)) Warning:  Acde = # may be too small in BSIM# model with w=# l=#.`
+* 87x `tran_slew: **warning** (p#:x#m# (tran_slew_taslak.sp:#)) Warning:  Acde = # may be too small in BSIM# model with w=# l=#.`
+* 74x `cmrr: **warning** (cmrr.sp:#) Undefined parameter or function definition "gain" for "cmrr". Please enter a defined name. .measure "cmrr" is ignored.`
+* 61x `tran_slew: **warning** (n#:x#m# (tran_slew_taslak.sp:#)) Warning:  Acde = # may be too small in BSIM# model with w=# l=#.`
+* 51x `ac_loop: **warning** (p#:x#m# (ac_loop_taslak.sp:#)) Warning:  Acde = # may be too small in BSIM# model with w=# l=#.`
+* 46x `ac_loop: model output failed (no measures); script draft used`
 * 42x `candidate N attempt N failed: cl_gain=# is outside the plausible range (#, #); cl_gain_err=# is outside the plausible range (#, #)`
-* 41x `tran_slew: **warning** (p#:x#m# (tran_slew_taslak.sp:#)) Warning:  Acde = # may be too small in BSIM# model with w=# l=#.`
-* 35x `tran_slew: **warning** (n#:x#m# (tran_slew_taslak.sp:#)) Warning:  Acde = # may be too small in BSIM# model with w=# l=#.`
+* 34x `ac_loop: **warning** (n#:x#m# (ac_loop_taslak.sp:#)) Warning:  Acde = # may be too small in BSIM# model with w=# l=#.`
+* 33x `cl_gain: **warning** (p#:x#m# (cl_gain_taslak.sp:#)) Warning:  Acde = # may be too small in BSIM# model with w=# l=#.`
 * 33x `candidate N attempt N failed: vos=# is outside the plausible range (#, #)`
 * 32x `offset: **warning** (offset.sp:#) Measurement time value specified exceeds analysis limit in measure variable vos. .measure has been ignored. Enter a `
 * 31x `ac_loop: **warning** (ac_loop.sp:#) Undefined parameter or function definition "bw_#db" for "phase_margin". Please enter a defined name. .measure "pha`
-* 30x `cmrr: **warning** (cmrr.sp:#) Undefined parameter or function definition "gain" for "cmrr". Please enter a defined name. .measure "cmrr" is ignored.`
-* 26x `cl_gain: **warning** (p#:x#m# (cl_gain_taslak.sp:#)) Warning:  Acde = # may be too small in BSIM# model with w=# l=#.`
-* 22x `ac_loop: **warning** (ac_loop.sp:#) measure result bw redefined, ignored the previous.`
-* 21x `cl_gain: **warning** (cl_gain.sp:#) Value of resistance #:rf defined is limited to # (RESMIN). Please specify a resistor value larger than the value o`
-* 20x `stimulus: '..' testbench'i model çıktısında yoktu; script taslağıyla tamamlandı`
 
 ## 4. Errors and fixes (all phases)
 

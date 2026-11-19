@@ -1,0 +1,1812 @@
+{
+ "command-r7b_latest": {
+  "DA": [
+   {
+    "rep": 1,
+    "status": "done",
+    "seconds": 1128,
+    "n_cands": 3,
+    "n_ok": 3,
+    "majority": 2,
+    "winner": "cand0",
+    "acc": [
+     4,
+     5
+    ],
+    "fallback_tests": 1,
+    "dropped": []
+   },
+   {
+    "rep": 2,
+    "status": "done",
+    "seconds": 1413,
+    "n_cands": 3,
+    "n_ok": 2,
+    "majority": 2,
+    "winner": "cand0",
+    "acc": [
+     4,
+     5
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "no measurements"
+     ]
+    ]
+   },
+   {
+    "rep": 3,
+    "status": "done",
+    "seconds": 1268,
+    "n_cands": 3,
+    "n_ok": 3,
+    "majority": 2,
+    "winner": "cand0",
+    "acc": [
+     4,
+     5
+    ],
+    "fallback_tests": 0,
+    "dropped": []
+   }
+  ],
+  "FCO": [
+   {
+    "rep": 1,
+    "status": "done",
+    "seconds": 1328,
+    "n_cands": 3,
+    "n_ok": 1,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 2,
+    "dropped": [
+     [
+      "failed .meas cl_gain.cl_bw"
+     ],
+     [
+      "no measurements"
+     ]
+    ]
+   },
+   {
+    "rep": 2,
+    "status": "done",
+    "seconds": 1135,
+    "n_cands": 3,
+    "n_ok": 3,
+    "majority": 3,
+    "winner": "cand0",
+    "acc": [
+     4,
+     4
+    ],
+    "fallback_tests": 2,
+    "dropped": []
+   },
+   {
+    "rep": 3,
+    "status": "done",
+    "seconds": 1146,
+    "n_cands": 3,
+    "n_ok": 3,
+    "majority": 3,
+    "winner": "cand0",
+    "acc": [
+     4,
+     4
+    ],
+    "fallback_tests": 3,
+    "dropped": []
+   }
+  ],
+  "TSO": [
+   {
+    "rep": 1,
+    "status": "done",
+    "seconds": 1084,
+    "n_cands": 3,
+    "n_ok": 3,
+    "majority": 2,
+    "winner": "cand0",
+    "acc": [
+     4,
+     4
+    ],
+    "fallback_tests": 0,
+    "dropped": []
+   },
+   {
+    "rep": 2,
+    "status": "done",
+    "seconds": 802,
+    "n_cands": 3,
+    "n_ok": 2,
+    "majority": 2,
+    "winner": "cand0",
+    "acc": [
+     4,
+     4
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "no measurements"
+     ]
+    ]
+   },
+   {
+    "rep": 3,
+    "status": "done",
+    "seconds": 1047,
+    "n_cands": 3,
+    "n_ok": 3,
+    "majority": 3,
+    "winner": "cand0",
+    "acc": [
+     4,
+     4
+    ],
+    "fallback_tests": 0,
+    "dropped": []
+   }
+  ]
+ },
+ "deepseek-coder_6.7b": {
+  "DA": [
+   {
+    "rep": 1,
+    "status": "done",
+    "seconds": 2384,
+    "n_cands": 3,
+    "n_ok": 2,
+    "majority": 2,
+    "winner": "cand1",
+    "acc": [
+     6,
+     6
+    ],
+    "fallback_tests": 2,
+    "dropped": [
+     [
+      "no measurements"
+     ]
+    ]
+   },
+   {
+    "rep": 2,
+    "status": "done",
+    "seconds": 1856,
+    "n_cands": 3,
+    "n_ok": 1,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "no measurements"
+     ],
+     [
+      "no measurements"
+     ]
+    ]
+   },
+   {
+    "rep": 3,
+    "status": "done",
+    "seconds": 1908,
+    "n_cands": 3,
+    "n_ok": 3,
+    "majority": 2,
+    "winner": "cand0",
+    "acc": [
+     6,
+     6
+    ],
+    "fallback_tests": 0,
+    "dropped": []
+   }
+  ],
+  "FCO": [
+   {
+    "rep": 1,
+    "status": "done",
+    "seconds": 1721,
+    "n_cands": 3,
+    "n_ok": 1,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "no measurements"
+     ],
+     [
+      "no measurements"
+     ]
+    ]
+   },
+   {
+    "rep": 2,
+    "status": "done",
+    "seconds": 1796,
+    "n_cands": 3,
+    "n_ok": 2,
+    "majority": 2,
+    "winner": "cand0",
+    "acc": [
+     5,
+     5
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "no measurements"
+     ]
+    ]
+   },
+   {
+    "rep": 3,
+    "status": "done",
+    "seconds": 1800,
+    "n_cands": 3,
+    "n_ok": 2,
+    "majority": 2,
+    "winner": "cand1",
+    "acc": [
+     3,
+     3
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "no measurements"
+     ]
+    ]
+   }
+  ],
+  "TSO": [
+   {
+    "rep": 1,
+    "status": "done",
+    "seconds": 1430,
+    "n_cands": 3,
+    "n_ok": 3,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 2,
+    "dropped": []
+   },
+   {
+    "rep": 2,
+    "status": "done",
+    "seconds": 1526,
+    "n_cands": 3,
+    "n_ok": 2,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 2,
+    "dropped": [
+     [
+      "no measurements"
+     ]
+    ]
+   },
+   {
+    "rep": 3,
+    "status": "done",
+    "seconds": 1001,
+    "n_cands": 3,
+    "n_ok": 1,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "no measurements"
+     ],
+     [
+      "no measurements"
+     ]
+    ]
+   }
+  ]
+ },
+ "ministral-3_8b": {
+  "DA": [
+   {
+    "rep": 1,
+    "status": "done",
+    "seconds": 2074,
+    "n_cands": 3,
+    "n_ok": 1,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 5,
+    "dropped": [
+     [
+      "failed .meas cmrr.gaincm",
+      "failed .meas psrr.gainpsrr",
+      "failed .meas cl_gain.cl_gain",
+      "failed .meas cl_gain.cl_bw"
+     ],
+     [
+      "no measurements"
+     ]
+    ]
+   },
+   {
+    "rep": 2,
+    "status": "running",
+    "seconds": null,
+    "n_cands": 2,
+    "n_ok": 1,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 6,
+    "dropped": [
+     [
+      "failed .meas cmrr.gaincm",
+      "failed .meas psrr.gainpsrr",
+      "failed .meas cl_gain.cl_gain",
+      "failed .meas cl_gain.cl_bw"
+     ]
+    ]
+   },
+   {
+    "rep": 3,
+    "status": "done",
+    "seconds": 2636,
+    "n_cands": 3,
+    "n_ok": 2,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 11,
+    "dropped": [
+     [
+      "failed .meas power_area.zsarea"
+     ]
+    ]
+   }
+  ],
+  "FCO": [
+   {
+    "rep": 1,
+    "status": "done",
+    "seconds": 1022,
+    "n_cands": 3,
+    "n_ok": 0,
+    "majority": 0,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 2,
+    "dropped": [
+     [
+      "no measurements"
+     ],
+     [
+      "failed .meas cmrr.gaincm",
+      "failed .meas psrr.gainpsrr",
+      "failed .meas psrr.psrr",
+      "failed .meas cl_gain.cl_gain",
+      "failed .meas cl_gain.cl_bw"
+     ],
+     [
+      "no measurements"
+     ]
+    ]
+   },
+   {
+    "rep": 2,
+    "status": "done",
+    "seconds": 1432,
+    "n_cands": 3,
+    "n_ok": 0,
+    "majority": 0,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 3,
+    "dropped": [
+     [
+      "no measurements"
+     ],
+     [
+      "no measurements"
+     ],
+     [
+      "failed .meas cmrr.gaincm"
+     ]
+    ]
+   },
+   {
+    "rep": 3,
+    "status": "done",
+    "seconds": 1894,
+    "n_cands": 3,
+    "n_ok": 1,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 4,
+    "dropped": [
+     [
+      "failed .meas cmrr.gaincm",
+      "failed .meas psrr.gainpsrr",
+      "failed .meas cl_gain.cl_gain",
+      "failed .meas cl_gain.cl_bw"
+     ],
+     [
+      "no measurements"
+     ]
+    ]
+   }
+  ],
+  "TSO": [
+   {
+    "rep": 1,
+    "status": "done",
+    "seconds": 2178,
+    "n_cands": 3,
+    "n_ok": 0,
+    "majority": 0,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 5,
+    "dropped": [
+     [
+      "failed .meas cmrr.gaincm",
+      "failed .meas psrr.gainpsrr",
+      "failed .meas cl_gain.cl_gain"
+     ],
+     [
+      "failed .meas cmrr.gaincm",
+      "failed .meas psrr.gainpsrr",
+      "failed .meas cl_gain.cl_g"
+     ],
+     [
+      "no measurements"
+     ]
+    ]
+   },
+   {
+    "rep": 2,
+    "status": "running",
+    "seconds": null,
+    "n_cands": 2,
+    "n_ok": 0,
+    "majority": 0,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 2,
+    "dropped": [
+     [
+      "failed .meas cmrr.gaincm",
+      "failed .meas psrr.gainpsrr",
+      "failed .meas psrr.psrr",
+      "failed .meas cl_gain.cl_gain",
+      "failed .meas cl_gain.cl_bw"
+     ],
+     [
+      "no measurements"
+     ]
+    ]
+   },
+   {
+    "rep": 3,
+    "status": "running",
+    "seconds": null,
+    "n_cands": 2,
+    "n_ok": 1,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 5,
+    "dropped": [
+     [
+      "cmrr out of range",
+      "failed .meas cmrr_fixed.gaincm"
+     ]
+    ]
+   }
+  ]
+ },
+ "qwen2.5-coder_7b": {
+  "DA": [
+   {
+    "rep": 1,
+    "status": "done",
+    "seconds": 1186,
+    "n_cands": 3,
+    "n_ok": 2,
+    "majority": 2,
+    "winner": "cand1",
+    "acc": [
+     6,
+     6
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "no measurements"
+     ]
+    ]
+   },
+   {
+    "rep": 2,
+    "status": "done",
+    "seconds": 1677,
+    "n_cands": 3,
+    "n_ok": 1,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "no measurements"
+     ],
+     [
+      "no measurements"
+     ]
+    ]
+   },
+   {
+    "rep": 3,
+    "status": "done",
+    "seconds": 1472,
+    "n_cands": 3,
+    "n_ok": 2,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "no measurements"
+     ]
+    ]
+   }
+  ],
+  "FCO": [
+   {
+    "rep": 1,
+    "status": "done",
+    "seconds": 1291,
+    "n_cands": 3,
+    "n_ok": 2,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "no measurements"
+     ]
+    ]
+   },
+   {
+    "rep": 2,
+    "status": "done",
+    "seconds": 1361,
+    "n_cands": 3,
+    "n_ok": 1,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "no measurements"
+     ],
+     [
+      "cl_gain_err out of range"
+     ]
+    ]
+   },
+   {
+    "rep": 3,
+    "status": "done",
+    "seconds": 1862,
+    "n_cands": 3,
+    "n_ok": 1,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "no measurements"
+     ],
+     [
+      "failed .meas offset.vos"
+     ]
+    ]
+   }
+  ],
+  "TSO": [
+   {
+    "rep": 1,
+    "status": "done",
+    "seconds": 1490,
+    "n_cands": 3,
+    "n_ok": 2,
+    "majority": 2,
+    "winner": "cand1",
+    "acc": [
+     5,
+     5
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "no measurements"
+     ]
+    ]
+   },
+   {
+    "rep": 2,
+    "status": "done",
+    "seconds": 1033,
+    "n_cands": 3,
+    "n_ok": 3,
+    "majority": 2,
+    "winner": "cand1",
+    "acc": [
+     5,
+     5
+    ],
+    "fallback_tests": 0,
+    "dropped": []
+   },
+   {
+    "rep": 3,
+    "status": "failed",
+    "seconds": 1891,
+    "n_cands": 3,
+    "n_ok": 0,
+    "majority": 0,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "no measurements"
+     ],
+     [
+      "no measurements"
+     ],
+     [
+      "no measurements"
+     ]
+    ]
+   }
+  ]
+ },
+ "qwen2.5_7b": {
+  "DA": [
+   {
+    "rep": 1,
+    "status": "done",
+    "seconds": 784,
+    "n_cands": 3,
+    "n_ok": 2,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "failed .meas cmrr.gaincm",
+      "failed .meas psrr.gainpsrr",
+      "failed .meas psrr.psrr"
+     ]
+    ]
+   },
+   {
+    "rep": 2,
+    "status": "done",
+    "seconds": 771,
+    "n_cands": 3,
+    "n_ok": 2,
+    "majority": 2,
+    "winner": "cand0",
+    "acc": [
+     6,
+     6
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "failed .meas tran_slew.t80",
+      "failed .meas tran_slew.slewrate"
+     ]
+    ]
+   },
+   {
+    "rep": 3,
+    "status": "done",
+    "seconds": 786,
+    "n_cands": 3,
+    "n_ok": 1,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "failed .meas cmrr.gaincm",
+      "failed .meas psrr.gainpsrr",
+      "failed .meas psrr.psrr"
+     ],
+     [
+      "failed .meas cmrr.gaincm",
+      "failed .meas psrr.gainpsrr",
+      "failed .meas psrr.psrr"
+     ]
+    ]
+   }
+  ],
+  "FCO": [
+   {
+    "rep": 1,
+    "status": "failed",
+    "seconds": 2455,
+    "n_cands": 3,
+    "n_ok": 0,
+    "majority": 0,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 1,
+    "dropped": [
+     [
+      "failed .meas offset.vos"
+     ],
+     [
+      "failed .meas cmrr.gaincm",
+      "failed .meas psrr.gainpsrr",
+      "failed .meas psrr.psrr",
+      "failed .meas offset.vos"
+     ],
+     [
+      "failed .meas cmrr.gaincm",
+      "failed .meas psrr.gainpsrr",
+      "failed .meas psrr.psrr",
+      "failed .meas offset.vos"
+     ]
+    ]
+   },
+   {
+    "rep": 2,
+    "status": "failed",
+    "seconds": 2435,
+    "n_cands": 3,
+    "n_ok": 0,
+    "majority": 0,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 3,
+    "dropped": [
+     [
+      "failed .meas offset.vos"
+     ],
+     [
+      "failed .meas psrr.gainpsrr",
+      "failed .meas psrr.psrr",
+      "failed .meas offset.vos"
+     ],
+     [
+      "failed .meas tran_slew.t20",
+      "failed .meas tran_slew.t80",
+      "failed .meas tran_slew.slewrate",
+      "failed .meas offset.vos"
+     ]
+    ]
+   },
+   {
+    "rep": 3,
+    "status": "done",
+    "seconds": 1885,
+    "n_cands": 3,
+    "n_ok": 1,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "failed .meas offset.vos"
+     ],
+     [
+      "failed .meas tran_slew.t20",
+      "failed .meas tran_slew.t80",
+      "failed .meas tran_slew.slewrate",
+      "failed .meas offset.vos"
+     ]
+    ]
+   }
+  ],
+  "TSO": [
+   {
+    "rep": 1,
+    "status": "done",
+    "seconds": 775,
+    "n_cands": 3,
+    "n_ok": 2,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "failed .meas cmrr.gaincm",
+      "failed .meas psrr.gainpsrr",
+      "failed .meas psrr.psrr"
+     ]
+    ]
+   },
+   {
+    "rep": 2,
+    "status": "done",
+    "seconds": 787,
+    "n_cands": 3,
+    "n_ok": 2,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "failed .meas tran_slew.t20",
+      "failed .meas tran_slew.t80",
+      "failed .meas tran_slew.slewrate"
+     ]
+    ]
+   },
+   {
+    "rep": 3,
+    "status": "done",
+    "seconds": 793,
+    "n_cands": 3,
+    "n_ok": 2,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 2,
+    "dropped": [
+     [
+      "failed .meas tran_slew.t20",
+      "failed .meas tran_slew.t80",
+      "failed .meas tran_slew.slewrate"
+     ]
+    ]
+   }
+  ]
+ },
+ "qwen3.5_4b": {
+  "DA": [
+   {
+    "rep": 1,
+    "status": "done",
+    "seconds": 798,
+    "n_cands": 3,
+    "n_ok": 1,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "cl_gain out of range",
+      "cl_gain_err out of range"
+     ],
+     [
+      "no measurements"
+     ]
+    ]
+   },
+   {
+    "rep": 2,
+    "status": "done",
+    "seconds": 1003,
+    "n_cands": 3,
+    "n_ok": 1,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "failed .meas cl_gain.cl_gain",
+      "failed .meas cl_gain.cl_gain_err",
+      "failed .meas cl_gain.cl_bw"
+     ],
+     [
+      "no measurements"
+     ]
+    ]
+   },
+   {
+    "rep": 3,
+    "status": "done",
+    "seconds": 1052,
+    "n_cands": 3,
+    "n_ok": 1,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 1,
+    "dropped": [
+     [
+      "cl_gain out of range",
+      "cl_gain_err out of range"
+     ],
+     [
+      "failed .meas cl_gain.cl_bw"
+     ]
+    ]
+   }
+  ],
+  "FCO": [
+   {
+    "rep": 1,
+    "status": "done",
+    "seconds": 598,
+    "n_cands": 3,
+    "n_ok": 0,
+    "majority": 0,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "failed .meas tran_slew.vfin",
+      "failed .meas tran_slew.t20",
+      "failed .meas tran_slew.t80",
+      "failed .meas tran_slew.slewrate",
+      "failed .meas tran_slew.tsettle_abs",
+      "failed .meas tran_slew.tsettle"
+     ],
+     [
+      "failed .meas tran_slew.t20",
+      "failed .meas tran_slew.t80",
+      "failed .meas tran_slew.slewrate",
+      "failed .meas tran_slew.tsettle_abs",
+      "failed .meas tran_slew.tsettle"
+     ],
+     [
+      "failed .meas tran_slew.vfin",
+      "failed .meas tran_slew.t20",
+      "failed .meas tran_slew.t80",
+      "failed .meas tran_slew.slewrate",
+      "failed .meas tran_slew.tsettle_abs",
+      "failed .meas tran_slew.tsettle"
+     ]
+    ]
+   },
+   {
+    "rep": 2,
+    "status": "done",
+    "seconds": 607,
+    "n_cands": 3,
+    "n_ok": 0,
+    "majority": 0,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "failed .meas tran_slew.vfin",
+      "failed .meas tran_slew.t20",
+      "failed .meas tran_slew.t80",
+      "failed .meas tran_slew.slewrate",
+      "failed .meas tran_slew.tsettle_abs",
+      "failed .meas tran_slew.tsettle"
+     ],
+     [
+      "failed .meas tran_slew.vfin",
+      "failed .meas tran_slew.tsettle_abs",
+      "failed .meas tran_slew.tsettle"
+     ],
+     [
+      "failed .meas tran_slew.vfin",
+      "failed .meas tran_slew.t20",
+      "failed .meas tran_slew.t80",
+      "failed .meas tran_slew.slewrate",
+      "failed .meas tran_slew.tsettle_abs",
+      "failed .meas tran_slew.tsettle"
+     ]
+    ]
+   },
+   {
+    "rep": 3,
+    "status": "done",
+    "seconds": 590,
+    "n_cands": 3,
+    "n_ok": 0,
+    "majority": 0,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "failed .meas tran_slew.vfin",
+      "failed .meas tran_slew.t20",
+      "failed .meas tran_slew.t80",
+      "failed .meas tran_slew.slewrate",
+      "failed .meas tran_slew.tsettle_abs",
+      "failed .meas tran_slew.tsettle"
+     ],
+     [
+      "failed .meas tran_slew.t20",
+      "failed .meas tran_slew.slewrate"
+     ],
+     [
+      "failed .meas tran_slew.vfin",
+      "failed .meas tran_slew.t20",
+      "failed .meas tran_slew.t80",
+      "failed .meas tran_slew.slewrate",
+      "failed .meas tran_slew.tsettle_abs",
+      "failed .meas tran_slew.tsettle"
+     ]
+    ]
+   }
+  ],
+  "TSO": [
+   {
+    "rep": 1,
+    "status": "done",
+    "seconds": 1092,
+    "n_cands": 3,
+    "n_ok": 1,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 1,
+    "dropped": [
+     [
+      "cl_gain out of range"
+     ],
+     [
+      "cl_gain out of range",
+      "cl_gain_err out of range",
+      "vos out of range",
+      "vos_max out of range",
+      "vos_min out of range",
+      "failed .meas cl_gain.cl_bw"
+     ]
+    ]
+   },
+   {
+    "rep": 2,
+    "status": "done",
+    "seconds": 1023,
+    "n_cands": 3,
+    "n_ok": 0,
+    "majority": 0,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 5,
+    "dropped": [
+     [
+      "cl_gain out of range",
+      "cl_gain_err out of range"
+     ],
+     [
+      "cl_gain out of range",
+      "cl_gain_err out of range"
+     ],
+     [
+      "failed .meas tran_slew.vfin",
+      "failed .meas tran_slew.t20",
+      "failed .meas tran_slew.t80",
+      "failed .meas tran_slew.slewrate",
+      "failed .meas tran_slew.tsettle_abs",
+      "failed .meas tran_slew.tsettle"
+     ]
+    ]
+   },
+   {
+    "rep": 3,
+    "status": "done",
+    "seconds": 1096,
+    "n_cands": 3,
+    "n_ok": 1,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "cl_gain out of range",
+      "cl_gain_err out of range",
+      "failed .meas cl_gain.cl_bw"
+     ],
+     [
+      "no measurements"
+     ]
+    ]
+   }
+  ]
+ },
+ "qwen3.5_4b-q8_0": {
+  "DA": [
+   {
+    "rep": 1,
+    "status": "done",
+    "seconds": 1207,
+    "n_cands": 3,
+    "n_ok": 1,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 1,
+    "dropped": [
+     [
+      "failed .meas cl_gain.cl_gain",
+      "failed .meas cl_gain.cl_gain_err"
+     ],
+     [
+      "cl_gain out of range",
+      "cl_gain_err out of range"
+     ]
+    ]
+   },
+   {
+    "rep": 2,
+    "status": "done",
+    "seconds": 1232,
+    "n_cands": 3,
+    "n_ok": 1,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 1,
+    "dropped": [
+     [
+      "cl_gain out of range",
+      "cl_gain_err out of range"
+     ],
+     [
+      "cl_gain out of range",
+      "cl_gain_err out of range"
+     ]
+    ]
+   },
+   {
+    "rep": 3,
+    "status": "done",
+    "seconds": 1345,
+    "n_cands": 3,
+    "n_ok": 0,
+    "majority": 0,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "failed .meas cl_gain.cl_gain",
+      "failed .meas cl_gain.cl_gain_err"
+     ],
+     [
+      "failed .meas cl_gain.cl_gain",
+      "failed .meas cl_gain.cl_gain_err"
+     ],
+     [
+      "vos out of range"
+     ]
+    ]
+   }
+  ],
+  "FCO": [
+   {
+    "rep": 1,
+    "status": "done",
+    "seconds": 1123,
+    "n_cands": 3,
+    "n_ok": 2,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "failed .meas tran_slew.vfin",
+      "failed .meas tran_slew.t20",
+      "failed .meas tran_slew.slewrate",
+      "failed .meas tran_slew.tsettle_abs",
+      "failed .meas tran_slew.tsettle"
+     ]
+    ]
+   },
+   {
+    "rep": 2,
+    "status": "done",
+    "seconds": 854,
+    "n_cands": 3,
+    "n_ok": 0,
+    "majority": 0,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "failed .meas tran_slew.vfin",
+      "failed .meas tran_slew.t20",
+      "failed .meas tran_slew.slewrate",
+      "failed .meas tran_slew.tsettle_abs",
+      "failed .meas tran_slew.tsettle"
+     ],
+     [
+      "failed .meas tran_slew.vfin",
+      "failed .meas tran_slew.t80",
+      "failed .meas tran_slew.slewrate",
+      "failed .meas tran_slew.tsettle_abs",
+      "failed .meas tran_slew.tsettle",
+      "failed .meas cl_gain.cl_bw"
+     ],
+     [
+      "failed .meas tran_slew.vfin",
+      "failed .meas tran_slew.t20",
+      "failed .meas tran_slew.slewrate",
+      "failed .meas tran_slew.tsettle_abs",
+      "failed .meas tran_slew.tsettle"
+     ]
+    ]
+   },
+   {
+    "rep": 3,
+    "status": "done",
+    "seconds": 1442,
+    "n_cands": 3,
+    "n_ok": 0,
+    "majority": 0,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 1,
+    "dropped": [
+     [
+      "failed .meas tran_slew.vfin",
+      "failed .meas tran_slew.t20",
+      "failed .meas tran_slew.slewrate",
+      "failed .meas tran_slew.tsettle_abs",
+      "failed .meas tran_slew.tsettle"
+     ],
+     [
+      "settle: no measurement statements"
+     ],
+     [
+      "tr_slew: no measurement statements"
+     ]
+    ]
+   }
+  ],
+  "TSO": [
+   {
+    "rep": 1,
+    "status": "done",
+    "seconds": 1640,
+    "n_cands": 3,
+    "n_ok": 1,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "cl_gain out of range",
+      "cl_gain_err out of range",
+      "failed .meas cl_gain.cl_bw"
+     ],
+     [
+      "cl_gain out of range",
+      "cl_gain_err out of range",
+      "cmrr out of range",
+      "failed .meas cl_gain.cl_bw"
+     ]
+    ]
+   },
+   {
+    "rep": 2,
+    "status": "done",
+    "seconds": 2152,
+    "n_cands": 3,
+    "n_ok": 0,
+    "majority": 0,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "failed .meas cl_gain.cl_gain",
+      "failed .meas cl_gain.cl_gain_err",
+      "failed .meas cl_gain.cl_bw"
+     ],
+     [
+      "cl_gain out of range",
+      "cl_gain_err out of range",
+      "failed .meas cl_gain.cl_bw"
+     ],
+     [
+      "failed .meas cl_gain.cl_gain",
+      "failed .meas cl_gain.cl_gain_err"
+     ]
+    ]
+   },
+   {
+    "rep": 3,
+    "status": "done",
+    "seconds": 1499,
+    "n_cands": 3,
+    "n_ok": 1,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 1,
+    "dropped": [
+     [
+      "failed .meas cl_gain.cl_gain",
+      "failed .meas cl_gain.cl_gain_err",
+      "failed .meas cl_gain.cl_bw"
+     ],
+     [
+      "failed .meas cl_gain.cl_gain",
+      "failed .meas cl_gain.cl_gain_err",
+      "failed .meas cl_gain.cl_bw"
+     ]
+    ]
+   }
+  ]
+ },
+ "qwen3_4b-instruct": {
+  "DA": [
+   {
+    "rep": 1,
+    "status": "done",
+    "seconds": 474,
+    "n_cands": 3,
+    "n_ok": 3,
+    "majority": 3,
+    "winner": "cand0",
+    "acc": [
+     6,
+     6
+    ],
+    "fallback_tests": 0,
+    "dropped": []
+   },
+   {
+    "rep": 2,
+    "status": "done",
+    "seconds": 728,
+    "n_cands": 3,
+    "n_ok": 3,
+    "majority": 2,
+    "winner": "cand0",
+    "acc": [
+     6,
+     6
+    ],
+    "fallback_tests": 1,
+    "dropped": []
+   },
+   {
+    "rep": 3,
+    "status": "done",
+    "seconds": 730,
+    "n_cands": 3,
+    "n_ok": 3,
+    "majority": 2,
+    "winner": "cand0",
+    "acc": [
+     6,
+     6
+    ],
+    "fallback_tests": 1,
+    "dropped": []
+   }
+  ],
+  "FCO": [
+   {
+    "rep": 1,
+    "status": "done",
+    "seconds": 624,
+    "n_cands": 3,
+    "n_ok": 3,
+    "majority": 3,
+    "winner": "cand0",
+    "acc": [
+     5,
+     5
+    ],
+    "fallback_tests": 1,
+    "dropped": []
+   },
+   {
+    "rep": 2,
+    "status": "done",
+    "seconds": 1048,
+    "n_cands": 3,
+    "n_ok": 2,
+    "majority": 2,
+    "winner": "cand0",
+    "acc": [
+     5,
+     5
+    ],
+    "fallback_tests": 1,
+    "dropped": [
+     [
+      "failed .meas offset.vos"
+     ]
+    ]
+   },
+   {
+    "rep": 3,
+    "status": "done",
+    "seconds": 1107,
+    "n_cands": 3,
+    "n_ok": 3,
+    "majority": 2,
+    "winner": "cand0",
+    "acc": [
+     5,
+     5
+    ],
+    "fallback_tests": 3,
+    "dropped": []
+   }
+  ],
+  "TSO": [
+   {
+    "rep": 1,
+    "status": "done",
+    "seconds": 634,
+    "n_cands": 3,
+    "n_ok": 3,
+    "majority": 2,
+    "winner": "cand0",
+    "acc": [
+     5,
+     5
+    ],
+    "fallback_tests": 3,
+    "dropped": []
+   },
+   {
+    "rep": 2,
+    "status": "done",
+    "seconds": 767,
+    "n_cands": 3,
+    "n_ok": 3,
+    "majority": 2,
+    "winner": "cand1",
+    "acc": [
+     5,
+     5
+    ],
+    "fallback_tests": 2,
+    "dropped": []
+   },
+   {
+    "rep": 3,
+    "status": "done",
+    "seconds": 748,
+    "n_cands": 3,
+    "n_ok": 3,
+    "majority": 3,
+    "winner": "cand0",
+    "acc": [
+     5,
+     5
+    ],
+    "fallback_tests": 3,
+    "dropped": []
+   }
+  ]
+ },
+ "qwen3_4b-instruct-2507-q8_0": {
+  "DA": [
+   {
+    "rep": 1,
+    "status": "done",
+    "seconds": 851,
+    "n_cands": 3,
+    "n_ok": 2,
+    "majority": 2,
+    "winner": "cand1",
+    "acc": [
+     6,
+     6
+    ],
+    "fallback_tests": 7,
+    "dropped": [
+     [
+      "failed .meas cmrr.gaincm"
+     ]
+    ]
+   },
+   {
+    "rep": 2,
+    "status": "done",
+    "seconds": 745,
+    "n_cands": 3,
+    "n_ok": 3,
+    "majority": 2,
+    "winner": "cand0",
+    "acc": [
+     6,
+     6
+    ],
+    "fallback_tests": 6,
+    "dropped": []
+   },
+   {
+    "rep": 3,
+    "status": "done",
+    "seconds": 792,
+    "n_cands": 3,
+    "n_ok": 1,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 5,
+    "dropped": [
+     [
+      "failed .meas cmrr.gaincm"
+     ],
+     [
+      "failed .meas cmrr.gaincm"
+     ]
+    ]
+   }
+  ],
+  "FCO": [
+   {
+    "rep": 1,
+    "status": "done",
+    "seconds": 659,
+    "n_cands": 3,
+    "n_ok": 3,
+    "majority": 3,
+    "winner": "cand0",
+    "acc": [
+     5,
+     5
+    ],
+    "fallback_tests": 4,
+    "dropped": []
+   },
+   {
+    "rep": 2,
+    "status": "done",
+    "seconds": 613,
+    "n_cands": 3,
+    "n_ok": 3,
+    "majority": 3,
+    "winner": "cand0",
+    "acc": [
+     5,
+     5
+    ],
+    "fallback_tests": 4,
+    "dropped": []
+   },
+   {
+    "rep": 3,
+    "status": "done",
+    "seconds": 661,
+    "n_cands": 3,
+    "n_ok": 3,
+    "majority": 3,
+    "winner": "cand0",
+    "acc": [
+     5,
+     5
+    ],
+    "fallback_tests": 4,
+    "dropped": []
+   }
+  ],
+  "TSO": [
+   {
+    "rep": 1,
+    "status": "done",
+    "seconds": 696,
+    "n_cands": 3,
+    "n_ok": 3,
+    "majority": 3,
+    "winner": "cand0",
+    "acc": [
+     5,
+     5
+    ],
+    "fallback_tests": 3,
+    "dropped": []
+   },
+   {
+    "rep": 2,
+    "status": "done",
+    "seconds": 668,
+    "n_cands": 3,
+    "n_ok": 3,
+    "majority": 2,
+    "winner": "cand0",
+    "acc": [
+     5,
+     5
+    ],
+    "fallback_tests": 3,
+    "dropped": []
+   },
+   {
+    "rep": 3,
+    "status": "done",
+    "seconds": 703,
+    "n_cands": 3,
+    "n_ok": 3,
+    "majority": 3,
+    "winner": "cand0",
+    "acc": [
+     5,
+     5
+    ],
+    "fallback_tests": 3,
+    "dropped": []
+   }
+  ]
+ }
+}

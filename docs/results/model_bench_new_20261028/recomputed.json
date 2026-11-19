@@ -1,0 +1,1159 @@
+{
+ "gemma4_e4b": {
+  "DA": [
+   {
+    "rep": 1,
+    "status": "done",
+    "seconds": 703,
+    "n_cands": 3,
+    "n_ok": 1,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "no measurements"
+     ],
+     [
+      "no measurements"
+     ]
+    ]
+   },
+   {
+    "rep": 2,
+    "status": "done",
+    "seconds": 592,
+    "n_cands": 3,
+    "n_ok": 1,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 1,
+    "dropped": [
+     [
+      "no measurements"
+     ],
+     [
+      "no measurements"
+     ]
+    ]
+   },
+   {
+    "rep": 3,
+    "status": "done",
+    "seconds": 525,
+    "n_cands": 3,
+    "n_ok": 2,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 2,
+    "dropped": [
+     [
+      "no measurements"
+     ]
+    ]
+   }
+  ],
+  "FCO": [
+   {
+    "rep": 1,
+    "status": "failed",
+    "seconds": 490,
+    "n_cands": 3,
+    "n_ok": 0,
+    "majority": 0,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "no measurements"
+     ],
+     [
+      "no measurements"
+     ],
+     [
+      "no measurements"
+     ]
+    ]
+   },
+   {
+    "rep": 2,
+    "status": "failed",
+    "seconds": 481,
+    "n_cands": 3,
+    "n_ok": 0,
+    "majority": 0,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "no measurements"
+     ],
+     [
+      "no measurements"
+     ],
+     [
+      "no measurements"
+     ]
+    ]
+   },
+   {
+    "rep": 3,
+    "status": "done",
+    "seconds": 468,
+    "n_cands": 3,
+    "n_ok": 1,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 1,
+    "dropped": [
+     [
+      "no measurements"
+     ],
+     [
+      "no measurements"
+     ]
+    ]
+   }
+  ],
+  "TSO": [
+   {
+    "rep": 1,
+    "status": "failed",
+    "seconds": 366,
+    "n_cands": 3,
+    "n_ok": 0,
+    "majority": 0,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "no measurements"
+     ],
+     [
+      "no measurements"
+     ],
+     [
+      "no measurements"
+     ]
+    ]
+   },
+   {
+    "rep": 2,
+    "status": "failed",
+    "seconds": 739,
+    "n_cands": 3,
+    "n_ok": 0,
+    "majority": 0,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "no measurements"
+     ],
+     [
+      "no measurements"
+     ],
+     [
+      "no measurements"
+     ]
+    ]
+   },
+   {
+    "rep": 3,
+    "status": "failed",
+    "seconds": 856,
+    "n_cands": 3,
+    "n_ok": 0,
+    "majority": 0,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 2,
+    "dropped": [
+     [
+      "no measurements"
+     ],
+     [
+      "vos_max out of range",
+      "vos_min out of range",
+      "cl_gain_1: no measurement statements",
+      "cl_gain_10: no measurement statements"
+     ],
+     [
+      "no measurements"
+     ]
+    ]
+   }
+  ]
+ },
+ "glm4_9b": {
+  "DA": [
+   {
+    "rep": 1,
+    "status": "done",
+    "seconds": 2288,
+    "n_cands": 3,
+    "n_ok": 2,
+    "majority": 2,
+    "winner": "cand1",
+    "acc": [
+     6,
+     6
+    ],
+    "fallback_tests": 1,
+    "dropped": [
+     [
+      "no measurements"
+     ]
+    ]
+   },
+   {
+    "rep": 2,
+    "status": "done",
+    "seconds": 2077,
+    "n_cands": 3,
+    "n_ok": 1,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 1,
+    "dropped": [
+     [
+      "no measurements"
+     ],
+     [
+      "no measurements"
+     ]
+    ]
+   },
+   {
+    "rep": 3,
+    "status": "failed",
+    "seconds": 1918,
+    "n_cands": 3,
+    "n_ok": 0,
+    "majority": 0,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "no measurements"
+     ],
+     [
+      "no measurements"
+     ],
+     [
+      "no measurements"
+     ]
+    ]
+   }
+  ],
+  "FCO": [
+   {
+    "rep": 1,
+    "status": "done",
+    "seconds": 1765,
+    "n_cands": 3,
+    "n_ok": 2,
+    "majority": 2,
+    "winner": "cand0",
+    "acc": [
+     5,
+     5
+    ],
+    "fallback_tests": 3,
+    "dropped": [
+     [
+      "no measurements"
+     ]
+    ]
+   },
+   {
+    "rep": 2,
+    "status": "done",
+    "seconds": 1778,
+    "n_cands": 3,
+    "n_ok": 1,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 2,
+    "dropped": [
+     [
+      "no measurements"
+     ],
+     [
+      "no measurements"
+     ]
+    ]
+   },
+   {
+    "rep": 3,
+    "status": "done",
+    "seconds": 979,
+    "n_cands": 3,
+    "n_ok": 1,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 1,
+    "dropped": [
+     [
+      "no measurements"
+     ],
+     [
+      "no measurements"
+     ]
+    ]
+   }
+  ],
+  "TSO": [
+   {
+    "rep": 1,
+    "status": "done",
+    "seconds": 2100,
+    "n_cands": 3,
+    "n_ok": 1,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 1,
+    "dropped": [
+     [
+      "no measurements"
+     ],
+     [
+      "no measurements"
+     ]
+    ]
+   },
+   {
+    "rep": 2,
+    "status": "done",
+    "seconds": 2421,
+    "n_cands": 3,
+    "n_ok": 1,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 1,
+    "dropped": [
+     [
+      "no measurements"
+     ],
+     [
+      "no measurements"
+     ]
+    ]
+   },
+   {
+    "rep": 3,
+    "status": "done",
+    "seconds": 1442,
+    "n_cands": 3,
+    "n_ok": 3,
+    "majority": 3,
+    "winner": "cand0",
+    "acc": [
+     5,
+     5
+    ],
+    "fallback_tests": 3,
+    "dropped": []
+   }
+  ]
+ },
+ "llama3.1_8b": {
+  "DA": [
+   {
+    "rep": 1,
+    "status": "done",
+    "seconds": 796,
+    "n_cands": 3,
+    "n_ok": 3,
+    "majority": 3,
+    "winner": "cand0",
+    "acc": [
+     6,
+     6
+    ],
+    "fallback_tests": 3,
+    "dropped": []
+   },
+   {
+    "rep": 2,
+    "status": "done",
+    "seconds": 759,
+    "n_cands": 3,
+    "n_ok": 3,
+    "majority": 3,
+    "winner": "cand0",
+    "acc": [
+     6,
+     6
+    ],
+    "fallback_tests": 1,
+    "dropped": []
+   },
+   {
+    "rep": 3,
+    "status": "done",
+    "seconds": 695,
+    "n_cands": 3,
+    "n_ok": 3,
+    "majority": 2,
+    "winner": "cand0",
+    "acc": [
+     6,
+     6
+    ],
+    "fallback_tests": 1,
+    "dropped": []
+   }
+  ],
+  "FCO": [
+   {
+    "rep": 1,
+    "status": "done",
+    "seconds": 798,
+    "n_cands": 3,
+    "n_ok": 3,
+    "majority": 2,
+    "winner": "cand0",
+    "acc": [
+     5,
+     5
+    ],
+    "fallback_tests": 1,
+    "dropped": []
+   },
+   {
+    "rep": 2,
+    "status": "done",
+    "seconds": 1274,
+    "n_cands": 3,
+    "n_ok": 1,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 2,
+    "dropped": [
+     [
+      "cmrr out of range",
+      "cmrr_fixed: no measurement statements",
+      "psrr_fixed: no measurement statements"
+     ],
+     [
+      "no measurements"
+     ]
+    ]
+   },
+   {
+    "rep": 3,
+    "status": "done",
+    "seconds": 1479,
+    "n_cands": 3,
+    "n_ok": 2,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 2,
+    "dropped": [
+     [
+      "cmrr out of range"
+     ]
+    ]
+   }
+  ],
+  "TSO": [
+   {
+    "rep": 1,
+    "status": "done",
+    "seconds": 797,
+    "n_cands": 3,
+    "n_ok": 3,
+    "majority": 3,
+    "winner": "cand0",
+    "acc": [
+     5,
+     5
+    ],
+    "fallback_tests": 2,
+    "dropped": []
+   },
+   {
+    "rep": 2,
+    "status": "done",
+    "seconds": 1587,
+    "n_cands": 3,
+    "n_ok": 2,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 1,
+    "dropped": [
+     [
+      "cmrr out of range"
+     ]
+    ]
+   },
+   {
+    "rep": 3,
+    "status": "done",
+    "seconds": 799,
+    "n_cands": 3,
+    "n_ok": 3,
+    "majority": 3,
+    "winner": "cand0",
+    "acc": [
+     5,
+     5
+    ],
+    "fallback_tests": 1,
+    "dropped": []
+   }
+  ]
+ },
+ "nemotron-3-nano_4b": {
+  "DA": [
+   {
+    "rep": 1,
+    "status": "failed",
+    "seconds": 874,
+    "n_cands": 3,
+    "n_ok": 0,
+    "majority": 0,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "no measurements"
+     ],
+     [
+      "no measurements"
+     ],
+     [
+      "no measurements"
+     ]
+    ]
+   },
+   {
+    "rep": 2,
+    "status": "failed",
+    "seconds": 893,
+    "n_cands": 3,
+    "n_ok": 0,
+    "majority": 0,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "no measurements"
+     ],
+     [
+      "no measurements"
+     ],
+     [
+      "no measurements"
+     ]
+    ]
+   },
+   {
+    "rep": 3,
+    "status": "done",
+    "seconds": 767,
+    "n_cands": 3,
+    "n_ok": 2,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 12,
+    "dropped": [
+     [
+      "no measurements"
+     ]
+    ]
+   }
+  ],
+  "FCO": [
+   {
+    "rep": 1,
+    "status": "failed",
+    "seconds": 1677,
+    "n_cands": 3,
+    "n_ok": 0,
+    "majority": 0,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 5,
+    "dropped": [
+     [
+      "cl_vel: no measurement statements",
+      "vos_vel: simulation error: **error** (vos_vel.sp:48) string misses dexter quotation mark, error is  before or at \"'v(vout)-v(vinp)) at=0\"",
+      "vos_vel: simulation error: **error** (vos_vel.sp:48) string misses dexter quotation mark, error is  before or at \"'v(vout)-v(vinp)) at=0\""
+     ],
+     [
+      "no measurements"
+     ],
+     [
+      "no measurements"
+     ]
+    ]
+   },
+   {
+    "rep": 2,
+    "status": "failed",
+    "seconds": 981,
+    "n_cands": 3,
+    "n_ok": 0,
+    "majority": 0,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "no measurements"
+     ],
+     [
+      "no measurements"
+     ],
+     [
+      "no measurements"
+     ]
+    ]
+   },
+   {
+    "rep": 3,
+    "status": "failed",
+    "seconds": 1253,
+    "n_cands": 3,
+    "n_ok": 0,
+    "majority": 0,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "no measurements"
+     ],
+     [
+      "no measurements"
+     ],
+     [
+      "no measurements"
+     ]
+    ]
+   }
+  ],
+  "TSO": [
+   {
+    "rep": 1,
+    "status": "failed",
+    "seconds": 660,
+    "n_cands": 3,
+    "n_ok": 0,
+    "majority": 0,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "no measurements"
+     ],
+     [
+      "no measurements"
+     ],
+     [
+      "no measurements"
+     ]
+    ]
+   },
+   {
+    "rep": 2,
+    "status": "done",
+    "seconds": 789,
+    "n_cands": 3,
+    "n_ok": 1,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 6,
+    "dropped": [
+     [
+      "no measurements"
+     ],
+     [
+      "ac_phase_margin: no measurement statements"
+     ]
+    ]
+   },
+   {
+    "rep": 3,
+    "status": "failed",
+    "seconds": 936,
+    "n_cands": 3,
+    "n_ok": 0,
+    "majority": 0,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 2,
+    "dropped": [
+     [
+      "no measurements"
+     ],
+     [
+      "no measurements"
+     ],
+     [
+      "ac_phase_margin: no measurement produced (.meas statements gave no result)",
+      "psrr_bandwidth: no measurement statements"
+     ]
+    ]
+   }
+  ]
+ },
+ "qwen3_8b": {
+  "DA": [
+   {
+    "rep": 1,
+    "status": "done",
+    "seconds": 1315,
+    "n_cands": 3,
+    "n_ok": 3,
+    "majority": 2,
+    "winner": "cand0",
+    "acc": [
+     6,
+     6
+    ],
+    "fallback_tests": 7,
+    "dropped": []
+   },
+   {
+    "rep": 2,
+    "status": "done",
+    "seconds": 2228,
+    "n_cands": 3,
+    "n_ok": 2,
+    "majority": 2,
+    "winner": "cand0",
+    "acc": [
+     6,
+     6
+    ],
+    "fallback_tests": 5,
+    "dropped": [
+     [
+      "cl_gain_err out of range"
+     ]
+    ]
+   },
+   {
+    "rep": 3,
+    "status": "done",
+    "seconds": 1224,
+    "n_cands": 3,
+    "n_ok": 3,
+    "majority": 3,
+    "winner": "cand0",
+    "acc": [
+     6,
+     6
+    ],
+    "fallback_tests": 6,
+    "dropped": []
+   }
+  ],
+  "FCO": [
+   {
+    "rep": 1,
+    "status": "done",
+    "seconds": 1217,
+    "n_cands": 3,
+    "n_ok": 3,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 6,
+    "dropped": []
+   },
+   {
+    "rep": 2,
+    "status": "done",
+    "seconds": 1222,
+    "n_cands": 3,
+    "n_ok": 3,
+    "majority": 2,
+    "winner": "cand0",
+    "acc": [
+     5,
+     5
+    ],
+    "fallback_tests": 7,
+    "dropped": []
+   },
+   {
+    "rep": 3,
+    "status": "done",
+    "seconds": 1207,
+    "n_cands": 3,
+    "n_ok": 3,
+    "majority": 3,
+    "winner": "cand0",
+    "acc": [
+     5,
+     5
+    ],
+    "fallback_tests": 6,
+    "dropped": []
+   }
+  ],
+  "TSO": [
+   {
+    "rep": 1,
+    "status": "done",
+    "seconds": 1250,
+    "n_cands": 3,
+    "n_ok": 3,
+    "majority": 2,
+    "winner": "cand0",
+    "acc": [
+     5,
+     5
+    ],
+    "fallback_tests": 7,
+    "dropped": []
+   },
+   {
+    "rep": 2,
+    "status": "done",
+    "seconds": 1045,
+    "n_cands": 3,
+    "n_ok": 3,
+    "majority": 3,
+    "winner": "cand0",
+    "acc": [
+     5,
+     5
+    ],
+    "fallback_tests": 6,
+    "dropped": []
+   },
+   {
+    "rep": 3,
+    "status": "done",
+    "seconds": 1077,
+    "n_cands": 3,
+    "n_ok": 3,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 5,
+    "dropped": []
+   }
+  ]
+ },
+ "yi-coder_9b": {
+  "DA": [
+   {
+    "rep": 1,
+    "status": "done",
+    "seconds": 1193,
+    "n_cands": 3,
+    "n_ok": 2,
+    "majority": 2,
+    "winner": "cand1",
+    "acc": [
+     6,
+     6
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "no measurements"
+     ]
+    ]
+   },
+   {
+    "rep": 2,
+    "status": "done",
+    "seconds": 1601,
+    "n_cands": 3,
+    "n_ok": 1,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "no measurements"
+     ],
+     [
+      "no measurements"
+     ]
+    ]
+   },
+   {
+    "rep": 3,
+    "status": "done",
+    "seconds": 1455,
+    "n_cands": 3,
+    "n_ok": 1,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "no measurements"
+     ],
+     [
+      "no measurements"
+     ]
+    ]
+   }
+  ],
+  "FCO": [
+   {
+    "rep": 1,
+    "status": "done",
+    "seconds": 1140,
+    "n_cands": 3,
+    "n_ok": 2,
+    "majority": 2,
+    "winner": "cand1",
+    "acc": [
+     5,
+     5
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "no measurements"
+     ]
+    ]
+   },
+   {
+    "rep": 2,
+    "status": "done",
+    "seconds": 1428,
+    "n_cands": 3,
+    "n_ok": 1,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "no measurements"
+     ],
+     [
+      "no measurements"
+     ]
+    ]
+   },
+   {
+    "rep": 3,
+    "status": "failed",
+    "seconds": 1746,
+    "n_cands": 3,
+    "n_ok": 0,
+    "majority": 0,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "no measurements"
+     ],
+     [
+      "no measurements"
+     ],
+     [
+      "no measurements"
+     ]
+    ]
+   }
+  ],
+  "TSO": [
+   {
+    "rep": 1,
+    "status": "done",
+    "seconds": 1428,
+    "n_cands": 3,
+    "n_ok": 1,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 2,
+    "dropped": [
+     [
+      "no measurements"
+     ],
+     [
+      "no measurements"
+     ]
+    ]
+   },
+   {
+    "rep": 2,
+    "status": "done",
+    "seconds": 1398,
+    "n_cands": 3,
+    "n_ok": 1,
+    "majority": 1,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "no measurements"
+     ],
+     [
+      "no measurements"
+     ]
+    ]
+   },
+   {
+    "rep": 3,
+    "status": "failed",
+    "seconds": 1716,
+    "n_cands": 3,
+    "n_ok": 0,
+    "majority": 0,
+    "winner": null,
+    "acc": [
+     0,
+     0
+    ],
+    "fallback_tests": 0,
+    "dropped": [
+     [
+      "no measurements"
+     ],
+     [
+      "no measurements"
+     ],
+     [
+      "no measurements"
+     ]
+    ]
+   }
+  ]
+ }
+}

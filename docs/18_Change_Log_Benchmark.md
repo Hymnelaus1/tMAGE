@@ -62,3 +62,10 @@ This note records the operations of the session in order. New entries are added 
 - **Decision (user):** only these models are used from now on: qwen3:4b-instruct (Q4 and Q8), command-r7b, deepseek-coder:6.7b and the six new ones (qwen3:8b, llama3.1:8b, gemma4:e4b, nemotron-3-nano:4b, yi-coder:9b, glm4:9b). qwen3.5:4b (Q4/Q8), qwen2.5:7b, qwen2.5-coder:7b and ministral-3:8b are offline (kept installed, not in runs). List: `config/model_status.json`.
 - **Plan (running):** `scripts/run_new_models.sh` pulls the new models, benchmarks each alone (DA/FCO/TSO x 3 x 3, prompts v3) in `batch/model_bench_new_20261028`, writes `docs/27_New_Models_Benchmark_Report.md`, then `scripts/random_triples.py` draws 4 random 3-model votes (pool: chosen models with at least 4 of 9 clean majorities) into `batch/random_triples_20261028`.
 - **Failed start (2026-10-29 00:42):** the first start of the new-model benchmark produced 54 runs with `Connection refused` in seconds: the machine had rebooted at 23:36 on 10-28 and the UI server (127.0.0.1:8765, which `batch.py` talks to) was not running. The UI server was started again (`source config/env.sh; ./run.sh --no-browser`), the useless output was moved to `batch/failed_start_20261029_ui_down*`, `scripts/random_triples.py` was made robust against models without candidates, and the chain was restarted at 00:42:48. After a reboot: start the UI server and check VPN (`openvpn-client@gtu`) before any batch.
+
+## 2026-11-20 — results published
+
+* New-model benchmark finished (qwen3:8b 7/9, llama3.1:8b 6/9, glm4:9b 3/9, yi-coder:9b 2/9, gemma4:e4b 0/9, nemotron-3-nano:4b 0/9 clean majorities); report `27_New_Models_Benchmark_Report.md`.
+* The random-triples stage was interrupted by a machine reboot (2026-11-09): T1 DA done, FCO partial, T2-T4 not run. Needs a restart (start the UI server and check the VPN first).
+* `scripts/recompute_scores.py` now resolves relative paths (the first report run crashed on `relative_to`) and knows the six new model names.
+* Result summaries of all batches added under `docs/results/`; `24_All_Runs_Log.md` regenerated (166 runs).
