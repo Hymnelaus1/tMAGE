@@ -17,6 +17,8 @@ import sys
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "engine"))
 import handoff  # noqa: E402
+import pipeline  # noqa: E402
+import sim  # noqa: E402
 from log import glog  # noqa: E402
 import subprocess  # noqa: E402
 STATIC = Path(__file__).resolve().parent / "static"
@@ -181,6 +183,64 @@ def adapt_netlist(text: str, dst_id: str, pdk: str = "", corner: str = "TT"):
     return {"ok": True, "text": res, "source": src_id, "report": report, "changed": changed}
 
 
+WAVE_EXT = {".tr0", ".ac0", ".sw0", ".sw1", ".tr1", ".ac1"}      # HSPICE waveform files WaveView can open
+TEXT_EXT = {".sp", ".lis", ".ms0", ".mt0", ".ma0", ".st0", ".json", ".log", ".md"}
+
+
+def run_dir(name):
+    d = RUNS / Path(name or "").name
+    return d if (d / "job.json").exists() else None
+
+
+def safe_run_file(d, rel):
+    """Resolves rel inside run dir d; None if it escapes the run or is missing."""
+    f = (d / rel).resolve()
+    return f if f.is_file() and d.resolve() in f.parents else None
+
+
+def run_files(d):
+    out = []
+    for f in sorted((d / "work").glob("cand*/*")):
+        ext = f.suffix.lower()
+        if ext in WAVE_EXT or ext in (".sp", ".ms0", ".mt0", ".ma0"):
+            out.append({"cand": f.parent.name, "name": f.name, "rel": str(f.relative_to(d)), "kind": "wave" if ext in WAVE_EXT else ("netlist" if ext == ".sp" else "measure"),
+                        "size": f.stat().st_size})
+    return out
+
+
+def llm_trace(d, since):
+    """LLM exchanges (prompt + reply) of a run, files after index `since`."""
+    files = sorted((d / "logs" / "llm").glob("*.json"))
+    items = []
+    for f in files[since:]:
+        try:
+            j = json.loads(f.read_text())
+        except Exception:
+            continue
+        msgs = j.get("messages") or []
+        items.append({"file": f.name, "stage": j.get("stage"), "model": j.get("model"), "attempt": j.get("attempt"), "ms": j.get("ms"),
+                      "prompt_tokens": j.get("prompt_tokens"), "output_tokens": j.get("output_tokens"), "errors": j.get("errors"),
+                      "system": next((m.get("content", "") for m in msgs if m.get("role") == "system"), "")[:6000],
+                      "user": "\n\n".join(m.get("content", "") for m in msgs if m.get("role") == "user")[:12000],
+                      "response": str(j.get("response", ""))[:30000]})
+    return {"items": items, "total": len(files)}
+
+
+def make_wave(sp):
+    """Copies a testbench to wave_<name>.sp with .option post + .probe, runs HSPICE, returns the waveform file (or None)."""
+    lines = sp.read_text(errors="replace").splitlines()
+    low = "\n".join(lines).lower()
+    probes = [f".probe {k} v(*)" for k in ("ac", "tran", "dc") if re.search(rf"^\s*\.{k}\b", low, re.M)]
+    wsp = sp.with_name("wave_" + sp.name)
+    wsp.write_text("\n".join(lines[:1] + [".option post=2 probe"] + probes + lines[1:]) + "\n")
+    sim.run_hspice(sp.parent, wsp.name)
+    for ext in (".tr0", ".ac0", ".sw0"):
+        w = wsp.with_suffix(ext)
+        if w.exists():
+            return w
+    return None
+
+
 class H(BaseHTTPRequestHandler):
     def log_message(self, *a):  # sessiz
         pass
@@ -285,6 +345,22 @@ class H(BaseHTTPRequestHandler):
                 if not (d / "context.json").exists():
                     return self._json({"error": "koşu bulunamadı"}, 404)
                 self._json({"dir": d.name, "context": json.loads((d / "context.json").read_text()), "stages": handoff.status(d)})
+            elif u.path == "/api/run/trace":
+                d = run_dir(q.get("dir", [""])[0])
+                if not d:
+                    return self._json({"error": "run not found"}, 404)
+                self._json(llm_trace(d, int(q.get("since", ["0"])[0])))
+            elif u.path == "/api/run/files":
+                d = run_dir(q.get("dir", [""])[0])
+                if not d:
+                    return self._json({"error": "run not found"}, 404)
+                self._json({"files": run_files(d), "wv": bool(shutil.which("wv"))})
+            elif u.path == "/api/run/filetext":
+                d = run_dir(q.get("dir", [""])[0])
+                f = safe_run_file(d, q.get("rel", [""])[0]) if d else None
+                if not f or f.suffix.lower() not in TEXT_EXT:
+                    return self._json({"error": "file not available"}, 404)
+                self._json({"name": f.name, "text": f.read_text(errors="replace")[:200000]})
             elif u.path == "/api/jobs":
                 jobs = []
                 for d in sorted(RUNS.glob("*/job.json"), reverse=True)[:30]:
@@ -333,6 +409,26 @@ class H(BaseHTTPRequestHandler):
                 threading.Thread(target=proc.wait, daemon=True).start()  # biten süreç zombi kalmasın (aksi hâlde 'çalışıyor' görünür)
                 glog(f"run started: {d.name}")
                 self._json({"ok": True})
+            elif u.path == "/api/run/open":
+                d = run_dir(body.get("dir"))
+                f = safe_run_file(d, body.get("rel", "")) if d else None
+                if not f or f.suffix.lower() not in WAVE_EXT | {".sp"}:
+                    return self._json({"ok": False, "error": "only a testbench (.sp) or an HSPICE waveform file can be opened in WaveView"}, 400)
+                env = sim.hspice_env()
+                wv = shutil.which("wv", path=env.get("PATH"))
+                if not wv:
+                    return self._json({"ok": False, "error": "wv (WaveView) not found in the tool PATH from config/env.sh"})
+                if not env.get("DISPLAY"):
+                    return self._json({"ok": False, "error": "no DISPLAY: start the server from a graphical session or with X11 forwarding"})
+                if f.suffix.lower() == ".sp":      # re-simulate a copy with waveform output (the run itself writes none)
+                    if not pipeline.license_reachable():
+                        return self._json({"ok": False, "error": "HSPICE license unreachable (VPN?)"})
+                    f = make_wave(f)
+                    if not f:
+                        return self._json({"ok": False, "error": "no waveform produced; see the .lis file of the wave_ copy"})
+                subprocess.Popen([wv, str(f)], cwd=str(f.parent), start_new_session=True, env=env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                glog(f"WaveView opened: {d.name}/{f.name}")
+                self._json({"ok": True, "file": f.name})
             elif u.path == "/api/parse":
                 text = body.get("text", "")
                 self._json({"parsed": parse_netlist(text), "tech": detect_tech(text),

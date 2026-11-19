@@ -65,6 +65,17 @@
   .adapt { border:1px solid var(--warn); border-radius:8px; padding:8px 12px; margin-top:10px; font-size:13px; }
   .adapt.done { border-color:var(--ok); } .adapt ul { margin:6px 0 0; padding-left:18px; font-size:12.5px; } .adapt li.w { color:var(--warn); }
   .adapt .btns { margin-top:8px; display:flex; gap:8px; }
+  #runCard.wide { position:fixed; inset:3vh 3vw; z-index:30; overflow:auto; margin:0; box-shadow:0 0 0 100vmax rgba(0,0,0,.55); }
+  .rtabs { display:flex; gap:4px; margin:8px 0; } .rtabs button.on { border-color:var(--accent); background:var(--accent2); color:var(--accent); font-weight:600; }
+  #runLog { background:#0b1514; color:#bff0dc; border-radius:8px; padding:10px; }
+  #runCard.wide #runLog, #runCard.wide #runChat { height:62vh !important; max-height:62vh !important; }
+  #runChat { height:300px; overflow:auto; font-size:12.5px; }
+  .msg { margin:0 0 12px; max-width:94%; } .msg .who { font-size:11px; color:var(--muted); margin-bottom:2px; }
+  .msg .b { border:1px solid var(--line); border-radius:12px; padding:8px 10px; white-space:pre-wrap; word-break:break-word; font-family:ui-monospace,Consolas,monospace; font-size:11.5px; max-height:260px; overflow:auto; }
+  .msg.ask .b { background:var(--accent2); } .msg.ans { margin-left:auto; } .msg.ans .b { background:var(--panel); border-color:var(--accent); }
+  .msg.err .b { border-color:var(--bad); } .msg details summary { cursor:pointer; font-size:11px; color:var(--muted); }
+  #runFiles .fr { display:flex; align-items:center; gap:8px; padding:4px 0; border-bottom:1px solid var(--line); font-size:12.5px; } #runFiles .fr span { flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; }
+  #runFiles .cd { margin:10px 0 2px; font-weight:600; color:var(--accent); } #runFileView { max-height:260px; overflow:auto; white-space:pre; font-size:11px; }
 </style>
 </head>
 <body>
@@ -170,7 +181,10 @@
     <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px"><span class="chip" id="runState">hazır</span><span class="hint" id="runStage"></span></div>
     <div class="stg" id="runStages"></div>
     <button class="primary" id="runGo" style="width:100%;margin:8px 0">Koşuyu başlat</button>
+    <div class="rtabs"><button id="rtLog" class="on">Terminal</button><button id="rtChat">LLM conversation</button><button id="rtFiles">Testbenches</button><button id="rtWide" class="nofl" style="margin-left:auto">Expand</button></div>
     <pre class="prev" id="runLog" style="height:260px;max-height:260px;font-size:11px;white-space:pre-wrap"></pre>
+    <div id="runChat" style="display:none"></div>
+    <div id="runFiles" style="display:none"><div class="hint" id="runFilesInfo"></div><div id="runFileList"></div><pre class="prev" id="runFileView" style="display:none"></pre></div>
     <pre class="prev" id="runReport" style="display:none;white-space:pre-wrap"></pre>
   </div>
 </aside>
@@ -476,7 +490,7 @@ async function loadJobs() {
 /* ---------- Koşu ve log ---------- */
 let curRun = '', logN = 0, pollT = null;
 function selectRun(dir, name) {
-  curRun = dir; logN = 0; $('runCard').style.display = ''; $('runName').textContent = name || dir; $('runLog').textContent = ''; $('runReport').style.display = 'none';
+  curRun = dir; logN = 0; traceN = 0; filesKey = ''; $('runChat').innerHTML = ''; $('runFileView').style.display = 'none'; $('runCard').style.display = ''; $('runName').textContent = name || dir; $('runLog').textContent = ''; $('runReport').style.display = 'none';
   clearInterval(pollT); pollT = setInterval(pollRun, 2000); pollRun(); loadJobs();
 }
 async function pollRun() {
@@ -494,10 +508,56 @@ async function pollRun() {
   if (d.report) { $('runReport').style.display = ''; $('runReport').textContent = d.report; }
   if (st.state !== 'running' && logN && !d.lines.length) { clearInterval(pollT); pollT = setInterval(pollRun, 8000); }
 }
+
+/* ---------- LLM conversation, testbenches, WaveView ---------- */
+let traceN = 0, filesKey = '';
+function rtab(w) {
+  ['Log', 'Chat', 'Files'].forEach(k => $('rt' + k).classList.toggle('on', k === w));
+  $('runLog').style.display = w === 'Log' ? '' : 'none'; $('runChat').style.display = w === 'Chat' ? '' : 'none'; $('runFiles').style.display = w === 'Files' ? '' : 'none';
+  if (w === 'Files') loadFiles(true);
+}
+$('rtLog').onclick = () => rtab('Log'); $('rtChat').onclick = () => rtab('Chat'); $('rtFiles').onclick = () => rtab('Files');
+$('rtWide').onclick = () => { const w = $('runCard').classList.toggle('wide'); $('rtWide').textContent = w ? 'Close' : 'Expand'; };
+const ROLE = {spec:'Spec agent', scenario:'Scenario agent', stimulus:'Stimulus agent (testbench)', measure:'Measure agent (.meas)'};
+function bubble(cls, who, text, extra) {
+  return '<div class="msg ' + cls + '"><div class="who">' + esc(who) + '</div><div class="b">' + esc(text) + '</div>' + (extra || '') + '</div>';
+}
+async function pollTrace() {
+  if (!curRun) return;
+  const d = await api('/api/run/trace?dir=' + encodeURIComponent(curRun) + '&since=' + traceN);
+  if (d.error || !d.items.length) return;
+  const box = $('runChat'), atEnd = box.scrollTop + box.clientHeight >= box.scrollHeight - 30;
+  box.insertAdjacentHTML('beforeend', d.items.map(x => {
+    const role = ROLE[x.stage] || x.stage, bad = x.errors && x.errors !== '[]' && String(x.errors).length > 2;
+    const meta = x.model + ' · attempt ' + x.attempt + ' · ' + (x.ms / 1000).toFixed(1) + ' s · ' + x.prompt_tokens + ' in / ' + x.output_tokens + ' out tokens';
+    return bubble('ask', 'tMAGE → ' + role + ' (' + x.model + ')', x.user, '<details><summary>system prompt</summary><div class="b">' + esc(x.system) + '</div></details>')
+         + bubble('ans' + (bad ? ' err' : ''), x.model + ' → ' + role + '  [' + meta + ']', x.response + (bad ? '\n\nchecker: ' + JSON.stringify(x.errors) : ''));
+  }).join(''));
+  traceN = d.total; if (atEnd) box.scrollTop = box.scrollHeight;
+}
+async function loadFiles(force) {
+  const d = await api('/api/run/files?dir=' + encodeURIComponent(curRun));
+  if (d.error) return;
+  const key = d.files.length + ':' + d.wv; if (!force && key === filesKey) return; filesKey = key;
+  $('runFilesInfo').textContent = d.wv ? 'Open in WaveView re-simulates a copy of the testbench with waveform output (a few seconds), then starts WaveView on this machine.' : 'WaveView (wv) was not found: source config/env.sh before starting the server.';
+  let cur = '', h = '';
+  d.files.filter(f => f.kind !== 'wave').forEach(f => {
+    if (f.cand !== cur) { cur = f.cand; h += '<div class="cd">' + esc(cur) + '</div>'; }
+    h += '<div class="fr"><span>' + esc(f.name) + '</span><button class="nofl" data-v="' + esc(f.rel) + '">View</button>' + (f.kind === 'netlist' ? '<button class="nofl" data-w="' + esc(f.rel) + '">Open in WaveView</button>' : '') + '</div>';
+  });
+  $('runFileList').innerHTML = h || '<div class="hint">No testbenches yet.</div>';
+  $('runFileList').querySelectorAll('[data-v]').forEach(b => b.onclick = async () => { const r = await api('/api/run/filetext?dir=' + encodeURIComponent(curRun) + '&rel=' + encodeURIComponent(b.dataset.v)); const v = $('runFileView'); v.style.display = ''; v.textContent = r.text || r.error; });
+  $('runFileList').querySelectorAll('[data-w]').forEach(b => b.onclick = async () => {
+    b.disabled = true; const t = b.textContent; b.textContent = 'Simulating…';
+    const r = await api('/api/run/open', {method:'POST', body:JSON.stringify({dir:curRun, rel:b.dataset.w})});
+    b.disabled = false; b.textContent = r.ok ? 'Opened' : t; if (!r.ok) alert(r.error);
+  });
+}
+setInterval(() => { if (curRun) { pollTrace(); if ($('runFiles').style.display !== 'none') loadFiles(false); } }, 3000);
 $('runGo').onclick = async () => {
   const d = await api('/api/run/start', {method:'POST', body:JSON.stringify({dir:curRun})});
   if (!d.ok) { alert(d.error); return; }
-  logN = 0; $('runLog').textContent = ''; $('runReport').style.display = 'none'; clearInterval(pollT); pollT = setInterval(pollRun, 2000); setTimeout(pollRun, 600);
+  logN = 0; traceN = 0; $('runChat').innerHTML = ''; $('runLog').textContent = ''; $('runReport').style.display = 'none'; clearInterval(pollT); pollT = setInterval(pollRun, 2000); setTimeout(pollRun, 600);
 };
 
 /* ---------- Başlangıç ---------- */

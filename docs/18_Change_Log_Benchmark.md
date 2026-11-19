@@ -69,3 +69,10 @@ This note records the operations of the session in order. New entries are added 
 * The random-triples stage was interrupted by a machine reboot (2026-11-09): T1 DA done, FCO partial, T2-T4 not run. Needs a restart (start the UI server and check the VPN first).
 * `scripts/recompute_scores.py` now resolves relative paths (the first report run crashed on `relative_to`) and knows the six new model names.
 * Result summaries of all batches added under `docs/results/`; `24_All_Runs_Log.md` regenerated (166 runs).
+
+## 2026-11-20 — run viewer in the web UI
+
+* The run card now has three tabs: **Terminal** (live `run.log`), **LLM conversation** (chat bubbles with the prompt sent to every agent and the model's reply, tokens, time, checker errors; read from `logs/llm/*.json`, live while a run goes), **Testbenches** (every generated `.sp`, `.meas` results; "View" shows the text). **Expand** shows the card full screen.
+* **Open in WaveView**: the run itself writes no waveforms, so the server re-simulates a copy (`wave_<test>.sp` with `.option post=2` and `.probe`, a few seconds, needs the license) and starts `wv` on this machine (needs `DISPLAY`; start the server after `source config/env.sh`).
+* New endpoints in `app/server.py`: `GET /api/run/trace`, `/api/run/files`, `/api/run/filetext`, `POST /api/run/open`; paths are confined to the run directory, only `.sp`/waveform files are launched, no shell.
+* Tested on a real run (endpoints, path-traversal refused, WaveView started on `wave_ac_loop.ac0`). The JavaScript was not syntax-checked by a tool (no node here), only exercised through the server.
