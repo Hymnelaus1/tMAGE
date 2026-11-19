@@ -76,3 +76,7 @@ This note records the operations of the session in order. New entries are added 
 * **Open in WaveView**: the run itself writes no waveforms, so the server re-simulates a copy (`wave_<test>.sp` with `.option post=2` and `.probe`, a few seconds, needs the license) and starts `wv` on this machine (needs `DISPLAY`; start the server after `source config/env.sh`).
 * New endpoints in `app/server.py`: `GET /api/run/trace`, `/api/run/files`, `/api/run/filetext`, `POST /api/run/open`; paths are confined to the run directory, only `.sp`/waveform files are launched, no shell.
 * Tested on a real run (endpoints, path-traversal refused, WaveView started on `wave_ac_loop.ac0`). The JavaScript was not syntax-checked by a tool (no node here), only exercised through the server.
+
+## 2026-11-20 — LLM run report
+
+* `scripts/llm_run_report.py` (new) writes `28_LLM_Run_Report.md`: how a testbench is produced, what is measured, calls and failure causes per model and agent, script-draft fallbacks per model and test (167 runs, 1715 LLM calls, all prompt versions).
